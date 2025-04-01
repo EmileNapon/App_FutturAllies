@@ -1,0 +1,27 @@
+
+
+
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Localisation</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let formation of formations">
+      <td>{{ formation.titre }}</td>
+      <td>{{ formation.localisation }}</td>
+      <td>
+        <a class="btn btn-warning" (click)="onSelectProgrammeTalent(formation.id)">
+          Voir formation
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button routerLink='/admin/ajouter-formation' class='btn btn-secondary'> Ajouter un programme talent</button>

@@ -1,0 +1,78 @@
+
+
+<body>
+
+  <div class="header">
+      <h1>WEBINAIRE N°{{webinarId}}</h1>
+      <button class="btn btn-custom" (click)='register(webinar.id)'>S'inscrire </button>
+  </div>
+
+  <div class="content">
+    <h2>
+     Theme: {{webinar?.title}}
+    </h2>
+      <p>
+        {{webinar.description}}
+      </p>
+      <p class="card-text text-muted">
+        <i class="bi bi-calendar3"></i> <strong>Date :</strong> {{ webinar.startDateTime |formatDate}}
+        <br />
+        <i class="bi bi-clock"></i> <strong>Heure :</strong> {{ webinar.duree }}
+        <br/>
+        <strong>Nombre max :</strong> {{ webinar.maxParticipants }}
+      </p>
+
+     
+    
+    
+  
+
+<br/>
+
+<div class="d-flex justify-content-center gap-3">
+  <!-- Formateur -->
+  <div class="text-center p-3 bg-light rounded shadow-sm">
+    <p class="overview mb-0"></p>
+      <span class="fw-bold">Formateur:</span>
+      <div class="user-icon">
+        <img [src]="baseUrl + encadrantsFiltres.profile_pic" [alt]="encadrantsFiltres.nom + ' ' + encadrantsFiltres.prenom" style="width: 100%; height: auto;">
+      </div>
+    
+  </div>
+
+  <!-- Modérateur -->
+  <div class="text-center p-3 bg-light rounded shadow-sm">
+    <p class="overview mb-0">
+      <span class="fw-bold">Modérateur:</span>
+      <b>Massogolo Latifah Sanogo</b>, Auditrice Comptable et Financière
+    </p>
+  </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<div class="links d-flex justify-content-center gap-3"  >
+        
+  <a  class="btn btn-danger" target="_blank"  id='btn-custom'> 
+    <i class="bi bi-youtube me-2" ></i> YouTube
+  </a>
+  <a  id='btn-custom' >
+    <i class="bi bi-envelope-at"></i> Email : <strong>infos&#64;fidalli-ec.com</strong>
+  </a>
+  <a
+    target="_blank" 
+     id='btn-custom'
+  >
+    <i class="bi bi-whatsapp me-2"></i> WhatsApp :  <strong>+226 72 77 69 69</strong>
+  </a>
+
+</div>
+
+</div>
+
+
+
+<app-footer></app-footer>
+</body>

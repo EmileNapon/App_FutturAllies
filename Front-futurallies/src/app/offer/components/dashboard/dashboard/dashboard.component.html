@@ -1,0 +1,99 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <mat-toolbar class="sidenav-toolbar">
+      <a href="/admin">
+        <span>FuturAllies</span>
+      </a>
+    </mat-toolbar>
+    <app-menu />
+  </mat-sidenav>
+
+  <!-- Contenu principal -->
+  <mat-sidenav-content>
+    <!-- Header -->
+    <header class="main-header">
+      <mat-toolbar class="main-toolbar">
+        <!-- Bouton pour ouvrir/fermer le sidenav -->
+        <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav" matTooltip="Ouvrir le menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <!-- Logo de l'application -->
+        <div class="logo">
+          <img src="assets/images/futurallies-logo.png" alt="Logo de l'application" />
+        </div>
+
+        <!-- Espace vide pour pousser les éléments à droite -->
+        <span class="spacer"></span>
+
+        <!-- Notifications -->
+        <button mat-icon-button matTooltip="Notifications">
+          <mat-icon aria-hidden="false" matBadge="3" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+
+        <!-- Messages -->
+        <button mat-icon-button matTooltip="Messages">
+          <mat-icon [matBadge]="user.messages" matBadgeColor="warn">mail</mat-icon>
+        </button>
+
+        <!-- Profil utilisateur -->
+        <ul class="nav">
+        <li class='nav-item' *ngIf="userInfo?.email; else loginTemplate">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img  src='assets/profil.png' style='background-color:yellow' height="25" />
+          </a>
+          <ul class="dropdown-menu">
+            <li><span class="dropdown-item">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</span></li>
+            <li><span class="dropdown-item">{{ userInfo?.email }}</span></li>
+             <li><button class="dropdown-item" (click)="onLogout()" > <i class="bi bi-power"></i><span  style='padding-left:5px'>Déconnexion</span></button></li>
+          </ul>
+        
+        </li>
+      </ul>
+        
+        <ng-template #loginTemplate>
+          <li class='nav-item'>
+            <a class="nav-link" class="btn btn-warning" href="/usersPages/login">Connexion</a> <!-- Remplacez par votre route de connexion -->
+          </li>
+        </ng-template>
+      </mat-toolbar>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="content">
+      <router-outlet></router-outlet> <!-- Affiche les routes enfants ici -->
+    </main>
+
+    <!-- Footer -->
+    <!-- <footer class="main-footer">
+      <div class="footer-content">
+        <p>&copy; 2024 FuturAllies. Tous droits réservés.</p>
+        <nav>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Conditions d'utilisation</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </footer> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+<li class='nav-item' *ngIf="userInfo?.email; else loginTemplate">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <img  src='assets/profil.png' style='background-color:yellow' height="25" />
+  </a>
+  <ul class="dropdown-menu">
+    <li><span class="dropdown-item">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</span></li>
+    <li><span class="dropdown-item">{{ userInfo?.email }}</span></li>
+     <li><button class="dropdown-item" (click)="onLogout()" > <i class="bi bi-power"></i><span  style='padding-left:5px'>Déconnexion</span></button></li>
+  </ul>
+
+</li>
+
+<ng-template #loginTemplate>
+  <li class='nav-item'>
+    <a class="nav-link" class="btn btn-warning" href="/usersPages/login">Connexion</a> <!-- Remplacez par votre route de connexion -->
+  </li>
+</ng-template>

@@ -1,0 +1,23 @@
+
+<div  class="container-xl">
+
+
+  <div class="custom-card">
+    <div  *ngFor="let section of __filteredSessionGestionnaire__" class="custom-card">
+        
+        <div  *ngFor="let contenu of ContenusFiltres"  >
+          <div [hidden]="contenu.section !== section.id">
+          <div class="form-group"(click)='onElementClick(contenu.id)' >
+            <label ><span [innerHTML]="section.nom_section"></span></label>
+            <ckeditor *ngIf="section.id === evenementClique" id="contentEditor" [(ngModel)]="section.nom_section" [editor]="Editor" class="custom-editor"></ckeditor>
+            <ckeditor *ngIf="contenu.id === evenementClique" id="descriptionEditor" [(ngModel)]="contenu.description" [editor]="Editor" class="custom-editor"></ckeditor>
+          </div>
+          <div >
+          </div>
+        </div>
+    </div>
+    </div>
+    <button (click)='sauvegarderContenus()'>Sauvegarder</button>
+  </div>
+  
+  

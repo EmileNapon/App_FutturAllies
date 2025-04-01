@@ -1,0 +1,18 @@
+
+
+
+<div *ngIf="apprenantDetail.length === 0 && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
+    <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
+    <span class="mt-2 text-muted fs-5">Aucune donnée disponible</span>
+</div>  
+<div *ngIf="apprenantDetail" class="container-xl mt-4">
+    
+      <h3>Détails de l'apprenant</h3>
+      <p>Nom: {{ apprenantDetail.nom }} {{ apprenantDetail.nom }}</p>
+      <p>Email: {{ apprenantDetail.email }}</p>
+      <p>Rôle: {{ apprenantDetail.role }}</p>
+      <p>Telephone: {{ apprenantDetail.phone_number }} </p>
+    
+    
+</div>
+  
