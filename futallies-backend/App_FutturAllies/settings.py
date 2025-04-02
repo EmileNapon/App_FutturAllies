@@ -82,7 +82,7 @@ CORS_ALLOW_HEADERS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200","www.futurallies.com"
+    "http://localhost:4200","https://www.futurallies.com"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
