@@ -1,8 +1,7 @@
 import { DomaineService } from './acceuil-formation-services/acceuil-formations-services';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/gestion-utilisateurs/connexion/service-connexion/service-connexion.service';
-
+import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 @Component({
     selector: 'app-acceuil-formation',
     templateUrl: './acceuil-formation.component.html',
@@ -15,8 +14,20 @@ export class AcceuilFormationComponent implements OnInit {
   
 userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null } | null = null;
 domaines: any[] = [];
+loading$ = this.domaineService.loading$;
 
-constructor(private authService: AuthService, private domaineService: DomaineService, private router: Router) { }
+constructor(private authService: AuthService, private domaineService: DomaineService, private router: Router) { 
+ 
+
+
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationStart) this.domaineService.show();
+    if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+      this.domaineService.hide();
+    }
+  });
+
+}
 
 ngOnInit(): void {
   this.loadDomaines();

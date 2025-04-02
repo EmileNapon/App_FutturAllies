@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../src/environments/environment.prod';
+import { BehaviorSubject } from 'rxjs';
+
+
 
 
 @Injectable({
@@ -10,6 +13,9 @@ import { environment } from '../../../../../src/environments/environment.prod';
   })
 
   export class ModuleService {
+
+
+
   private apiUrl = environment.apiUrl;
 constructor( private http: HttpClient ) { }
 

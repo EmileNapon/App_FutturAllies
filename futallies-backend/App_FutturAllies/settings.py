@@ -40,7 +40,7 @@ SECRET_KEY=os.getenv('Django_SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['futurallies.com']
 
 
 
@@ -122,9 +122,9 @@ WSGI_APPLICATION = 'App_FutturAllies.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'fidalli_app',
+#         'NAME': 'fidalli_db',
 #         'USER': 'root',
-#         'PASSWORD': 'fidalli',
+#         'PASSWORD': '',
 #         'HOST': 'localhost',  
 #         'PORT': '3306',  
 #         'OPTIONS': {
@@ -143,22 +143,13 @@ DATABASES = {
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': '5432'
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.getenv('DATABASE_NAME'),
-#         'USER': os.getenv('DATABASE_USER'),
-#         'PASSWORD': os.getenv('DATABASE_PASSWORD',''),
-#         'HOST': os.getenv('DATABASE_HOST'),
-#         'PORT': os.getenv('DATABASE_PORT'),
-#     }
-# }
+
 
 
 AUTH_USER_MODEL = 'users.CustomUser'

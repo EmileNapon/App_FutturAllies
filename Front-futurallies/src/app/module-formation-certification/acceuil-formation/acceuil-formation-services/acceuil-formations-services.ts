@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../src/environments/environment.prod';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +11,12 @@ import { environment } from '../../../../../src/environments/environment.prod';
  
 
 export class DomaineService {
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
+  
+  show() { this.loadingSubject.next(true); }
+  hide() { this.loadingSubject.next(false); }
+
   private apiUrl = environment.apiUrl;
  // private domainesUrl = 'http://localhost:8000/fidalli/domaines/list_domaines';
   private matieresUrl = 'http://localhost:9999/matieres';

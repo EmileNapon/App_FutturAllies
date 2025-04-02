@@ -14,6 +14,7 @@ import { DomaineService } from '../module-formation-certification/acceuil-format
     standalone: false
 })
 export class AcceuilComponent implements OnInit{
+  loading$ = this.domaineService.loading$;
   constructor(private domaineService: DomaineService, private fb: FormBuilder ,private authService: AuthService, private ServiceConnexion: ServiceConnexionPrincipale, private http: HttpClient) {}
   myf!:FormGroup
   showSearch = false;
