@@ -42,7 +42,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "180.149.196.17", "futurallies.com"]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200","https://www.futurallies.com","http://180.149.196.17:8001", ' http://127.0.0.1:8001'
+    "http://localhost:4200","https://www.futurallies.com","http://180.149.196.17:8000", ' http://127.0.0.1:8000'
 ]
 
 
