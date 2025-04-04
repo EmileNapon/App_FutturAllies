@@ -156,7 +156,7 @@ Testing configuration:
 
 Run gunicorn:
 cd /opt/myproject/myproject/repo-name
-# gunicorn --bind 0.0.0.0:8000 project_name.wsgi
+# gunicorn --bind 0.0.0.0:8000 App_FutturAllies.wsgi
 Visit your project on your server ip address on port 8000:
 yourServerIp:8000
  

@@ -46,7 +46,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-FORCE_SCRIPT_NAME = "/"
+# FORCE_SCRIPT_NAME = "/"
 
 
 
