@@ -69,6 +69,7 @@ Install nginx:
 
 # sudo apt install nginx
 # sudo nano /etc/nginx/sites-available/myproject
+# sudo nano /etc/nginx/sites-available/App_FutturAllies
 
 Type the following into the file:
 
@@ -91,13 +92,45 @@ server {
 }
 
 
+
+
+
+
+
+server {
+    listen 80;
+    server_name futurallies.com www.futurallies.com;
+
+    access_log /var/log/nginx/futurallies.com.access.log;
+    error_log /var/log/nginx/futurallies.com.error.log;
+
+    location /static/ {
+        alias /App_FutturAllies/App_FutturAllies/staticfiles/;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header SCRIPT_NAME "";
+    }
+}
+
+
+
 Now we need to set up a symbolic link in the /etc/nginx/sites-enabled directory that points to this configuration file. That is how NGINX knows this site is active. Change directories to /etc/nginx/sites-enabled like this:
 
 cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/myproject
+
+
+sudo ln -s ../sites-available/App_FutturAllies
+
 Go to:
 
-# /etc/nginx/nginx.conf
+# sudo nano /etc/nginx/nginx.conf
 
 uncomment this line:
 # server_names_hash_bucket_size 64;
