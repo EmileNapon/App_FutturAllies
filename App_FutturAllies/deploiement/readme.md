@@ -30,7 +30,7 @@ Collect static files:
 
 run:
 # ssh username@server_ip_address
-# Enter password 
+# Enter password  : djVZ2HLQmBu
 
 4- Update & Upgrade Server:
 
@@ -96,25 +96,25 @@ server {
 
 
 
-
 server {
     listen 80;
-    server_name futurallies.com www.futurallies.com;
+    server_name 180.149.196.17; 
 
-    access_log /var/log/nginx/futurallies.com.access.log;
-    error_log /var/log/nginx/futurallies.com.error.log;
-
-    location /static/ {
-        alias /App_FutturAllies/App_FutturAllies/staticfiles/;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-
+    location /admin/ {
+        proxy_pass http://180.149.196.17:8000/admin/; 
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header SCRIPT_NAME "";
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+  
+    location / {
+        proxy_pass http://180.149.196.17:8000;  
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
 

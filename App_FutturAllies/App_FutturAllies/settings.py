@@ -40,7 +40,7 @@ SECRET_KEY=os.getenv('Django_SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost",'0.0.0.0', "180.149.196.17", "futurallies.com"]
+ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200","https://www.futurallies.com","http://180.149.196.17:8000", ' http://127.0.0.1:8000'
 ]
@@ -248,24 +248,10 @@ REST_FRAMEWORK = {
 # }
 
 
-import os
-
 STATIC_URL = '/static/'
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Configuration des fichiers médias
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+   os.path.join(BASE_DIR, 'static'),
 ]
-
-
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
