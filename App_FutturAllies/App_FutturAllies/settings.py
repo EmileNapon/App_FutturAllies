@@ -40,7 +40,7 @@ SECRET_KEY=os.getenv('Django_SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "180.149.196.17", "futurallies.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost",'0.0.0.0', "180.149.196.17", "futurallies.com"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200","https://www.futurallies.com","http://180.149.196.17:8000", ' http://127.0.0.1:8000'
 ]
