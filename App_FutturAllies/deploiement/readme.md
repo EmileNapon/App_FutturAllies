@@ -209,7 +209,7 @@ check nginx configuration:
 sudo nginx -t
 reload nginx: sudo systemctl reload nginx
 run gunicorn:
-gunicorn --bind 0.0.0.0:8000 project_name.wsgi
+gunicorn --bind 0.0.0.0:8000 App_FutturAllies.wsgi
 Run gunicorn in the background: nohup gunicorn --bind 0.0.0.0:8000 project_name.wsgi &  
 
 kill gunicorn running in background:
