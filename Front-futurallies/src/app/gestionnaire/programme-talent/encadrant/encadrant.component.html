@@ -1,0 +1,42 @@
+<!-- Titre -->
+<h2 class="mb-4">Liste des formateurs</h2>
+                  
+<!-- Tableau pour afficher les étudiants -->
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>N</th>
+      <th>Photo</th>
+      <th>Nom</th>
+      <th>Mail</th>
+      <th>Téléphone</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let encadrant of encadrants; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <div class="user-icon">
+          <img [src]="baseUrl + encadrant.profile_pic" style="width: 100%; height: auto;">   
+        </div>
+      </td>
+    
+      
+      <td>{{ encadrant.nom }} {{ encadrant.prenom }}</td>
+      <td>{{ encadrant.email }}</td>
+      <td>{{ encadrant.phone_number }}</td>
+      <td>
+        <div class="d-flex">
+            <a (click)= "onSelectEncadrant(encadrant.id)"><i class="bi bi-pencil"></i></a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  
+
+
+

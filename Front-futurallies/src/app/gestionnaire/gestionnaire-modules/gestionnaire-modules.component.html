@@ -1,0 +1,95 @@
+   
+<body>
+
+  
+    <!-- Bandeau violet -->
+    <section class="bg-purple text-white py-2 text-center">
+        <div class="container mt-2">
+            <div class="search-bar">
+              <!-- Icône de recherche -->
+              <i class="bi bi-search icon"></i>
+              
+              <!-- Champ de recherche -->
+              <input class='w-25' type="text" placeholder="Rechercher sur le Web">
+            
+            </div>
+          </div>
+    </section>
+  
+    <!-- Contenu principal -->
+    <main class="container mt-4"> 
+    <!-- Message "Aucune donnée disponible" avec image -->
+    <div *ngIf="__filteredModulesGestionnaire__.length === 0 && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
+        <mat-icon class="no-data-icon text-muted" style="font-size: 48px;">info</mat-icon>
+        <span class="mt-2 text-muted fs-5">Aucun module disponible</span>
+    </div>
+    
+      <!-- Table et formulaire de recherche -->
+      <div *ngIf="__filteredModulesGestionnaire__.length > 0" class="container-xl mt-4">
+        <!-- Barre de recherche -->
+  
+    
+        <!-- Tableau des domaines -->
+        <div class="table-responsive">
+          <div class="table-wrapper">
+            <table class="table table-hover">
+              <thead>
+                <tr class="bg-purple text-white">
+                  <th scope="col">Module(s)</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let module of __filteredModulesGestionnaire__">
+                  <td>
+                    <div (click)="selecterModule(module.id)">
+                      <i class="circle" 
+                         [ngClass]="{'bi bi-circle': selectedModuleIndex !== module.id, 
+                                     'bi bi-circle-fill': selectedModuleIndex === module.id}">
+                      </i> {{ module.nom_module }}
+                    </div>
+                  </td>
+                  <td>
+                    <i class="fa-solid fa-folder-open me-3 text-primary" style="cursor: pointer;" (click)='onSelectModule(module.id)'></i>
+                    <i class="fas fa-trash text-danger" style="font-size: 20px; cursor: pointer;"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Formulaire d'ajout de domaine -->
+      <div *ngIf="__addModule__ === true" class="fixed-overlay d-flex justify-content-center align-items-center">
+        <div class="container container-l d-flex justify-content-center align-items-center min-vh-100">
+          <div class="col-md-8 col-lg-6 bg-white p-4 rounded shadow">
+            <h5 class="text-center mb-4">Ajouter un nouveau module</h5>
+            <form [formGroup]="ModuleForm" (ngSubmit)="onSubmit()">
+              <!-- Titre du domaine -->
+              <div class="row mb-3 align-items-center">
+                <label for="nom_module" class="col-sm-4 col-form-label">Titre</label>
+                <div class="col-sm-8 input-group">
+                  <span class="input-group-text"><i class="bi bi-file-earmark-plus"></i></span>
+                  <input type="text" id="nom_module" formControlName="nom_module" class="form-control" placeholder="Titre du module">
+                </div>
+              </div>
+              <!-- Boutons -->
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <button (click)="OnAdd()" type="button" class="btn btn-danger">Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  
+
+  <button class="floating-button" (click)='OnAdd()'>
+    +
+  </button>
+
+
+

@@ -1,0 +1,85 @@
+<body>
+  <!-- Entête principale -->
+  <div class="bg-light py-4 navbar-scroll" [class.fixed]="isFixed">
+    <div class="container d-flex align-items-center justify-content-between">
+      <!-- Logo -->
+      <a>
+        <img src="assets/icon.png" alt="FuturAlliés" class="logo" height="25">
+      </a>
+
+      <!-- Bouton avec icône bi-border-width, visible uniquement sur mobile -->
+      <button class="navbar-toggle-icon d-md-none" (click)="toggleSearch()">
+        <i class="bi bi-border-width"></i>
+      </button>
+
+      <!-- Navigation -->
+      <nav class="nav nav-underline" [class.show]="showSearch" style="padding-left: 50px;">
+        <ul class="nav flex-column flex-md-row">
+          <!-- Formations (dropdown) -->
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Formations
+            </a>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item" routerLink="/progTalent">Programmes talents</button></li>
+              <li><button class="dropdown-item" routerLink="/certification">Certifications</button></li>
+              <li><button class="dropdown-item" routerLink="/domaines">Auditions libres</button></li>
+              <li><button class="dropdown-item" routerLink="/webinar-list">Webinaires</button></li>
+              <li><button class="dropdown-item" routerLink="/domaines">Cafés des alliés</button></li>
+              <li><button class="dropdown-item" routerLink="/domaines">Catalogue</button></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/offers" class="nav-link">Offre d'emplois</a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/orientation/etablissement" class="nav-link">Orientations</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#trainers" class="nav-link">Statistiques</a>
+          </li>
+
+          <!-- Barre de recherche -->
+          <li class="nav-item">
+            <form class="d-flex" role="search" [class.d-none]="!showSearch">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <button class="btn btn-outline-secondary" (click)="toggleSearch()" *ngIf="!showSearch">
+              <i class="bi bi-search"></i>
+            </button>
+          </li>
+
+          <li class="nav-item">
+            <a href="#trainers" class="nav-link">Contact</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#trainers" class="nav-link">Équipes</a>
+          </li>
+
+          <!-- Profil ou Connexion -->
+          <li class="nav-item" *ngIf="userInfo?.email; else loginTemplate">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="assets/profil.png" style="background-color: yellow;" height="25" />
+            </a>
+            <ul class="dropdown-menu">
+              <li><span class="dropdown-item">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</span></li>
+              <li><span class="dropdown-item">{{ userInfo?.email }}</span></li>
+              <li><button class="dropdown-item" routerLink="/dasbord"><i class="bi bi-power"></i><span style="padding-left: 5px;">Tableau de bord</span></button></li>
+              <li><button class="dropdown-item" (click)="onLogout()"><i class="bi bi-power"></i><span style="padding-left: 5px;">Déconnexion</span></button></li>
+            </ul>
+          </li>
+
+          <ng-template #loginTemplate>
+            <li class="nav-item">
+              <a class="nav-link btn btn-warning" routerLink="/usersPages/login">Connexion</a>
+            </li>
+          </ng-template>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
