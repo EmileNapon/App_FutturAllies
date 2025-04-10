@@ -29,7 +29,7 @@
     "d3": "^7.9.0",
     "dompurify": "^3.1.7",
     "intl-tel-input": "^24.3.4",
-    "ng2-validation": "^4.2.0",
+    "ng2-validation": "^3.9.1",
     "or": "^0.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.8.1",
