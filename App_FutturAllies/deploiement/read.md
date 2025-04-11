@@ -97,10 +97,6 @@ server {
 
 
 
-
-
-
-
 Now we need to set up a symbolic link in the /etc/nginx/sites-enabled directory that points to this configuration file. That is how NGINX knows this site is active. Change directories to /etc/nginx/sites-enabled like this:
 
 cd /etc/nginx/sites-enabled
