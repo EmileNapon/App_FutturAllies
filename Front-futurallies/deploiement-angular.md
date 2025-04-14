@@ -25,18 +25,35 @@ depot github
 sudo nano /etc/nginx/sites-available/futuallies
 sudo ln -s /etc/nginx/sites-available/futuallies /etc/nginx/sites-enabled/
 
-
 server {
     listen 80;
-    server_name 180.149.196.17;  
+    server_name 180.149.196.17 futurallies.com www.futurallies.com;
 
-    root /var/www/ton-site;
+    access_log /var/log/nginx/futur-allies.log;
+
+
+    root /opt/myproject/myproject/App_FutturAllies/Front-futurallies/dist/recrutement-intelligent/browser;
     index index.html;
+
+    location /static/ {
+        alias /opt/myproject/myproject/App_FutturAllies/App_FutturAllies/staticfiles/;
+    }
+
+
+    location /fidalli/{
+        proxy_pass http://180.149.196.17:8000/fidalli/;
+        proxy_set_header X-Forwarded-Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
 
     location / {
         try_files $uri $uri/ /index.html;
     }
 }
+
+
 
 
 verifier Ngnix
