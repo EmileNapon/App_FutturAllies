@@ -2,5 +2,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'http://futurallies.com/fidalli'
+  apiUrl: 'https://futurallies.com/fidalli'
 };
