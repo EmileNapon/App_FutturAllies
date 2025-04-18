@@ -40,6 +40,37 @@ import { LoginComponent } from './components/login/login.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MenuComponent } from './components/menu/menu.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { CreationFormateurComponent } from './components/gestionnaire/creation-formateur/creation-formateur.component';
+import { FormateurDashboardComponent } from './components/gestionnaire/formateur/formateur-dashboard/formateur-dashboard.component';
+import { FormateurEvaluationComponent } from './components/gestionnaire/formateur/formateur-Evaluation/formateur-Evaluation';
+import { ListFormateurComponent } from './components/gestionnaire/formateur/list-formateur/list-formateur.component';
+import { GestionnaireAcceuilComponent } from './components/gestionnaire/gestionnaire-acceuil/gestionnaire-acceuil.component';
+import { GestionnaireCertificatComponent } from './components/gestionnaire/gestionnaire-certificat/gestionnaire-certificat.component';
+import { GestionnaireCertificatCoursComponent } from './components/gestionnaire/gestionnaire-certificat-cours/gestionnaire-certificat-cours.component';
+import { GestionnaireChapitreComponent } from './components/gestionnaire/gestionnaire-chapitre/gestionnaire-chapitre.component';
+import { GestionnaireModifierContenuCoursComponent } from './components/gestionnaire/gestionnaire-modifier-contenu-cours/gestionnaire-modifier-contenu-cours.component';
+import { GestionnaireCoursComponent } from './components/gestionnaire/gestionnaire-cours/gestionnaire-cours.component';
+import { GestionnaireDomaineComponent } from './components/gestionnaire/gestionnaire-domaine/gestionnaire-domaine.component';
+import { GestionnaireModulesComponent } from './components/gestionnaire/gestionnaire-modules/gestionnaire-modules.component';
+import { EncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/encadrant.component';
+import { AjoutAnnonceComponent } from './components/gestionnaire/programme-talent/annonce/ajout-annonce/ajout-annonce.component';
+import { ModificationAnnonceComponent } from './components/gestionnaire/programme-talent/annonce/modification-annonce/modification-annonce.component';
+import { GestionnaireDasbordProgTalentComponent } from './components/gestionnaire/programme-talent/dasbord-prog-talent/dasbord-prog-talent.component';
+import { AjoutEncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/ajout-encadrant/ajout-encadrant.component';
+import { ModifEncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/modif-encadrant/modif-encadrant.component';
+import { FooterComponent } from './components/gestionnaire/programme-talent/footer/footer.component';
+import { GestionnaireFormationComponent } from './components/gestionnaire/programme-talent/formation/formation.component';
+import { ajoutModuleComponent } from './components/gestionnaire/programme-talent/formation/ajout-formation/ajouterModule/ajouteModule.component';
+import { AjoutFormationComponent } from './components/gestionnaire/programme-talent/formation/ajout-formation/ajout-formation.component';
+import { GestionnaireFormationDetailComponent } from './components/gestionnaire/programme-talent/formation/formation-detail/formation-detail.component';
+import { ModificationFormationComponent } from './components/gestionnaire/programme-talent/formation/modification-formation/modification-formation.component';
+import { GroupeEtudiantComponent } from './components/gestionnaire/programme-talent/groupe-etudiant/groupe-etudiant.component';
+import { HeaderComponent } from './components/gestionnaire/programme-talent/header/header.component';
+import { ModificationSeanceComponent } from './components/gestionnaire/programme-talent/seance/modification-seance/modification-seance.component';
+import { AjoutSeanceComponent } from './components/gestionnaire/programme-talent/seance/ajout-seance/ajout-seance.component';
+import { EtudiantComponent } from './components/gestionnaire/programme-talent/etudiant/etudiant.component';
+import { AnnonceComponent } from './components/gestionnaire/programme-talent/annonce/annonce.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -54,7 +85,16 @@ import { MatDividerModule } from '@angular/material/divider';
     ResourceCreateComponent,
     ResourceDetailsComponent,
     ConfirmationDialogComponent,
-    
+
+    CreationFormateurComponent,FormateurDashboardComponent,FormateurEvaluationComponent,ListFormateurComponent, GestionnaireAcceuilComponent,
+    GestionnaireCertificatComponent, GestionnaireCertificatCoursComponent, GestionnaireChapitreComponent, GestionnaireCoursComponent, GestionnaireDomaineComponent,
+    GestionnaireModifierContenuCoursComponent, GestionnaireModulesComponent,ModificationSeanceComponent,EtudiantComponent,
+
+    AjoutAnnonceComponent, ModificationAnnonceComponent, GestionnaireDasbordProgTalentComponent, AjoutEncadrantComponent, ModifEncadrantComponent, EncadrantComponent,
+
+    FooterComponent, ajoutModuleComponent, AjoutFormationComponent, GestionnaireFormationDetailComponent, ModificationFormationComponent, GestionnaireFormationComponent,
+
+    GroupeEtudiantComponent, AjoutSeanceComponent, AnnonceComponent,
   ],
   imports: [
 
@@ -87,7 +127,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDialogModule,
     MatSnackBarModule,
     NgxChartsModule,
-    MatDividerModule, MatIconModule, ReactiveFormsModule, FormsModule
+    MatDividerModule, MatIconModule, ReactiveFormsModule, FormsModule,  MatIconModule,
+
+    CKEditorModule,
   ],
   exports: [
     LoginComponent,

@@ -9,11 +9,8 @@ import { ModuleFormationCertificationModule } from './module-formation-certifica
 import { RouterModule } from '@angular/router';
 import { PremiumEtudiantComponent } from './gestion-abonnements-premium/premium-etudiant/premium-etudiant.component';
 import { GestionUtilisateursModule } from './gestion-utilisateurs/gestion-utilisateurs.module';
-import { AcceuilFormationComponent } from './module-formation-certification/acceuil-formation/acceuil-formation.component';
-import { OrientationAcceuilComponent } from './orientations/orientation-acceuil/orientation-acceuil.component';
-import { EtablissementsComponent } from './orientations/etablissements/etablissements.component';
+
 import { OrientationsModule } from './orientations/orientations.module';
-import { GestionnaireModule } from './gestionnaire/gestionnaire.module';
 import { FooterComponent} from './header-footer/footer/footer.component'
 import{HeaderPrincipaleComponent} from './header-footer/header-principal/headerPrincipale';
 import { HeaderGestionnaireComponent } from './header-footer/header-gestionnaire/header-gestionnaire.component';
@@ -29,17 +26,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormatDatePipe } from './module-formation-certification/a_pipes/datePipe';
 
+import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,
+    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,
     BrowserAnimationsModule,  MatSlideToggleModule,
-    AppRoutingModule, RouterModule, GestionUtilisateursModule, OrientationsModule, ModuleFormationCertificationModule, GestionnaireModule, OfferModule, MatDividerModule, MatIconModule
+    AppRoutingModule, RouterModule, GestionUtilisateursModule, OrientationsModule, ModuleFormationCertificationModule, OfferModule, MatDividerModule, MatIconModule
   ],
   providers: [
     {

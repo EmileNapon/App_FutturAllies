@@ -1,9 +1,10 @@
 
-import { UtilisateurService } from '../../../../gestionnaire/programme-talent/services/utilisateur.service'
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OfferService } from '../../../services/offer.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { UtilisateurService } from 'src/app/admin/services/utilisateur.service';
 
 @Component({
     selector: 'app-candidat-list',

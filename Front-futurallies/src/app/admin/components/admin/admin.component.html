@@ -1,21 +1,20 @@
 
-<!-- Titre -->
+<!--  
 <div >
-  <!-- Loading State (Optional, if you have a loading indicator) -->
+
   <div *ngIf="loading" class="loading-message d-flex flex-column align-items-center justify-content-center">
     <span class="text-muted fs-5">Chargement...</span>
   </div>
 
-  <!-- No Data Message -->
   <div *ngIf="userInfo?.role !='admin' && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
     <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
     <span class="mt-2 text-muted fs-5">Aucune donnée disponible</span>
   </div>
 
-  <!-- Content (Table and Pagination) -->
+
   <div *ngIf="userInfo?.role == 'admin'" class="content"> 
 
-
+-->
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
@@ -37,28 +36,6 @@
       <div class="spacer"></div>
       <!-- User Section -->
       <div class="user-profile">
-        <!--
-        <button mat-icon-button matBadge="{{user.notifications}}" matBadgeColor="warn" aria-label="Notifications" class="badge-button notifications-badge" matTooltip="Notifications">
-          <mat-icon>notifications</mat-icon>
-        </button>
-        <button mat-icon-button matBadge="{{user.messages}}" matBadgeColor="accent" aria-label="Messages" class="badge-button messages-badge" matTooltip="Messages">
-          <mat-icon>message</mat-icon>
-        </button>
-        
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item matTooltip="Voir mon profil">
-            <mat-icon>account_circle</mat-icon>
-            <span>Mon profil</span>
-          </button>
-          <button mat-menu-item matTooltip="Se déconnecter" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>Déconnexion</span>
-          </button>
-        </mat-menu>
--->
-
-
-
 
         <ul class="nav">
           <li class='nav-item' *ngIf="userInfo?.email; else loginTemplate">
@@ -91,4 +68,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-</div>

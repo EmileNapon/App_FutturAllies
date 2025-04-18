@@ -6,30 +6,7 @@ import { ResourceListComponent } from './components/resource-list/resource-list.
 import { ResourceCreateComponent } from './components/resource-create/resource-create.component';
 import { ResourceEditComponent } from './components/resource-edit/resource-edit.component';
 import { ResourceDetailsComponent } from './components/resource-details/resource-details.component';
-import { GestionnaireDomaineComponent } from '../gestionnaire/gestionnaire-domaine/gestionnaire-domaine.component';
-import { GestionnaireModulesComponent } from '../gestionnaire/gestionnaire-modules/gestionnaire-modules.component';
-import { GestionnaireCoursComponent } from '../gestionnaire/gestionnaire-cours/gestionnaire-cours.component';
-import { GestionnaireChapitreComponent } from '../gestionnaire/gestionnaire-chapitre/gestionnaire-chapitre.component';
-import { GestionnaireModifierContenuCoursComponent } from '../gestionnaire/gestionnaire-modifier-contenu-cours/gestionnaire-modifier-contenu-cours.component';
-import { GestionnaireCertificatComponent } from '../gestionnaire/gestionnaire-certificat/gestionnaire-certificat.component';
-import { GestionnaireCertificatCoursComponent } from '../gestionnaire/gestionnaire-certificat-cours/gestionnaire-certificat-cours.component';
-import { GestionnaireDasbordProgTalentComponent } from '../gestionnaire/programme-talent/dasbord-prog-talent/dasbord-prog-talent.component';
-import { GestionnaireFormationComponent } from '../gestionnaire/programme-talent/formation/formation.component';
-import { AjoutFormationComponent } from '../gestionnaire/programme-talent/formation/ajout-formation/ajout-formation.component';
-import { ModificationFormationComponent } from '../gestionnaire/programme-talent/formation/modification-formation/modification-formation.component';
-import { AjoutSeanceComponent } from '../gestionnaire/programme-talent/seance/ajout-seance/ajout-seance.component';
-import { ModificationSeanceComponent } from '../gestionnaire/programme-talent/seance/modification-seance/modification-seance.component';
-import { ModificationAnnonceComponent } from '../gestionnaire/programme-talent/annonce/modification-annonce/modification-annonce.component';
-import { AjoutAnnonceComponent } from '../gestionnaire/programme-talent/annonce/ajout-annonce/ajout-annonce.component';
-import { AjoutEncadrantComponent } from '../gestionnaire/programme-talent/encadrant/ajout-encadrant/ajout-encadrant.component';
-import { ModifEncadrantComponent } from '../gestionnaire/programme-talent/encadrant/modif-encadrant/modif-encadrant.component';
-import { GestionnaireFormationDetailComponent } from '../gestionnaire/programme-talent/formation/formation-detail/formation-detail.component';
-import { ajoutModuleComponent } from '../gestionnaire/programme-talent/formation/ajout-formation/ajouterModule/ajouteModule.component';
-import { CreationFormateurComponent } from '../gestionnaire/creation-formateur/creation-formateur.component';
-import { EncadrantComponent } from '../gestionnaire/programme-talent/encadrant/encadrant.component';
 import { WebinarManagementComponent } from '../module-formation-certification/webinar/components/webinar-management/webinar-management.component';
-import { EtudiantComponent } from '../gestionnaire/programme-talent/etudiant/etudiant.component';
-import { AnnonceComponent } from '../gestionnaire/programme-talent/annonce/annonce.component';
 import { ListEtudiantsComponent } from './components/utilisateurs/apprenants/list-apprenants/list-apprenants.component';
 import { DetailEtudiantsComponent } from './components/utilisateurs/apprenants/detail-apprenant/detail-apprenant.component';
 import { EditEtudiantsComponent } from './components/utilisateurs/apprenants/edit-apprenant/edit-apprenant.component';
@@ -41,6 +18,23 @@ import { ListEntrepriseComponent } from './components/utilisateurs/entreprise/li
 import { DetailEntrepriseComponent } from './components/utilisateurs/entreprise/detail-entreprise/detail-entreprise.component';
 import { EditEntrepriseComponent } from './components/utilisateurs/entreprise/edit-entreprise/edit-entreprise.component';
 import { CreateEntreprisetComponent } from './components/utilisateurs/entreprise/create-entreprise/create-entreprise.component';
+import { GestionnaireDomaineComponent } from './components/gestionnaire/gestionnaire-domaine/gestionnaire-domaine.component';
+import { GestionnaireModulesComponent } from './components/gestionnaire/gestionnaire-modules/gestionnaire-modules.component';
+import { GestionnaireCoursComponent } from './components/gestionnaire/gestionnaire-cours/gestionnaire-cours.component';
+import { GestionnaireChapitreComponent } from './components/gestionnaire/gestionnaire-chapitre/gestionnaire-chapitre.component';
+import { GestionnaireFormationComponent } from './components/gestionnaire/programme-talent/formation/formation.component';
+import { GestionnaireDasbordProgTalentComponent } from './components/gestionnaire/programme-talent/dasbord-prog-talent/dasbord-prog-talent.component';
+import { AjoutFormationComponent } from './components/gestionnaire/programme-talent/formation/ajout-formation/ajout-formation.component';
+import { ModificationFormationComponent } from './components/gestionnaire/programme-talent/formation/modification-formation/modification-formation.component';
+import { AjoutSeanceComponent } from './components/gestionnaire/programme-talent/seance/ajout-seance/ajout-seance.component';
+import { ModificationSeanceComponent } from './components/gestionnaire/programme-talent/seance/modification-seance/modification-seance.component';
+import { AnnonceComponent } from './components/gestionnaire/programme-talent/annonce/annonce.component';
+import { AjoutAnnonceComponent } from './components/gestionnaire/programme-talent/annonce/ajout-annonce/ajout-annonce.component';
+import { ModificationAnnonceComponent } from './components/gestionnaire/programme-talent/annonce/modification-annonce/modification-annonce.component';
+import { AjoutEncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/ajout-encadrant/ajout-encadrant.component';
+import { ModifEncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/modif-encadrant/modif-encadrant.component';
+import { GestionnaireFormationDetailComponent } from './components/gestionnaire/programme-talent/formation/formation-detail/formation-detail.component';
+import { ajoutModuleComponent } from './components/gestionnaire/programme-talent/formation/ajout-formation/ajouterModule/ajouteModule.component';
 
 
 

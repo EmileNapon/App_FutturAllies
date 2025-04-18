@@ -18,6 +18,7 @@ export class FormationComponent implements OnInit {
   modulesFormations: any[]=[]
   formationId!:number
   formationWithModules: any[]=[]
+  loading:boolean=false
 
   constructor(
     private formationService: FormationService,
