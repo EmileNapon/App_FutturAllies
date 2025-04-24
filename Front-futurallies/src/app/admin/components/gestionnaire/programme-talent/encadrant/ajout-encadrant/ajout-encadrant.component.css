@@ -1,6 +1,6 @@
 .no-data-message {
 	height: 50vh;
-	font-size: 1.2rem;
+	font-size: 21px;
 	color: #6c757d;
   }
   
@@ -22,7 +22,7 @@
   
   .error {
 	color: #e53e3e;
-	font-size: 0.9em;
+	font-size: 21px;
 	margin-top: 5px;
   }
 
@@ -35,7 +35,7 @@
 	  .breadcrumb {
 		background-color: transparent;
 		margin-bottom: 0;
-		font-size: 0.9rem;
+		font-size: 21px;
 	  }
 
 
@@ -64,13 +64,13 @@
 		outline: none; /* Supprimer le focus par défaut */
 		background: transparent; /* Fond transparent */
 		flex: 1; /* Occupe tout l'espace disponible */
-		font-size: 16px; /* Taille de police */
+		font-size: 21px; /* Taille de police */
 		width: 20px; /* Fixe une largeur spécifique */
 		padding-left: 10px; /* Espace interne à gauche */
 	  }
   
 	  .search-bar .icon {
-		font-size: 1.2rem;
+		font-size: 21px;
 		color: gray;
 	  }
   

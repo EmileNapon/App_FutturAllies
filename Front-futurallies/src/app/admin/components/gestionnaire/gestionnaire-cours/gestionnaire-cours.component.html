@@ -6,31 +6,14 @@
 <body>
 
   
-    <!-- Bandeau violet -->
-    <section class="bg-purple text-white py-2 text-center">
-        <div class="container mt-2">
-            <div class="search-bar">
-              <!-- Icône de recherche -->
-              <i class="bi bi-search icon"></i>
-              
-              <!-- Champ de recherche -->
-              <input class='w-25' type="text" placeholder="Rechercher sur le Web">
-            
-            </div>
-          </div>
-    </section>
+
   
     <!-- Contenu principal -->
     <main class="container mt-4"> 
     <!-- Message "Aucune donnée disponible" avec image -->
-    <div  *ngIf="__coursGestionnaire__.length === 0 && loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
-        <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
-        <mat-icon class="no-data-icon text-muted" style="font-size: 48px;">info</mat-icon>
-        <span class="mt-2 text-muted fs-5">Aucun cours disponible</span>
-    </div>
-    
+
       <!-- Table et formulaire de recherche -->
-      <div *ngIf="__filteredCoursGestionnaire__.length > 0" class="container-xl mt-4">
+      <div *ngIf="__filteredCoursGestionnaire__.length > 0; else noChapters"class="container-xl mt-4">
         <!-- Barre de recherche -->
   
     
@@ -64,6 +47,10 @@
           </div>
         </div>
       </div>
+
+      <ng-template #noChapters>
+        <p>Aucun domaine disponible.</p>
+      </ng-template>
     
       <!-- Formulaire d'ajout de domaine -->
       <div *ngIf="__addCours__ === true" class="fixed-overlay d-flex justify-content-center align-items-center">

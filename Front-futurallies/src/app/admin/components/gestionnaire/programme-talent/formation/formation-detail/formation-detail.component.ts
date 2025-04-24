@@ -37,6 +37,7 @@ export class GestionnaireFormationDetailComponent implements OnInit{
     this.formationService.getFormationById(this.formationId).subscribe(
       (data) => {
         this.formations = data;
+        console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk", data)
       },
       (error) => {
         console.error('Erreur lors du chargement des formations:', error);

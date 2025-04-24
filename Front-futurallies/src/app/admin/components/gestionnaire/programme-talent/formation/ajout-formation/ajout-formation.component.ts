@@ -105,12 +105,30 @@ statut:boolean=true
   
   
     onSubmit(){
-      this.ajouterNouvelleFormation(this.formationForm.value)
+    
+      const rawDate = this.formationForm.value.date; // "22/04/2025"
+      const formattedDate = this.convertDateFormat(rawDate); // "2025-04-22"
+      const formation = {
+        titre: this.formationForm.value.titre,
+        type: this.formationForm.value.type,
+        niveau: this.formationForm.value.niveau,
+        prix: this.formationForm.value.prix,
+        duree: this.formationForm.value.duree,
+        nombre: this.formationForm.value.nombre,
+        location: this.formationForm.value.location,
+        resume: this.formationForm.value.resume,
+        description: this.formationForm.value.description,
+        date: formattedDate
+      };
+      this.ajouterNouvelleFormation(formation)
      
     }
   
 
-
+    convertDateFormat(dateStr: string): string {
+      const [day, month, year] = dateStr.split('/');
+      return `${year}-${month}-${day}`; 
+    }
 
 
 

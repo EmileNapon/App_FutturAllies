@@ -12,7 +12,7 @@ mat-list-item {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 500;
   color: #444444; /* Texte légèrement foncé */
   transition: background-color 0.3s ease, color 0.3s ease; /* Transition fluide */
@@ -24,14 +24,14 @@ mat-list-item:hover {
 }
 
 mat-icon {
-  font-size: 20px;
-  margin-right: 12px;
+  font-size: 23px;
+  margin-right: 19px;
   color: rgb(255, 136, 0); /* Icônes dans une couleur de marque */
 }
 
 /* Style pour le texte des éléments du menu */
 span {
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 500;
 }
 
@@ -44,7 +44,7 @@ mat-expansion-panel {
 mat-expansion-panel-header {
   background-color: #e0f2f1; /* Fond subtilement coloré pour les en-têtes */
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 21px;
   font-weight: 600;
   color: rgb(255, 136, 0); /* Couleur de texte principale */
   padding: 12px 20px;
@@ -57,7 +57,7 @@ mat-expansion-panel-header:hover {
 }
 
 mat-expansion-panel-header mat-icon {
-  font-size: 22px;
+  font-size: 23px;
   margin-right: 12px;
 }
 
@@ -66,7 +66,7 @@ mat-nav-list > a {
   display: flex;
   align-items: center;
   padding: 10px 30px;
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 400;
   color: #666666;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -79,7 +79,7 @@ mat-nav-list > a:hover {
 }
 
 mat-nav-list > a mat-icon {
-  font-size: 18px;
+  font-size: 21px;
   margin-right: 12px;
   color: rgb(255, 136, 0); /* Couleur des icônes des sous-menus */
 }
@@ -88,7 +88,7 @@ mat-nav-list > a mat-icon {
 .mat-tooltip {
   background-color: rgb(255, 136, 0);
   color: #ffffff;
-  font-size: 12px;
+  font-size: 21px;
   padding: 6px;
   border-radius: 4px;
   font-weight: 500;
