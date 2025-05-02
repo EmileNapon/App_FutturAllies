@@ -337,3 +337,13 @@ def list_webinars_inscrit(request):
     webinars = WebinarEnrollment.objects.all()
     serializer = WebinarEnrollmentSerializer(webinars, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+@api_view(['GET'])
+def get_nombre_webinar_suivi(request, id):
+    try:
+        count = WebinarEnrollment.objects.filter(user=id).count()
+        return Response(count)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

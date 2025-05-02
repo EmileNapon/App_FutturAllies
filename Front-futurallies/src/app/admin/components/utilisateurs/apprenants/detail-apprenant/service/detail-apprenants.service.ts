@@ -20,5 +20,14 @@ import { environment } from '../../../../../../../../src/environments/environmen
       getApprenantById(id: number): Observable<CustomUser> {
         return this.http.get<CustomUser>(`${this.apiUrl}/apprenants/${id}/`);
       }
-  
+    
+      getNombreWebinarSuivi(id:number): Observable<number> {
+        return this.http.get<number>(`${this.apiUrl}/inscrit/nombre/${id}`);
+      }
+    
+      getNombreProgrammeTalentSuivi(id:number): Observable<number> {
+        return this.http.get<number>(`${this.apiUrl}/inscrit/nombre/talent/${id}/`);
+      }
+    
+
   }

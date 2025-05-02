@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {  Router, RouterLink } from '@angular/router';
 import { ListEncadrantService } from './service/list-encadrant.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-etudiants',
-  imports: [CommonModule,RouterLink,],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './list-encadrants.component.html',
   styleUrl: './list-encadrants.component.css'
 })
@@ -14,6 +15,10 @@ export class ListEncadrantComponent implements OnInit{
   // public baseUrl = 'http://127.0.0.1:8000';
   encadrants: any[] = [];
   loading:boolean=false
+  encadrantsActifs:number=0
+  encadrantsNotActifs:number=0
+  searchTerm: string = '';
+  sortOrder: string = '';
 
   page: number = 1; // Current page
   size: number = 5; // Default items per page
@@ -31,17 +36,41 @@ export class ListEncadrantComponent implements OnInit{
   
 
 
+  // loadEncadrants(): void {
+  //   this.loading = true;
+  //   this.listEncadrantService.getEncadrants().subscribe((data: any[]) => {
+  //     this.encadrants = data;
+  //     this.totalPages = Math.ceil(this.encadrants.length / this.size);
+  //     this.updatePaginatedEncadrant();
+  //     this.loading = false;
+  //   }, () => {
+  //     this.loading = false;
+  //   });
+  // }
+
   loadEncadrants(): void {
     this.loading = true;
-    this.listEncadrantService.getEncadrants().subscribe((data: any[]) => {
+    const filters: any = { role: 'formateur' };
+  
+    if (this.searchTerm) filters.search = this.searchTerm;
+    if (this.sortOrder) filters.ordering = this.sortOrder;
+  
+    this.listEncadrantService.getEncadrants(filters).subscribe((data: any[]) => {
       this.encadrants = data;
+      console.log('mmmmmm',this.encadrants)
       this.totalPages = Math.ceil(this.encadrants.length / this.size);
       this.updatePaginatedEncadrant();
+  
+      // ✅ Recalcul des totaux visibles
+      this.encadrantsActifs = this.encadrants.filter(a => a.is_active).length;
+      this.encadrantsNotActifs = this.encadrants.filter(a => !a.is_active).length;
+  
       this.loading = false;
     }, () => {
       this.loading = false;
     });
   }
+
 
   updatePaginatedEncadrant(): void {
     const startIndex = (this.page - 1) * this.size;
@@ -54,6 +83,7 @@ export class ListEncadrantComponent implements OnInit{
       this.page++;
       this.updatePaginatedEncadrant();
     }
+
   }
 
   prevPage(): void {

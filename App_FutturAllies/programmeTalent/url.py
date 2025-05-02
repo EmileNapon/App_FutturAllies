@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+
 # from .views import(EncadrantAPIView)
 
 urlpatterns = [
@@ -32,6 +33,8 @@ urlpatterns = [
     path('fidalli/annonces/<int:annonce_id>/', views.annonce_detail, name='annonce_detail'),
     
     # path('encadrant/', EncadrantAPIView.as_view(), name='encadrant'),
+
+    path('fidalli/inscrit/nombre/talent/<int:id>/', views.get_nombre_programme_talent_suivi),
     
 ]
 

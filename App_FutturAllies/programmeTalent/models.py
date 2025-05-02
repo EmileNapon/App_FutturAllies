@@ -7,10 +7,10 @@ from users.models import CustomUser
 
 class Formation(models.Model):
     titre=models.CharField(max_length=200)
-    date=models.DateField(auto_now_add=True)
+    date=models.DateField(blank=True, null=True)
     type = models.TextField(max_length=200,null=True)
     niveau = models.CharField(max_length=800,null=True)
-    prix = models.DecimalField(max_digits=10, decimal_places=2, null=True)  # Utilisation d'un DecimalField pour le prix
+    prix = models.DecimalField(max_digits=10, decimal_places=2, null=True)  
     duree = models.CharField(max_length=20)
     nombre = models.IntegerField(null=True)
     localisation = models.CharField(max_length=200,default='FIDALLI')

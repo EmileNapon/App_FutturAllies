@@ -48,7 +48,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     fonction = models.TextField(max_length=200, blank=True, null=True)
     specialite = models.CharField(max_length=200, blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profiles/', blank=True, null=True)
-
+    date_inscription=models.DateTimeField(auto_now_add=True, null=True) 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'

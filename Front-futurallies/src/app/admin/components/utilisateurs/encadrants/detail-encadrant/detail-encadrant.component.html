@@ -1,23 +1,642 @@
 
+<body class="bg-light">
+  <div class="container py-4">
+      <!-- Header -->
+      <header class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="h3 text-primary fw-bold"> Detail du formateur</h1>
+          <div class="d-flex gap-2">
+              <!--
+              <button class="btn btn-primary">
+                  <i class="fas fa-edit me-2"></i> Edit Profile
+              </button>
+              
+              <button class="btn btn-outline-primary">
+                  <i class="fas fa-download me-2"></i> Export Data
+              </button>
+              -->
+          </div>
+      </header>
+      
+      <!-- Main Profile Section -->
+      <div class="card mb-4">
+          <div class="row g-0">
+              <!-- Profile Image -->
+              <div class="col-md-3 p-4 d-flex justify-content-center">
+                  <div class="position-relative">
+                      <img *ngIf="encadrantDetail.profile_pic; else defaultIcon"
+                      [src]="encadrantDetail.profile_pic" alt="Profile" class="profile-image img-fluid rounded-circle" style="width: 160px; height: 160px;">
+                      <ng-template #defaultIcon>
+                          <i class="bi bi-person-circle" style="font-size: 48px; color: gray;"></i>
+                        </ng-template>
+                      <div class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border: 2px solid white;">
+                          <i class="fas fa-check"></i>
+                      </div>
+                  </div>
+              </div>
+              
+              <!-- Profile Details -->
+              <div class="col-md-9">
+                  <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start">
+                          <div>
+                              <h2 class="h4 card-title fw-bold">{{encadrantDetail.nom}} {{encadrantDetail.prenom}} </h2>
+                              <p class="text-muted mb-2">{{encadrantDetail.specialite}}</p>
+                          </div>
 
-
-<div *ngIf="encadrantDetail.length === 0 && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
-    <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
-    <span class="mt-2 text-muted fs-5">Aucune donnée disponible</span>
-</div>  
-<div *ngIf="encadrantDetail" class="container-xl mt-4">
-    
-      <h3>Détails de l'apprenant</h3>
-      <div class="user-icon">
-        <img [src]="encadrantDetail.profile_pic" alt='gb' style="width: 100%; height: auto;">   
+                              <span class="badge-status" [ngClass]="encadrantDetail.is_active ? 'badge-active' : 'badge-inactive'">
+                                  {{ encadrantDetail.is_active ? 'Actif' : 'Inactif' }}
+                                </span>
+                       
+                      </div>
+                      
+                      <div class="row mt-3">
+                          <div class="col-md-4 mb-3 mb-md-0">
+                              <div class="info-card">
+                                  <p class="text-muted small mb-1">Date d'inscription</p>
+                                  <p class="fw-semibold mb-0"> {{ encadrantDetail.date_inscription | date: 'MMMM d, y' }}</p>
+                              </div>
+                          </div>
+                          <div class="col-md-3 mb-2 mb-md-0">
+                              <div class="info-card">
+                                  <p class="text-muted small mb-1">Webinaires suivis</p>
+                                  <div class="d-flex align-items-center">
+                                      <p class="fw-semibold mb-0 me-2">{{nombreInscrit}}</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="info-card">
+                                  <p class="text-muted small mb-1">Programs talents</p>
+                                  <p class="fw-semibold mb-0">inconnus</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <p>Nom: {{ encadrantDetail.nom }} {{ encadrantDetail.nom }}</p>
-      <p>Email: {{ encadrantDetail.email }}</p>
-      <p>Role: {{ encadrantDetail.role }}</p>
-      <p>Specialite: {{ encadrantDetail.specialite }}</p>
-      <p>Fonction: {{ encadrantDetail.fonction }}</p>
-      <p>Telephone: {{ encadrantDetail.phone_number }} </p>
-    
-    
-</div>
-  
+      
+      <!-- Tabs Section -->
+      <ul class="nav nav-tabs" id="learnerTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                  <i class="fas fa-user me-2"></i> Aperçu
+              </button>
+          </li>
+          <li class="nav-item" role="presentation">
+              <button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab">
+                  <i class="fas fa-book me-2"></i> Cours dispenses
+              </button>
+          </li>
+          
+      </ul>
+      
+      <!-- Tab Content -->
+      <div class="tab-content" id="learnerTabsContent">
+          <!-- Overview Tab -->
+          <div class="tab-pane fade show active" id="overview" role="tabpanel">
+              <div class="row g-4 mb-4">
+                  <!-- Personal Info -->
+                  <div class="col-md-4">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h3 class="h5 card-title fw-semibold mb-3">
+                                  <i class="fas fa-info-circle text-primary me-2"></i> Personal Information
+                              </h3>
+                              <div class="d-flex flex-column gap-2">
+                                  <div>
+                                      <p class="text-muted small mb-1">Email</p>
+                                      <p class="fw-medium mb-0">{{encadrantDetail.email}}</p>
+                                  </div>
+                                  <div>
+                                      <p class="text-muted small mb-1">Phone</p>
+                                      <p class="fw-medium mb-0">{{encadrantDetail.phone_number}}</p>
+                                  </div>
+                                  <div>
+                                      <p class="text-muted small mb-1">Specialite</p>
+                                      <p class="fw-medium mb-0">{{encadrantDetail.specialite}}</p>
+                                  </div>
+
+                                  <div>
+                                      <p class="text-muted small mb-1">Fonction actuelle</p>
+                                      <p class="fw-medium mb-0">{{encadrantDetail.fonction}}</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Skills -->
+                  <div class="col-md-4">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h3 class="h5 card-title fw-semibold mb-3">
+                                  <i class="fas fa-code text-primary me-2"></i> Technical Skills
+                              </h3>
+                              <div class="d-flex flex-column gap-3">
+                                  <div>
+                                      <div class="d-flex justify-content-between mb-1">
+                                          <span class="small fw-medium">HTML/CSS</span>
+                                          <span class="small text-muted">90%</span>
+                                      </div>
+                                      <div class="progress">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="d-flex justify-content-between mb-1">
+                                          <span class="small fw-medium">JavaScript</span>
+                                          <span class="small text-muted">85%</span>
+                                      </div>
+                                      <div class="progress">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="d-flex justify-content-between mb-1">
+                                          <span class="small fw-medium">React</span>
+                                          <span class="small text-muted">75%</span>
+                                      </div>
+                                      <div class="progress">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="d-flex justify-content-between mb-1">
+                                          <span class="small fw-medium">Node.js</span>
+                                          <span class="small text-muted">65%</span>
+                                      </div>
+                                      <div class="progress">
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- 
+                  <div class="col-md-4">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h3 class="h5 card-title fw-semibold mb-3">
+                                  <i class="fas fa-clock text-primary me-2"></i> Recent Activity
+                              </h3>
+                              <div class="d-flex flex-column gap-3">
+                                  <div class="d-flex align-items-start">
+                                      <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-3">
+                                          <i class="fas fa-check text-primary"></i>
+                                      </div>
+                                      <div>
+                                          <p class="small fw-medium mb-1">Completed "Advanced CSS" module</p>
+                                          <p class="small text-muted mb-0">2 hours ago</p>
+                                      </div>
+                                  </div>
+                                  <div class="d-flex align-items-start">
+                                      <div class="bg-info bg-opacity-10 p-2 rounded-circle me-3">
+                                          <i class="fas fa-comment text-info"></i>
+                                      </div>
+                                      <div>
+                                          <p class="small fw-medium mb-1">Posted a question in "React Hooks" forum</p>
+                                          <p class="small text-muted mb-0">5 hours ago</p>
+                                      </div>
+                                  </div>
+                                  <div class="d-flex align-items-start">
+                                      <div class="bg-success bg-opacity-10 p-2 rounded-circle me-3">
+                                          <i class="fas fa-trophy text-success"></i>
+                                      </div>
+                                      <div>
+                                          <p class="small fw-medium mb-1">Earned "JavaScript Ninja" badge</p>
+                                          <p class="small text-muted mb-0">1 day ago</p>
+                                      </div>
+                                  </div>
+                                  <div class="d-flex align-items-start">
+                                      <div class="bg-purple bg-opacity-10 p-2 rounded-circle me-3">
+                                          <i class="fas fa-book text-purple"></i>
+                                      </div>
+                                      <div>
+                                          <p class="small fw-medium mb-1">Started "Node.js Fundamentals" course</p>
+                                          <p class="small text-muted mb-0">2 days ago</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  -->
+              </div>
+            
+              <!--  
+              <div class="row g-4">
+                  
+                  <div class="col-md-6">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h3 class="h5 card-title fw-semibold mb-3">
+                                  <i class="fas fa-project-diagram text-primary me-2"></i> Recent Projects
+                              </h3>
+                              <div class="d-flex flex-column gap-3">
+                                  <div class="pb-3 border-bottom">
+                                      <h4 class="h6 fw-medium">E-commerce Dashboard</h4>
+                                      <p class="small text-muted mb-2">React, Node.js, MongoDB</p>
+                                      <div class="d-flex flex-wrap gap-2">
+                                          <span class="skill-badge badge bg-primary bg-opacity-10 text-primary">React</span>
+                                          <span class="skill-badge badge bg-success bg-opacity-10 text-success">Node.js</span>
+                                          <span class="skill-badge badge bg-warning bg-opacity-10 text-warning">MongoDB</span>
+                                      </div>
+                                  </div>
+                                  <div class="pb-3 border-bottom">
+                                      <h4 class="h6 fw-medium">Portfolio Website</h4>
+                                      <p class="small text-muted mb-2">HTML, CSS, JavaScript</p>
+                                      <div class="d-flex flex-wrap gap-2">
+                                          <span class="skill-badge badge bg-purple bg-opacity-10 text-purple">HTML5</span>
+                                          <span class="skill-badge badge bg-pink bg-opacity-10 text-pink">CSS3</span>
+                                          <span class="skill-badge badge bg-warning bg-opacity-10 text-warning">JavaScript</span>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <h4 class="h6 fw-medium">Task Management App</h4>
+                                      <p class="small text-muted mb-2">React, Firebase</p>
+                                      <div class="d-flex flex-wrap gap-2">
+                                          <span class="skill-badge badge bg-primary bg-opacity-10 text-primary">React</span>
+                                          <span class="skill-badge badge bg-orange bg-opacity-10 text-orange">Firebase</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  -->
+                  <!-- 
+                  <div class="col-md-6">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h3 class="h5 card-title fw-semibold mb-3">
+                                  <i class="fas fa-certificate text-primary me-2"></i> Certifications
+                              </h3>
+                              <div class="d-flex flex-column gap-3">
+                                  <div class="pb-3 border-bottom">
+                                      <div class="d-flex align-items-start">
+                                          <div class="bg-primary bg-opacity-10 p-2 rounded-3 me-3">
+                                              <i class="fas fa-award text-primary fs-5"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-medium">Advanced JavaScript Developer</h4>
+                                              <p class="small text-muted mb-1">CodeMaster Academy</p>
+                                              <p class="small text-muted mb-0">Issued: May 2023</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="pb-3 border-bottom">
+                                      <div class="d-flex align-items-start">
+                                          <div class="bg-info bg-opacity-10 p-2 rounded-3 me-3">
+                                              <i class="fas fa-award text-info fs-5"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-medium">React Fundamentals</h4>
+                                              <p class="small text-muted mb-1">Frontend Masters</p>
+                                              <p class="small text-muted mb-0">Issued: March 2023</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="d-flex align-items-start">
+                                          <div class="bg-success bg-opacity-10 p-2 rounded-3 me-3">
+                                              <i class="fas fa-award text-success fs-5"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-medium">Responsive Web Design</h4>
+                                              <p class="small text-muted mb-1">FreeCodeCamp</p>
+                                              <p class="small text-muted mb-0">Issued: January 2023</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              -->
+          </div>
+          
+          
+          <!-- 
+          <div class="tab-pane fade" id="courses" role="tabpanel">
+              <div class="card mb-4">
+                  <div class="card-body">
+                      <h3 class="h5 card-title fw-semibold mb-4">Enrolled Courses</h3>
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead class="table-light">
+                                  <tr>
+                                      <th>Course</th>
+                                      <th>Instructor</th>
+                                      <th>Progress</th>
+                                      <th>Last Accessed</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="bg-primary bg-opacity-10 rounded-3 p-2 me-3">
+                                                  <i class="fas fa-code text-primary"></i>
+                                              </div>
+                                              <div>
+                                                  <div class="fw-medium">Advanced React Patterns</div>
+                                                  <div class="small text-muted">Web Development</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>Sarah Johnson</td>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                  <div class="progress-bar bg-primary" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+                                              <span class="small">65%</span>
+                                          </div>
+                                      </td>
+                                      <td class="small text-muted">2 hours ago</td>
+                                      <td>
+                                          <a href="#" class="btn btn-link btn-sm text-primary">Continue</a>
+                                          <a href="#" class="btn btn-link btn-sm text-secondary">Details</a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="bg-info bg-opacity-10 rounded-3 p-2 me-3">
+                                                  <i class="fas fa-server text-info"></i>
+                                              </div>
+                                              <div>
+                                                  <div class="fw-medium">Node.js Fundamentals</div>
+                                                  <div class="small text-muted">Backend Development</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>Michael Chen</td>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                  <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+                                              <span class="small">30%</span>
+                                          </div>
+                                      </td>
+                                      <td class="small text-muted">1 day ago</td>
+                                      <td>
+                                          <a href="#" class="btn btn-link btn-sm text-primary">Continue</a>
+                                          <a href="#" class="btn btn-link btn-sm text-secondary">Details</a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="bg-success bg-opacity-10 rounded-3 p-2 me-3">
+                                                  <i class="fas fa-paint-brush text-success"></i>
+                                              </div>
+                                              <div>
+                                                  <div class="fw-medium">Advanced CSS</div>
+                                                  <div class="small text-muted">Web Design</div>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td>Emma Rodriguez</td>
+                                      <td>
+                                          <div class="d-flex align-items-center">
+                                              <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                  <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+                                              <span class="small">100%</span>
+                                          </div>
+                                      </td>
+                                      <td class="small text-muted">3 days ago</td>
+                                      <td>
+                                          <a href="#" class="btn btn-link btn-sm text-primary">Review</a>
+                                          <a href="#" class="btn btn-link btn-sm text-secondary">Certificate</a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          -->
+          <!-- 
+          <div class="tab-pane fade" id="achievements" role="tabpanel">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="h5 card-title fw-semibold mb-4">Earned Badges & Achievements</h3>
+                      <div class="row g-4">
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-medal text-warning fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">JavaScript Ninja</h4>
+                                              <p class="small text-muted mb-0">Mastered advanced JS concepts</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Earned after completing all JavaScript challenges with 90%+ score</p>
+                                      <p class="small text-muted mb-0">Earned: May 28, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-star text-info fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">React Explorer</h4>
+                                              <p class="small text-muted mb-0">Completed React fundamentals</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Awarded for finishing all React modules and projects</p>
+                                      <p class="small text-muted mb-0">Earned: April 15, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-check-circle text-success fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">Perfect Attendance</h4>
+                                              <p class="small text-muted mb-0">30 days streak</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Logged in and completed tasks for 30 consecutive days</p>
+                                      <p class="small text-muted mb-0">Earned: March 30, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-purple bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-lightbulb text-purple fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">Quick Learner</h4>
+                                              <p class="small text-muted mb-0">Fast module completion</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Completed 5 modules ahead of schedule</p>
+                                      <p class="small text-muted mb-0">Earned: March 10, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-danger bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-heart text-danger fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">Community Helper</h4>
+                                              <p class="small text-muted mb-0">Active forum participant</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Helped 10+ fellow learners in discussion forums</p>
+                                      <p class="small text-muted mb-0">Earned: February 28, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4">
+                              <div class="achievement-card card h-100">
+                                  <div class="card-body">
+                                      <div class="d-flex align-items-center mb-3">
+                                          <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                              <i class="fas fa-code text-primary fs-4"></i>
+                                          </div>
+                                          <div>
+                                              <h4 class="h6 fw-semibold mb-0">HTML/CSS Master</h4>
+                                              <p class="small text-muted mb-0">Frontend fundamentals</p>
+                                          </div>
+                                      </div>
+                                      <p class="small text-muted mb-3">Completed all HTML/CSS challenges with perfect scores</p>
+                                      <p class="small text-muted mb-0">Earned: February 15, 2023</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          -->
+          <!-- 
+          <div class="tab-pane fade" id="activity" role="tabpanel">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="h5 card-title fw-semibold mb-4">Learning Activity</h3>
+                      <div class="d-flex flex-column">
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-check text-primary"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Completed "React Context API" lesson</p>
+                                      <p class="small text-muted mb-2">Advanced React Patterns course</p>
+                                      <p class="small text-muted mb-0">Today, 10:45 AM</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-info bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-comment text-info"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Posted a question in forum</p>
+                                      <p class="small text-muted mb-2">"How to optimize React performance?"</p>
+                                      <p class="small text-muted mb-0">Yesterday, 4:30 PM</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-warning bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-question-circle text-warning"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Attempted quiz: JavaScript Advanced Concepts</p>
+                                      <p class="small text-muted mb-2">Score: 85% (first attempt)</p>
+                                      <p class="small text-muted mb-0">Yesterday, 11:20 AM</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-purple bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-book text-purple"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Started new course: Node.js Fundamentals</p>
+                                      <p class="small text-muted mb-2">Completed introduction module</p>
+                                      <p class="small text-muted mb-0">2 days ago</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-success bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-project-diagram text-success"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Submitted project: E-commerce Dashboard</p>
+                                      <p class="small text-muted mb-2">Received 4.8/5 from instructor</p>
+                                      <p class="small text-muted mb-0">3 days ago</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="activity-item">
+                              <div class="d-flex align-items-start">
+                                  <div class="bg-danger bg-opacity-10 p-2 rounded-circle me-3">
+                                      <i class="fas fa-trophy text-danger"></i>
+                                  </div>
+                                  <div>
+                                      <p class="fw-medium mb-1">Earned badge: JavaScript Ninja</p>
+                                      <p class="small text-muted mb-2">For mastering advanced concepts</p>
+                                      <p class="small text-muted mb-0">5 days ago</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          -->
+      </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+      // Simulate loading animations
+      document.addEventListener('DOMContentLoaded', () => {
+          const progressBars = document.querySelectorAll('.progress-bar');
+          progressBars.forEach(bar => {
+              const targetWidth = bar.style.width;
+              bar.style.width = '0';
+              setTimeout(() => {
+                  bar.style.width = targetWidth;
+              }, 300);
+          });
+      });
+  </script>
+</body>

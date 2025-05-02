@@ -8,7 +8,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['email', 'nom', 'prenom', 'phone_number', 'role', 'password', 'fonction', 'specialite', 'profile_pic']
+        fields = ['email', 'nom', 'prenom', 'phone_number', 'role', 'password', 'fonction', 'specialite', 'profile_pic','is_active','date_inscription']
         extra_kwargs = {
             'role': {'required': False},  # Role n'est pas obligatoire
         }
@@ -68,6 +68,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['is_superuser'] = user.is_superuser
         token['fonction'] = user.fonction
         token['specialite'] = user.specialite
+        token['is_active'] = user.is_active
+        token['date_inscription'] = user.date_inscription.isoformat() if user.date_inscription else None
+  
         if user.profile_pic:
             token['profile_pic'] = user.profile_pic.url  # Récupération de l'URL de l'image de profil
 
@@ -84,9 +87,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'prenom': user.prenom,
             'role': user.role,
             'email': user.email,
-            'is_superuser': user.is_superuser,
             'fonction': user.fonction,
             'specialite': user.specialite,
+            'is_active': user.is_active,
+            'is_superuser':user.is_superuser,
+            'date_inscription':user.date_inscription,
             'profile_pic': user.profile_pic.url if user.profile_pic else None,
         })
         return data
@@ -98,5 +103,5 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'nom', 'prenom', 'phone_number', 'role', 'is_superuser', 'fonction', 'specialite', 'profile_pic']
+        fields = ['id', 'email', 'nom', 'prenom', 'phone_number', 'role', 'is_superuser', 'fonction', 'specialite', 'profile_pic','is_active', 'date_inscription']
         read_only_fields = ['id', 'is_superuser']

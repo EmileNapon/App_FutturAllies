@@ -37,3 +37,391 @@
     </form>
   </div>
   
+
+
+
+
+<body class="bg-light">
+    <div class="container py-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 mb-0">
+                    <a href="#" class="text-decoration-none text-secondary me-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    Édition Apprenant
+                </h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">Apprenants</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Édition</li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                <button class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-trash-alt me-1"></i> Supprimer
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Enregistrer
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="row">
+            <!-- Left Column - Profile -->
+            <div class="col-lg-4 mb-4">
+                <div class="card section-card h-100">
+                    <div class="section-header">
+                        <h2 class="h5 mb-0"><i class="fas fa-user-circle me-2"></i>Profil</h2>
+                    </div>
+                    <div class="section-body text-center">
+                        <div class="profile-picture-container mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="profile-picture">
+                            <div class="edit-picture-btn" data-bs-toggle="tooltip" title="Changer la photo">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="h5 mb-1">Sophia Williams</h3>
+                            <p class="text-muted mb-2">Développeuse Web</p>
+                            <span class="badge bg-success bg-opacity-10 text-success">
+                                <i class="fas fa-circle text-success me-1" style="font-size: 8px;"></i> Actif
+                            </span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center gap-3 mb-4">
+                            <div class="text-center">
+                                <div class="h4 mb-0">12</div>
+                                <small class="text-muted">Cours</small>
+                            </div>
+                            <div class="text-center">
+                                <div class="h4 mb-0">8</div>
+                                <small class="text-muted">Projets</small>
+                            </div>
+                            <div class="text-center">
+                                <div class="h4 mb-0">15</div>
+                                <small class="text-muted">Badges</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Statut</label>
+                            <select class="form-select">
+                                <option value="active" selected>Actif</option>
+                                <option value="inactive">Inactif</option>
+                                <option value="graduated">Diplômé</option>
+                                <option value="paused">En pause</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Date d'inscription</label>
+                            <input type="date" class="form-control" value="2023-03-15">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Niveau</label>
+                            <select class="form-select">
+                                <option value="beginner">Débutant</option>
+                                <option value="intermediate" selected>Intermédiaire</option>
+                                <option value="advanced">Avancé</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Details -->
+            <div class="col-lg-8">
+                <!-- Informations Personnelles -->
+                <div class="card section-card mb-4">
+                    <div class="section-header">
+                        <h2 class="h5 mb-0"><i class="fas fa-info-circle me-2"></i>Informations Personnelles</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required-field">Prénom</label>
+                                <input type="text" class="form-control" value="Sophia">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required-field">Nom</label>
+                                <input type="text" class="form-control" value="Williams">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label required-field">Email</label>
+                                <input type="email" class="form-control" value="sophia.williams@example.com">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" value="(555) 123-4567">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date de naissance</label>
+                                <input type="date" class="form-control" value="1995-06-12">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Genre</label>
+                                <select class="form-select">
+                                    <option value="female" selected>Féminin</option>
+                                    <option value="male">Masculin</option>
+                                    <option value="other">Autre</option>
+                                    <option value="prefer-not-to-say">Préfère ne pas dire</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Adresse</label>
+                            <input type="text" class="form-control mb-2" placeholder="Adresse ligne 1" value="123 Main Street">
+                            <input type="text" class="form-control" placeholder="Adresse ligne 2">
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Ville</label>
+                                <input type="text" class="form-control" value="San Francisco">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">État/Région</label>
+                                <input type="text" class="form-control" value="California">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Code postal</label>
+                                <input type="text" class="form-control" value="94105">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Pays</label>
+                            <select class="form-select">
+                                <option value="US" selected>États-Unis</option>
+                                <option value="FR">France</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">Royaume-Uni</option>
+                                <!-- Autres pays -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Compétences -->
+                <div class="card section-card mb-4">
+                    <div class="section-header">
+                        <h2 class="h5 mb-0"><i class="fas fa-code me-2"></i>Compétences Techniques</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="mb-3">
+                            <label class="form-label">Compétences actuelles</label>
+                            <div class="d-flex flex-wrap mb-3" id="current-skills">
+                                <span class="skill-tag">
+                                    HTML/CSS <span class="skill-tag-remove"><i class="fas fa-times"></i></span>
+                                </span>
+                                <span class="skill-tag">
+                                    JavaScript <span class="skill-tag-remove"><i class="fas fa-times"></i></span>
+                                </span>
+                                <span class="skill-tag">
+                                    React <span class="skill-tag-remove"><i class="fas fa-times"></i></span>
+                                </span>
+                                <span class="skill-tag">
+                                    Node.js <span class="skill-tag-remove"><i class="fas fa-times"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Ajouter une compétence</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="new-skill-input" placeholder="Ex: Python, SQL, etc.">
+                                <button class="btn btn-outline-secondary" type="button" id="add-skill-btn">
+                                    <i class="fas fa-plus"></i> Ajouter
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Niveau global</label>
+                            <div class="d-flex align-items-center">
+                                <div class="progress flex-grow-1 me-3" style="height: 10px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="fw-medium">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cours et Formations -->
+                <div class="card section-card">
+                    <div class="section-header">
+                        <h2 class="h5 mb-0"><i class="fas fa-book me-2"></i>Cours et Formations</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Cours</th>
+                                        <th>Progression</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-primary bg-opacity-10 rounded-3 p-2 me-3">
+                                                    <i class="fas fa-code text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-medium">Advanced React Patterns</div>
+                                                    <div class="small text-muted">Sarah Johnson</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span class="small">65%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-primary bg-opacity-10 text-primary">En cours</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-success bg-opacity-10 rounded-3 p-2 me-3">
+                                                    <i class="fas fa-paint-brush text-success"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-medium">Advanced CSS</div>
+                                                    <div class="small text-muted">Emma Rodriguez</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span class="small">100%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-success bg-opacity-10 text-success">Terminé</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-info bg-opacity-10 rounded-3 p-2 me-3">
+                                                    <i class="fas fa-server text-info"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-medium">Node.js Fundamentals</div>
+                                                    <div class="small text-muted">Michael Chen</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="progress flex-grow-1 me-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <span class="small">30%</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge bg-info bg-opacity-10 text-info">Commencé</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-plus me-1"></i> Ajouter un cours
+                            </button>
+                            <a href="#" class="text-decoration-none">Voir tous les cours (12)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialiser les tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Gestion des compétences
+            document.getElementById('add-skill-btn').addEventListener('click', function() {
+                const input = document.getElementById('new-skill-input');
+                const skill = input.value.trim();
+                
+                if (skill) {
+                    const skillTag = document.createElement('span');
+                    skillTag.className = 'skill-tag';
+                    skillTag.innerHTML = `
+                        ${skill} <span class="skill-tag-remove"><i class="fas fa-times"></i></span>
+                    `;
+                    
+                    document.getElementById('current-skills').appendChild(skillTag);
+                    input.value = '';
+                    
+                    // Ajouter l'événement de suppression
+                    skillTag.querySelector('.skill-tag-remove').addEventListener('click', function() {
+                        skillTag.remove();
+                    });
+                }
+            });
+            
+            // Gestion de la suppression des compétences existantes
+            document.querySelectorAll('.skill-tag-remove').forEach(function(removeBtn) {
+                removeBtn.addEventListener('click', function() {
+                    this.closest('.skill-tag').remove();
+                });
+            });
+            
+            // Permettre l'ajout de compétence avec la touche Entrée
+            document.getElementById('new-skill-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('add-skill-btn').click();
+                }
+            });
+        });
+    </script>
+</body>

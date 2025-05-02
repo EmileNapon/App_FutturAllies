@@ -13,8 +13,8 @@ export class ListApprenantsService {
     constructor(private http:HttpClient){}
     private apiUrl = environment.apiUrl;
 
-    getApprenants(): Observable<CustomUser[]> {
-        return this.http.get<CustomUser[]>(`${this.apiUrl}/apprenants/`);   
+    getApprenants(params: any = {}): Observable<CustomUser[]> {
+        return this.http.get<CustomUser[]>(`${this.apiUrl}/apprenants/`, {params});   
       }
 
       deleteApprenant(id: number): Observable<any> {
@@ -25,8 +25,9 @@ export class ListApprenantsService {
         const url = `${this.apiUrl}?page=${page}&size=${size}`;
         return this.http.get<CustomUser[]>(url)
       }
-      
-      
+
+
+
 
 
 

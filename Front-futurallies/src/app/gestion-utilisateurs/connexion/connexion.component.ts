@@ -32,7 +32,7 @@ export class ConnexionComponent implements OnInit {
 
     const { email, password } = this.loginForm.value;
     this.isLoading = true; // Activer l'indicateur de chargement
-
+console.log('hhhhhhhhhhh', this.loginForm.value)
     this.authService.login(email, password).subscribe({
       next: (response) => {
         console.log('Login successful', response);

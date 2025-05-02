@@ -1,0 +1,79 @@
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-picture-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.section-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.section-header {
+    border-bottom: 1px solid #eee;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px 10px 0 0;
+}
+
+.section-body {
+    padding: 20px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.required-field::after {
+    content: "*";
+    color: #dc3545;
+    margin-left: 4px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e9ecef;
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.skill-tag-remove {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.skill-tag-remove:hover {
+    color: #dc3545;
+}

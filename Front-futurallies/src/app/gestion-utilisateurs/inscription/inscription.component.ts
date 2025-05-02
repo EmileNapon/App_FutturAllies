@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       // password2: ['', Validators.required],
       phone_number: ['', Validators.required],
+      specialite:['', Validators.required],
       role: ['', Validators.required]
     });
   }
@@ -52,6 +53,7 @@ export class RegistrationComponent implements OnInit {
       formData.append('email', this.registrationForm.get('email')?.value);
       formData.append('phone_number', this.registrationForm.get('phone_number')?.value);
       formData.append('password', this.registrationForm.get('password')?.value);
+      formData.append('specialite', this.registrationForm.get('specialite')?.value);
       formData.append('role', this.registrationForm.get('role')?.value);
       formData.forEach((value, key) => {
         console.log(`${key}: ${value}`);

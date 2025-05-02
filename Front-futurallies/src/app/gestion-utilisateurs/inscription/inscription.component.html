@@ -135,6 +135,18 @@
         <!-- Type d'utilisateur -->
        
 
+                <!-- Numéro de Téléphone -->
+                <div *ngIf='isApprenant()' class="row mb-3 align-items-center">
+                    <label for="specialite" class="col-sm-4 col-form-label">Specialite:</label>
+                    <div class="col-sm-8 input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        <input type="tel" id="specialite" formControlName="specialite" class="form-control" placeholder="Entrez votre specialite">              
+                    </div>
+                    <div *ngIf="registrationForm.get('specialite')?.invalid && registrationForm.get('specialite')?.touched" class="text-danger">
+                        specialite requis.
+                    </div>
+                </div>
+
         <button  type="submit" class="btn btn-warning w-100 mb-3">S'inscrire</button>
     </form>
 

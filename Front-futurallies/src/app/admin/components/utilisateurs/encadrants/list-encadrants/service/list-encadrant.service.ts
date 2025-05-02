@@ -13,13 +13,16 @@ export class ListEncadrantService {
     constructor(private http:HttpClient){}
     private apiUrl = environment.apiUrl;
 
-    getEncadrants(): Observable<CustomUser[]> {
-        return this.http.get<CustomUser[]>(`${this.apiUrl}/encadrants/`);   
+    getEncadrants(params: any = {}): Observable<CustomUser[]> {
+        return this.http.get<CustomUser[]>(`${this.apiUrl}/encadrants/`,{params});   
       }
 
       deleteEncadrant(id: number): Observable<any> {
         return this.http.delete(`${this.apiUrl}/users/delete/${id}/`);
       }
       
-
+      getEncadrantsPaginated(page: number, size: number): Observable<CustomUser[]> {
+        const url = `${this.apiUrl}?page=${page}&size=${size}`;
+        return this.http.get<CustomUser[]>(url)
+      }
 }

@@ -13,6 +13,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Vue pour l'inscription
 class RegisterView(generics.CreateAPIView):
@@ -60,9 +62,20 @@ def list_users(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+
+from rest_framework import filters
+
+
+
 class ApprenantListView(generics.ListAPIView):
-    queryset = CustomUser.objects.filter(role='apprenant')  
+    # Filtrer par rôle 'apprenant'
+    queryset = CustomUser.objects.filter(role='apprenant')   
     serializer_class = UserSerializer
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['is_active'] 
+    search_fields = ['nom', 'prenom', 'email']
+    ordering = ['nom']  # Par défaut, trier par nom (A-Z)
 
 
 class ApprenantDetailView(generics.RetrieveAPIView):
@@ -93,12 +106,30 @@ class EncadrantDetailView(generics.RetrieveAPIView):
 
 
 
-class EntreprisesListView(generics.ListAPIView):
-    queryset = CustomUser.objects.filter(role='employeur')  
-    serializer_class = UserSerializer
+# class EntreprisesListView(generics.ListAPIView):
+#     queryset = CustomUser.objects.filter(role='employeur')  
+#     serializer_class = UserSerializer
 
 
 class EntrepriseDetailView(generics.RetrieveAPIView):
     queryset = CustomUser.objects.filter(role='employeur')
     serializer_class = UserSerializer
     lookup_field = 'id'  
+
+class EncadrantListView(generics.ListAPIView):
+    # Filtrer par rôle 'apprenant'
+    queryset = CustomUser.objects.filter(role='formateur')   
+    serializer_class = UserSerializer
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['is_active'] 
+    search_fields = ['nom', 'prenom', 'email']
+    ordering = ['nom']  # Par défaut, trier par nom (A-Z)
+
+class EntreprisesListView(generics.ListAPIView):
+    # Filtrer par rôle 'apprenant'
+    queryset = CustomUser.objects.filter(role='employeur')   
+    serializer_class = UserSerializer
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['is_active'] 
+    search_fields = ['nom', 'prenom', 'email']
+    ordering = ['nom']  # Par défaut, trier par nom (A-Z)

@@ -13,8 +13,8 @@ export class ListEntrepriseService {
 
     private apiUrl = environment.apiUrl;
 
-    getEntreprises(): Observable<CustomUser[]> {
-        return this.http.get<CustomUser[]>(`${this.apiUrl}/entreprises/`);   
+    getEntreprises(params: any = {}): Observable<CustomUser[]> {
+        return this.http.get<CustomUser[]>(`${this.apiUrl}/entreprises/`, {params});   
       }
 
       deleteEntreprise(id: number): Observable<any> {

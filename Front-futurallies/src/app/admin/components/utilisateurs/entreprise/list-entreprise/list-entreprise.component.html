@@ -3,87 +3,156 @@
 
 
 
+<body>
+  <div class="container-fluid" style='font-size:110%'>
+      <div class="row">
+          <main class="">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2"><i class="fas fa-user-graduate me-2"></i> Gestion des entreprises</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                      
+                  </div>
+              </div>
 
+              <!-- Cards -->
+              <div class="row mb-4">
+                  <div class="col-md-4">
+                      <div class="card card-counter bg-primary text-white mb-4">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="card-title" style='font-size:80%'>Total entreprises</h6>
+                                      <h2 class="mb-0" style='font-size:95%'>{{ entreprises.length }}</h2>
+                                  </div>
+                                  <i class="fas fa-user-graduate fa-3x opacity-50"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card card-counter bg-success text-white mb-4">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="card-title" style='font-size:80%'>Actifs</h6>
+                                      <h2 class="mb-0"style='font-size:95%'>{{entreprisesActifs}}</h2>
+                                  </div>
+                                  <i class="fas fa-check-circle fa-3x opacity-50"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card card-counter bg-warning text-white mb-4">
+                          <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h6 class="card-title" style='font-size:80%'>Inactifs</h6>
+                                      <h2 class="mb-0" style='font-size:95%'>{{entreprisesNotActifs}}</h2>
+                                  </div>
+                                  <i class="fas fa-exclamation-circle fa-3x opacity-50"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
+              <!-- Search and Filter -->
+              <div class="row mb-3">
+                  <div class="col-md-6">
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                          <input type="text" class="form-control" placeholder="Rechercher un apprenant..." [(ngModel)]="searchTerm" (input)="loadEntreprises()">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="d-flex">
+                          <select class="form-select me-2" [(ngModel)]="sortOrder" (change)="loadEntreprises()">
+                              <option value="">Trier par</option>
+                              <option value="nom">Nom (A-Z)</option>
+                              <option value="-nom">Nom (Z-A)</option>
+                          </select>
+                          
+                      </div>
+                  </div>
+              </div>
 
+              <!-- Students Table -->
+              <div class="card mb-4">
+                  <div class="card-header">
+                      <h5 class="card-title mb-0" style='font-size:80%;'>Liste des encadrants</h5>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead class="table-light">
+                                  <tr>
+                                      <th>ID</th>
+                                      <th>Photo</th>
+                                      <th>Nom complet</th>
+                                      <th>Email</th>
+                                      <th>Téléphone</th>
+                                      <th>Statut</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody *ngFor="let entreprise of paginatedEntreprise; let i = index">
+                                  <tr>
+                                      <td>{{i+1}}</td>
+                                      <td>
 
+                                          <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: #f0f0f0;">
+                                              <img *ngIf="entreprise.profile_pic; else defaultIcon"
+                                                   [src]="entreprise.profile_pic"
+                                                   alt="Photo"
+                                                   style="width: 100%; height: 100%; object-fit: cover;">
+                                              <ng-template #defaultIcon>
+                                                <i class="bi bi-person-circle" style="font-size: 48px; color: gray;"></i>
+                                              </ng-template>
+                                            </div>
+                                            
+                                           
+                                      </td>
+                                      <td> {{ entreprise.nom }}</td>
+                                      <td>{{ entreprise.email }}</td>
+                                      <td>{{ entreprise.phone_number }}</td>
+                                      <td >
+                              
+                                          <span class="badge-status" [ngClass]="entreprise.is_active ? 'badge-active' : 'badge-inactive'">
+                                              {{ entreprise.is_active ? 'Actif' : 'Inactif' }}
+                                            </span>
+                                          
+                                        </td>
 
+                                      <td>
+                                          <button (click)="allerDetail(entreprise.id)" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+                                          <button (click)="onDeleteEntreprise(entreprise.id)" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                      </td>
+                                  </tr>
 
-
-<!-- Titre -->
-<div class="container-xl mt-4">
-  <!-- Loading State (Optional, if you have a loading indicator) -->
-  <div *ngIf="loading" class="loading-message d-flex flex-column align-items-center justify-content-center">
-    <span class="text-muted fs-5">Chargement...</span>
-  </div>
-
-  <!-- No Data Message -->
-  <div *ngIf="entreprises.length === 0 && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
-    <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
-    <span class="mt-2 text-muted fs-5">Aucune donnée disponible</span>
-  </div>
-
-  <!-- Content (Table and Pagination) -->
-  <div *ngIf="entreprises.length > 0" class="content">
-    <!-- Page Size Selector -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div>
-        <label for="pageSize" class="me-2">Items par page:</label>
-        <select id="pageSize" [value]="size" (change)="onPageSizeChange($event)" class="form-select d-inline-block w-auto">
-          <option *ngFor="let option of sizeOptions" [value]="option">{{ option }}</option>
-        </select>
+                              </tbody>
+                          </table>
+                      </div>
+                     
+                          <div class="pagination d-flex justify-content-center align-items-center mt-3">
+                              <button class="btn btn-outline-primary me-2" [disabled]="page === 1" (click)="prevPage()">Précédent</button>
+                              <span>Page {{ page }} de {{ totalPages }}</span>
+                              <button   class="btn btn-outline-primary ms-2" [disabled]="page === totalPages" (click)="nextPage()">Suivant</button>
+                            </div>
+                  
+                  </div>
+              </div>
+          </main>
       </div>
-      <span>Total: {{ entreprises.length }} entreprises</span>
-    </div>
-
-    <!-- Tableau pour afficher les étudiants (using paginatedApprenants) -->
-    <table class="table table-striped table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th>N</th>
-          <th>Photo</th>
-          <th>Nom</th>
-          <th>Mail</th>
-          <th>Téléphone</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entreprise of paginatedEntreprise; let i = index">
-          <td>{{ (page - 1) * size + i + 1 }}</td> <!-- Adjust index for pagination -->
-          <td>
-            <div class="user-icon">
-              <img [src]="entreprise.profile_pic" alt='gb' style="width: 100%; height: auto;">   
-            </div>
-          </td>
-        
-          
-          <td>{{ entreprise.nom }} </td>
-          <td>{{ entreprise.email }}</td>
-          <td>{{ entreprise.phone_number }}</td>
-          <td style='display: inline-flex;'>
-              <button class="d-flex"  (click)='allerDetail(entreprise.id)' style='border:none'>
-                  <a > <i class="bi bi-info-circle"></i></a>
-              </button>
-              <button class="d-flex" (click)='allerEdit(entreprise.id)' style='border:none;padding-left:10px;'>
-                  <a ><i class="bi bi-pencil"></i></a>
-              </button>
-              <button class="d-flex"(click)='onDeleteEntreprise(entreprise.id)' style='border:none;padding-left:10px;'>
-                  <a ><i class="bi bi-trash"></i></a>
-              </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Pagination Controls -->
-    <div class="pagination d-flex justify-content-center align-items-center mt-3">
-      <button class="btn btn-outline-primary me-2" [disabled]="page === 1" (click)="prevPage()">Précédent</button>
-      <span>Page {{ page }} de {{ totalPages }}</span>
-      <button class="btn btn-outline-primary ms-2" [disabled]="page === totalPages" (click)="nextPage()">Suivant</button>
-    </div>
   </div>
-</div>
+
+
+</body>
+
+
+<button class="floating-button" routerLink='/admin/create-formateur'>
+  + 
+</button>
 
 <button class="floating-button" routerLink='/admin/create-entreprise'>
   + 

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {  Router, RouterLink } from '@angular/router';
 import { ListEntrepriseService } from './service/list-entreprise.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-etudiants',
-  imports: [CommonModule,RouterLink,],
+  imports: [CommonModule,RouterLink,FormsModule],
   templateUrl: './list-entreprise.component.html',
   styleUrl: './list-entreprise.component.css'
 })
@@ -22,7 +23,10 @@ export class ListEntrepriseComponent implements OnInit{
   totalPages: number = 0; // Total number of pages
   paginatedEntreprise: any[] = []; // Paginated apprenants for display
 
-
+  entreprisesActifs:number=0
+  entreprisesNotActifs:number=0
+  searchTerm: string = '';
+  sortOrder: string = '';
   constructor(private listEntrepriseService:ListEntrepriseService,  private route:Router ) { }
 
   ngOnInit():void{ 
@@ -62,17 +66,42 @@ export class ListEntrepriseComponent implements OnInit{
 
 
 
+  // loadEntreprises(): void {
+  //   this.loading = true;
+  //   this.listEntrepriseService.getEntreprises().subscribe((data: any[]) => {
+  //     this.entreprises = data;
+  //     this.totalPages = Math.ceil(this.entreprises.length / this.size);
+  //     this.updatePaginatedEntreprise();
+  //     this.loading = false;
+  //   }, () => {
+  //     this.loading = false;
+  //   });
+  // }
+
+
   loadEntreprises(): void {
     this.loading = true;
-    this.listEntrepriseService.getEntreprises().subscribe((data: any[]) => {
+    const filters: any = { role: 'employeur' };
+  
+    if (this.searchTerm) filters.search = this.searchTerm;
+    if (this.sortOrder) filters.ordering = this.sortOrder;
+  
+    this.listEntrepriseService.getEntreprises(filters).subscribe((data: any[]) => {
       this.entreprises = data;
+      console.log('mmmmmm',this.entreprises)
       this.totalPages = Math.ceil(this.entreprises.length / this.size);
       this.updatePaginatedEntreprise();
+  
+      // ✅ Recalcul des totaux visibles
+      this.entreprisesActifs = this.entreprises.filter(a => a.is_active).length;
+      this.entreprisesNotActifs = this.entreprises.filter(a => !a.is_active).length;
+  
       this.loading = false;
     }, () => {
       this.loading = false;
     });
   }
+
 
   updatePaginatedEntreprise(): void {
     const startIndex = (this.page - 1) * this.size;

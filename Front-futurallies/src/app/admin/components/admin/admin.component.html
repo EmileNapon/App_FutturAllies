@@ -1,26 +1,10 @@
 
-<!--  
-<div >
-
-  <div *ngIf="loading" class="loading-message d-flex flex-column align-items-center justify-content-center">
-    <span class="text-muted fs-5">Chargement...</span>
-  </div>
-
-  <div *ngIf="userInfo?.role !='admin' && !loading" class="no-data-message d-flex flex-column align-items-center justify-content-center">
-    <img src="assets/no-data.png" alt="Aucune donnée disponible" class="no-data-img mb-3">
-    <span class="mt-2 text-muted fs-5">Aucune donnée disponible</span>
-  </div>
-
-
-  <div *ngIf="userInfo?.role == 'admin'" class="content"> 
-
--->
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-toolbar class="sidenav-toolbar">
       <a href="/admin">
-        <span>FuturAllies</span>
+        <span style=" font-size: 25px;">FuturAllies</span>
       </a>
     </mat-toolbar>
     <app-menu />
@@ -31,7 +15,7 @@
       <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav" matTooltip="Ouvrir le menu">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="toolbar-title">Administration</span>
+      <span class="toolbar-title" style=" font-size: 25px;">Administration</span>
       <!-- <app-breadcrumbs /> -->
       <div class="spacer"></div>
       <!-- User Section -->
@@ -39,14 +23,15 @@
 
         <ul class="nav">
           <li class='nav-item' *ngIf="userInfo?.email; else loginTemplate">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img  src='assets/profil.png' style='background-color:yellow' height="25" />
-              </a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle" style="background-color:white; font-size: 25px; border-radius: 50%; padding: 2px;"></i>
+            </a>
+            
               <ul class="dropdown-menu">
-                <li><span class="dropdown-item">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</span></li>
-                <li><span class="dropdown-item">{{ userInfo?.email }}</span></li>
-                <li><span class="dropdown-item">{{ userInfo?.role }}</span></li>
-                <li><button class="dropdown-item" (click)="onLogout()" > <i class="bi bi-power"></i><span  style='padding-left:5px'>Déconnexion</span></button></li>
+                <li><span class="dropdown-item" style=" font-size: 25px;">{{ userInfo?.firstName }} {{ userInfo?.lastName }}</span></li>
+                <li><span class="dropdown-item" style=" font-size: 25px;">{{ userInfo?.email }}</span></li>
+                <li><span class="dropdown-item" style=" font-size: 25px;">{{ userInfo?.role }}</span></li>
+                <li><button class="dropdown-item" (click)="onLogout()" style=" font-size: 25px;" > <i class="bi bi-power"></i><span  style='padding-left:5px'>Déconnexion</span></button></li>
               </ul>
 
             </li>

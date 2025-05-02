@@ -42,6 +42,7 @@ import { UserProfileTypeComponent } from './payment/components/user-profile-type
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
 
 
+
 const routes: Routes = [
 
 
@@ -69,7 +70,6 @@ const routes: Routes = [
   },
 
   { path: 'admin-login', component: LoginComponent },
-
   { path: 'webinar-list', component: WebinarListComponent },
   { path: 'webinar-details/:id/detail', component: WebinarDetailsComponent },
   { path: 'webinar-enroll/:id/incription', component: WebinarEnrollComponent },

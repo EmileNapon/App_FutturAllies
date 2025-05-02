@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import ContentView, ChapitreView
+from .views import ContentView, ChapitreView, get_nombre_webinar_suivi
 
 urlpatterns = [
     path('modules/create/', views.create_module, name='create_module'),
@@ -46,6 +46,7 @@ urlpatterns = [
     path('webinarEnrollments/enroll', views.enroll_to_webinar, name='inscrit'),
         # Liste des webinaires
     path('webinars-inscrit/', views.list_webinars_inscrit, name='list_webinars'),
+    path('inscrit/nombre/<int:id>/', get_nombre_webinar_suivi),
 
 ]
 

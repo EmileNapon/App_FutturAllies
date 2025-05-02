@@ -343,3 +343,13 @@ def annonce_detail(request, annonce_id):
 #             serializer.save() 
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def get_nombre_programme_talent_suivi(request, id):
+    try:
+        count = Inscrit.objects.filter(user=id).count()
+        return Response(count)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

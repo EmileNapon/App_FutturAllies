@@ -12,35 +12,56 @@ import { FormsModule } from '@angular/forms';
 })
 export class ListEtudiantsComponent implements OnInit{
 
-
+  apprenantsActifs:number=0
+  apprenantsNotActifs:number=0
   apprenants: any[] = [];
   loading:boolean=false
 
   page: number = 1; // Current page
   size: number = 5; // Default items per page
   sizeOptions: number[] = [5, 10, 20, 100]; // Page size options
-  totalPages: number = 0; // Total number of pages
+  totalPages: number = 1; // Total number of pages
   paginatedApprenants: any[] = []; // Paginated apprenants for display
 
   constructor(private apprenantsService:ListApprenantsService,  private route:Router ) { }
 
   ngOnInit():void{ 
     this.loadApprenants()
+
+   
   }
 
 
 
+
+
+  searchTerm: string = '';
+  sortOrder: string = '';
+  
+
   loadApprenants(): void {
     this.loading = true;
-    this.apprenantsService.getApprenants().subscribe((data: any[]) => {
+    const filters: any = { role: 'apprenant' };
+  
+    if (this.searchTerm) filters.search = this.searchTerm;
+    if (this.sortOrder) filters.ordering = this.sortOrder;
+  
+    this.apprenantsService.getApprenants(filters).subscribe((data: any[]) => {
       this.apprenants = data;
       this.totalPages = Math.ceil(this.apprenants.length / this.size);
       this.updatePaginatedApprenants();
+  
+      // ✅ Recalcul des totaux visibles
+      this.apprenantsActifs = this.apprenants.filter(a => a.is_active).length;
+      this.apprenantsNotActifs = this.apprenants.filter(a => !a.is_active).length;
+  
       this.loading = false;
     }, () => {
       this.loading = false;
     });
   }
+  
+
 
   updatePaginatedApprenants(): void {
     const startIndex = (this.page - 1) * this.size;
@@ -48,12 +69,7 @@ export class ListEtudiantsComponent implements OnInit{
     this.paginatedApprenants = this.apprenants.slice(startIndex, endIndex);
   }
 
-  nextPage(): void {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.updatePaginatedApprenants();
-    }
-  }
+
 
   prevPage(): void {
     if (this.page > 1) {
@@ -61,7 +77,13 @@ export class ListEtudiantsComponent implements OnInit{
       this.updatePaginatedApprenants();
     }
   }
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.updatePaginatedApprenants();
+    }
 
+  }
   changePageSize(newSize: number): void {
     if (this.sizeOptions.includes(newSize)) {
       this.size = newSize;

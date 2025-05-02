@@ -4,9 +4,8 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
     CustomTokenObtainPairView, RegisterView, UserDetailView, 
-    list_users, UpdateUserView, DeleteUserView, ApprenantListView, ApprenantDetailView, EncadrantListView, EncadrantDetailView,
-
-    EntreprisesListView, EntrepriseDetailView
+    list_users, UpdateUserView, DeleteUserView, ApprenantListView, ApprenantDetailView, EncadrantListView, 
+    EncadrantDetailView,EntreprisesListView, EntrepriseDetailView, 
 )
 
 urlpatterns = [
@@ -30,9 +29,11 @@ urlpatterns = [
      path('fidalli/encadrants/', EncadrantListView.as_view(), name='encadrants-list'),
      path('fidalli/encadrants/<int:id>/', EncadrantDetailView.as_view(), name='encadrants-detail'),
 
-      path('fidalli/entreprises/', EntreprisesListView.as_view(), name='employeurs-list'),
+    path('fidalli/entreprises/', EntreprisesListView.as_view(), name='employeurs-list'),
      path('fidalli/entreprises/<int:id>/', EntrepriseDetailView.as_view(), name='employeurs-detail'),
+
 ]
+
 
 # Ajout du support pour servir les fichiers médias en mode DEBUG
 if settings.DEBUG:
