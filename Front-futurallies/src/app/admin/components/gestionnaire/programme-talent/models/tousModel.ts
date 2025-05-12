@@ -18,6 +18,7 @@ export interface Formation {
     type: string;
     niveau: string;
     prix: number;
+    date:Date;
     duree: string;
     nombre: string; // Nombre de places
     localisation: string; // Lieu de la formation

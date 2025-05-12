@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-# from .views import(EncadrantAPIView)
+from .views import(FormationListView)
 
 urlpatterns = [
 
@@ -35,6 +35,7 @@ urlpatterns = [
     # path('encadrant/', EncadrantAPIView.as_view(), name='encadrant'),
 
     path('fidalli/inscrit/nombre/talent/<int:id>/', views.get_nombre_programme_talent_suivi),
+    path('fidalli/formation/formations1/', FormationListView.as_view(), name='formations1-list'),
     
 ]
 

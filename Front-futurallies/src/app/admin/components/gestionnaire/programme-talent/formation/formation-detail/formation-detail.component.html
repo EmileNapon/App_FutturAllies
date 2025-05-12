@@ -1,158 +1,544 @@
 
-<div  class="container-xl">
-  <div class="table-responsive">
-      <div class="table-wrapper">
-          <div class="table-title">
-              <div class="row">
-                  <div class="col-sm-6">
-                      <h2>Details <b>d'une formation</b></h2>
-                  </div>
-                  <div class="col-sm-6">
-                      <a  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span></span></a>
-                      <a   class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span></span></a>
-                      <a  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span></span></a>  						
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+<body class="bg-gray-50 font-sans">
+    <!-- Admin Layout -->
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="admin-sidebar bg-gray-800 text-white h-screen fixed top-0 left-0 w-64 overflow-y-auto z-50">
+            <div class="p-4 flex items-center justify-between border-b border-gray-700">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-blue-400 text-2xl"></i>
+                    <span class="sidebar-text text-xl font-bold">FIDALLI Admin</span>
+                </div>
+                <button id="sidebar-toggle" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg bg-gray-700 text-white">
+                            <i class="fas fa-tachometer-alt mr-3"></i>
+                            <span class="sidebar-text">Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-chalkboard-teacher mr-3"></i>
+                            <span class="sidebar-text">Formations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-users mr-3"></i>
+                            <span class="sidebar-text">Participants</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-user-tie mr-3"></i>
+                            <span class="sidebar-text">Formateurs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-calendar-alt mr-3"></i>
+                            <span class="sidebar-text">Calendrier</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            <span class="sidebar-text">Statistiques</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-cog mr-3"></i>
+                            <span class="sidebar-text">Paramètres</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-expanded flex-1 ml-64 transition-all duration-300">
+            <!-- Top Navigation -->
+            <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-chalkboard-teacher mr-2 text-blue-600"></i>
+                    Détails de la Formation
+                </h1>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img class="h-8 w-8 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin">
+                        <span class="text-gray-700 font-medium">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="p-6">
+                <!-- Action Buttons -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex space-x-2">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Retour
+                        </button>
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-print mr-2"></i>
+                            Imprimer
+                        </button>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button id="edit-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-edit mr-2"></i>
+                            Modifier
+                        </button>
+                        <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-trash-alt mr-2"></i>
+                            Supprimer
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="stat-card bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm">Participants</p>
+                                <h3 class="text-2xl font-bold text-gray-800">24</h3>
+                            </div>
+                            <div class="bg-blue-100 p-2 rounded-full">
+                                <i class="fas fa-users text-blue-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up mr-1"></i> 12% vs dernière session
+                        </p>
+                    </div>
+                    <div class="stat-card bg-white p-4 rounded-lg shadow border-l-4 border-green-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm">Taux de complétion</p>
+                                <h3 class="text-2xl font-bold text-gray-800">78%</h3>
+                            </div>
+                            <div class="bg-green-100 p-2 rounded-full">
+                                <i class="fas fa-check-circle text-green-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up mr-1"></i> 5% vs dernière session
+                        </p>
+                    </div>
+                    <div class="stat-card bg-white p-4 rounded-lg shadow border-l-4 border-purple-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm">Satisfaction</p>
+                                <h3 class="text-2xl font-bold text-gray-800">4.6/5</h3>
+                            </div>
+                            <div class="bg-purple-100 p-2 rounded-full">
+                                <i class="fas fa-star text-purple-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-red-500 text-sm mt-2">
+                            <i class="fas fa-arrow-down mr-1"></i> 0.2 vs dernière session
+                        </p>
+                    </div>
+                    <div class="stat-card bg-white p-4 rounded-lg shadow border-l-4 border-yellow-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm">Revenu généré</p>
+                                <h3 class="text-2xl font-bold text-gray-800">312,500 DH</h3>
+                            </div>
+                            <div class="bg-yellow-100 p-2 rounded-full">
+                                <i class="fas fa-coins text-yellow-600"></i>
+                            </div>
+                        </div>
+                        <p class="text-green-500 text-sm mt-2">
+                            <i class="fas fa-arrow-up mr-1"></i> 18% vs dernière session
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formation Details -->
+                <div class="bg-white rounded-lg shadow overflow-hidden mb-6">
+                    <!-- Tabs Navigation -->
+                    <div class="border-b border-gray-200">
+                        <div class="flex">
+                            <button class="tab-btn px-6 py-4 font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-300 transition-all active" data-tab="info">
+                                <i class="fas fa-info-circle mr-2"></i>Informations
+                            </button>
+                            <button class="tab-btn px-6 py-4 font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="participants">
+                                <i class="fas fa-users mr-2"></i>Participants
+                            </button>
+                            <button class="tab-btn px-6 py-4 font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="sessions">
+                                <i class="fas fa-calendar-alt mr-2"></i>Sessions
+                            </button>
+                            <button class="tab-btn px-6 py-4 font-medium text-gray-600 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-300 transition-all" data-tab="documents">
+                                <i class="fas fa-file-alt mr-2"></i>Documents
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tabs Content -->
+                    <div class="tab-content active p-6" id="info-tab">
+                        <!-- View Mode -->
+                        <div id="view-mode">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Détails de base</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Titre:</span>
+                                            <span class="w-2/3" id="formation-titre">Développement Web Full Stack</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Type:</span>
+                                            <span class="w-2/3" id="formation-type">Formation Professionnelle</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Niveau:</span>
+                                            <span class="w-2/3" id="formation-niveau">Débutant à Intermédiaire</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Prix:</span>
+                                            <span class="w-2/3" id="formation-prix">12,500 DH</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Durée:</span>
+                                            <span class="w-2/3" id="formation-duree">6 mois (480 heures)</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Places:</span>
+                                            <span class="w-2/3" id="formation-places">25 (max)</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Localisation:</span>
+                                            <span class="w-2/3" id="formation-localisation">FIDALLI, Casablanca</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Date de création:</span>
+                                            <span class="w-2/3" id="formation-created">15/03/2023</span>
+                                        </div>
+                                        <div class="flex">
+                                            <span class="w-1/3 font-medium text-gray-600">Statut:</span>
+                                            <span class="w-2/3">
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-sm">Active</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Description</h3>
+                                    <div class="prose max-w-none" id="formation-description">
+                                        <p>Cette formation intensive en développement web full stack permet d'acquérir toutes les compétences nécessaires pour concevoir, développer et déployer des applications web complètes. Les participants maîtriseront à la fois les technologies front-end (HTML, CSS, JavaScript, React) et back-end (Node.js, Express, MongoDB).</p>
+                                        <p>Notre approche pédagogique repose sur une alternance entre théorie et pratique, avec de nombreux exercices et projets concrets. À l'issue de la formation, les participants seront capables de développer des applications web complètes de A à Z.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Programme détaillé</h3>
+                                <div id="formation-programme" class="prose max-w-none">
+                                    <h4>Module 1: Fondamentaux du Web (30 heures)</h4>
+                                    <ul>
+                                        <li>HTML5 et sémantique web</li>
+                                        <li>CSS3 et animations modernes</li>
+                                        <li>JavaScript ES6+</li>
+                                    </ul>
+                                    <h4>Module 2: Front-end Avancé (45 heures)</h4>
+                                    <ul>
+                                        <li>React.js fondamentaux</li>
+                                        <li>Gestion d'état avec Redux</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Prérequis</h3>
+                                <div id="formation-prerequis" class="prose max-w-none">
+                                    <ul>
+                                        <li>Bonne maîtrise de l'outil informatique</li>
+                                        <li>Connaissances de base en algorithmique (un plus)</li>
+                                        <li>Logique et esprit analytique</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit Mode (hidden by default) -->
+                        <div id="edit-mode" class="hidden">
+                            <form>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Détails de base</h3>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Titre</label>
+                                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="Développement Web Full Stack">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Type</label>
+                                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                                    <option>Formation Professionnelle</option>
+                                                    <option>Formation Continue</option>
+                                                    <option>Formation Certifiante</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Niveau</label>
+                                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="Débutant à Intermédiaire">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Prix (DH)</label>
+                                                <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="12500">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Durée</label>
+                                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="6 mois (480 heures)">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Nombre de places</label>
+                                                <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="25">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Localisation</label>
+                                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="FIDALLI, Casablanca">
+                                            </div>
+                                            <div>
+                                                <label class="block text-gray-600 mb-1">Statut</label>
+                                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                                    <option>Active</option>
+                                                    <option>Inactive</option>
+                                                    <option>En préparation</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Description</h3>
+                                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg h-64">Cette formation intensive en développement web full stack permet d'acquérir toutes les compétences nécessaires pour concevoir, développer et déployer des applications web complètes. Les participants maîtriseront à la fois les technologies front-end (HTML, CSS, JavaScript, React) et back-end (Node.js, Express, MongoDB).
+
+Notre approche pédagogique repose sur une alternance entre théorie et pratique, avec de nombreux exercices et projets concrets. À l'issue de la formation, les participants seront capables de développer des applications web complètes de A à Z.</textarea>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Programme détaillé</h3>
+                                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg h-48"><h4>Module 1: Fondamentaux du Web (30 heures)</h4>
+<ul>
+    <li>HTML5 et sémantique web</li>
+    <li>CSS3 et animations modernes</li>
+    <li>JavaScript ES6+</li>
+</ul>
+<h4>Module 2: Front-end Avancé (45 heures)</h4>
+<ul>
+    <li>React.js fondamentaux</li>
+    <li>Gestion d'état avec Redux</li>
+</ul></textarea>
+                                </div>
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Prérequis</h3>
+                                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-lg h-32"><ul>
+    <li>Bonne maîtrise de l'outil informatique</li>
+    <li>Connaissances de base en algorithmique (un plus)</li>
+    <li>Logique et esprit analytique</li>
+</ul></textarea>
+                                </div>
+                                <div class="flex justify-end space-x-3">
+                                    <button type="button" id="cancel-edit" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                                        Annuler
+                                    </button>
+                                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                        Enregistrer les modifications
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content p-6" id="participants-tab">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Liste des participants</h3>
+                            <div class="flex space-x-2">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm">
+                                    <i class="fas fa-plus mr-1"></i> Ajouter
+                                </button>
+                                <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded-lg text-sm">
+                                    <i class="fas fa-download mr-1"></i> Exporter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="py-3 px-4 text-left text-gray-600">ID</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Nom complet</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Email</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Téléphone</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Statut</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Progression</th>
+                                        <th class="py-3 px-4 text-left text-gray-600">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="py-3 px-4">#2354</td>
+                                        <td class="py-3 px-4 font-medium">Mehdi El Amrani</td>
+                                        <td class="py-3 px-4">mehdiexample.com</td>
+                                        <td class="py-3 px-4">+212 6 12 34 56 78</td>
+                                        <td class="py-3 px-4">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Actif</span>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                            <span class="text-xs text-gray-600">75%</span>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <button class="text-blue-600 hover:text-blue-800 mr-2">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="text-yellow-600 hover:text-yellow-800 mr-2">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- More rows would go here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="text-sm text-gray-600">
+                                Affichage de 1 à 5 sur 24 participants
+                            </div>
+                            <div class="flex space-x-1">
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg bg-gray-100 text-gray-600">
+                                    <i class="fas fa-angle-left"></i>
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg bg-blue-600 text-white">
+                                    1
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg hover:bg-gray-100">
+                                    2
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg hover:bg-gray-100">
+                                    3
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg hover:bg-gray-100">
+                                    <i class="fas fa-angle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content p-6" id="sessions-tab">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Sessions programmées</h3>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm">
+                                <i class="fas fa-plus mr-1"></i> Nouvelle session
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Session du 15/10/2023 au 15/04/2024</h4>
+                                        <div class="flex items-center text-sm text-gray-500 mt-1">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Lundi, Mercredi, Vendredi - 18h30 à 21h30</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-800">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-yellow-600 hover:text-yellow-800">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-600 hover:text-red-800">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div>
+                                            <h5 class="font-medium text-gray-700 mb-2">Formateur principal</h5>
+                                            <div class="flex items-center">
+                                                <img class="h-8 w-8 rounded-full mr-2" src="https://randomuser.me/api/portraits/men/42.jpg" alt="">
+                                                <span>Prof. Ahmed Bennis</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-700 mb-2">Salle</h5>
+                                            <div class="flex items-center">
+                                                <i class="fas fa-door-open text-gray-500 mr-2"></i>
+                                                <span>Salle 12 - Bâtiment A</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium text-gray-700 mb-2">Participants</h5>
+                                            <div class="flex items-center">
+                                                <i class="fas fa-users text-gray-500 mr-2"></i>
+                                                <span>24 inscrits</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More sessions would go here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content p-6" id="documents-tab">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Documents associés</h3>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm">
+                                <i class="fas fa-plus mr-1"></i> Ajouter
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-start mb-3">
+                                    <div class="bg-blue-100 p-3 rounded-lg mr-3">
+                                        <i class="fas fa-file-pdf text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Programme détaillé.pdf</h4>
+                                        <p class="text-sm text-gray-500">2.4 MB - Ajouté le 10/03/2023</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="text-yellow-600 hover:text-yellow-800">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- More documents would go here -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 
 
-<div class='container mb-3 mt-3'>
-    <div class="row">
-        <h1><b>{{ formations.titre }}</b></h1>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <table  class="table no-border-table">
-            <tr>
-              <td><b>Type :</b></td>
-              <td>{{ formations.type }}</td>
-            </tr>
-            <!-- <tr>
-              <td>Domaines éligibles :</td>
-              <td>#</td>
-            </tr> -->
-            <tr>
-              <td><b>Niveau requis :</b></td>
-              <td>{{ formations.niveau }}</td>
-            </tr>
-            <tr>
-              <td><b>Prix :</b></td>
-              <td>{{ formations.prix }} euros</td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <table  class="table no-border-table">
-            <tr>
-              <td><b>Durée bbb :</b></td>
-              <td>{{ formations.duree }}</td>
-            </tr>
-
-            <tr>
-              <td><b>Nombre de places :</b></td>
-              <td>{{ formations.nombre }}</td>
-            </tr>
-            <tr>
-              <td><b>Localisation :</b></td>
-              <td>{{ formations.localisation }}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-  
-      <div class="row">
-        <p><b>Resumé de la formation: </b>{{ formations.resume }} </p>
-      </div>
-
-      <!-- nouveau -->
-      <div class="card-body">
-        <!-- <p><strong>Description:</strong> {{ formation.description }}</p> -->
-        <h2><b>Liste des Modules de cette formation:</b></h2>
-        moduleFormations
-
-        <ul *ngFor="let module of modules">
-          <!-- <li *ngFor="let module of getModulesForFormation(formation.id)"> -->
-            <li>
-            Module ID: {{ module.code }} - Nom: {{ module.nom_module}}
-          </li>
-        </ul>
-
-        <ul *ngFor="let moduleFormation of moduleFormations">
-              <li>
-              Formation ID: {{ moduleFormation.formation_id }} - Module ID: {{ moduleFormation.module_id}}
-            </li>
-        </ul>
-      </div>
-  
-      <!-- <div style="margin: 20px;" *ngIf="showDetail">
-        <div [innerHTML]="formation.description"></div>
-        <div class="row">
-          <h2>Détails supplémentaires</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Objectifs de la formation :</h4>
-            <ul>
-              <li>Renforcer les compétences en gestion d'entreprise</li>
-              <li>Développer une expertise technique en finance et comptabilité</li>
-              <li>Améliorer les compétences en informatique et en gestion de projet</li>
-              <li>Préparer les participants pour des stages en entreprise</li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Modalités d'inscription :</h4>
-            <p>Date limite d'inscription : <b>15 octobre 2024</b></p>
-            <p>Documents requis : CV, lettre de motivation, diplôme (minimum Bac+2)</p>
-            <p>Envoyer votre dossier via la plateforme ou par email à <b>inscriptionsaformation.com</b></p>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Certificat délivré :</h4>
-            <p>À la fin de la formation, les participants recevront un <b>certificat de formation professionnelle</b> reconnu par l'État.</p>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Entreprises partenaires :</h4>
-            <p>Plusieurs entreprises partenaires dans les secteurs de la finance, de la gestion, et de l'informatique offriront des opportunités de stages aux meilleurs participants.</p>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Dates et horaires :</h4>
-            <p>Début de la formation : <b>1er novembre 2024</b></p>
-            <p>Horaires : Du lundi au vendredi, de 9h à 17h</p>
-          </div>
-        </div>
-      </div> -->
-  
-      <div class="row">
-        <p>
-          <i class="bi bi-star-fill" style="color: rgb(99, 104, 3);"></i>
-          <i class="bi bi-star-half" style="color: rgb(99, 104, 3);"></i>
-          <i class="bi bi-star" style="color: rgb(99, 104, 3);"></i>
-        </p>
-      </div>
-  
-      <div class="row">
-        <div class="text-end">
-          <button class="btn btn-outline-danger" routerLink="/gestionnaire/dasbord-prog-talent">Fermer</button>
-          <button class="btn btn-outline-secondary mx-2" style="color: red;" routerLink="">S'inscrire</button>
-          <button class="btn btn-warning mx-2" (click)='onSelectFormation(formations.id)'>Modifier</button>
-          <button class="btn btn-danger mx-2" (click)="deleteFormation(formations.id)">Supprimer</button>
-        </div>
-      </div>
-  
-      <br/>
-  </div>
-  
+</body>

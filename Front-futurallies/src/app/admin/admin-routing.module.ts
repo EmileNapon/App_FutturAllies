@@ -75,6 +75,7 @@ const routes: Routes = [
       {path:':idcoursGestionnaireId/chapitre', component:GestionnaireChapitreComponent},
       {path: 'formation', component: GestionnaireFormationComponent},
       {path: ':dasbordId/programme-talent', component: GestionnaireDasbordProgTalentComponent},
+      // {path: 'formation/:formationId/detail', component: GestionnaireFormationDetailComponent},
       
       // {path:'gestionnaire/:idchapitreGestionnaireId/gestionnaire-contenu', component:GestionnaireModifierContenuCoursComponent},
       // {path:'gestionnaire/gestionnaire-certificat', component:GestionnaireCertificatComponent},

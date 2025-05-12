@@ -56,14 +56,6 @@ export class AnnonceComponent {
       });
     }
 
-  // Ajouter une nouvelle annonce
-  // ajouterAnnonce(): void {
-  //   this.annonceService.addAnnonce(this.newAnnonce).subscribe(annonce => {
-  //     this.annonces.push(annonce);
-  //   });
-  // }
-
-  // Supprimer une annonce
   supprimerAnnonce(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
       this.annonceService.deleteAnnonce(id).subscribe(() =>  {

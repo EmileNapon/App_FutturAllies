@@ -15,6 +15,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import filters
+
 
 # Vue pour l'inscription
 class RegisterView(generics.CreateAPIView):
@@ -62,12 +64,6 @@ def list_users(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
-
-from rest_framework import filters
-
-
-
 class ApprenantListView(generics.ListAPIView):
     # Filtrer par rôle 'apprenant'
     queryset = CustomUser.objects.filter(role='apprenant')   
@@ -103,12 +99,6 @@ class EncadrantDetailView(generics.RetrieveAPIView):
     queryset = CustomUser.objects.filter(role='formateur')
     serializer_class = UserSerializer
     lookup_field = 'id'  
-
-
-
-# class EntreprisesListView(generics.ListAPIView):
-#     queryset = CustomUser.objects.filter(role='employeur')  
-#     serializer_class = UserSerializer
 
 
 class EntrepriseDetailView(generics.RetrieveAPIView):

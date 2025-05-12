@@ -5,12 +5,15 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 from .models import Formation, Inscrit, ModuleFormation, Seance,Annonce, CustomUser,Module
-
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
 
 from .serializers import AffectationStageSerializer, FormationSerializer, GroupSerializer, InscritSerializer, ModuleFormationSerializer, SeanceSerializer,AnnonceSerializer
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import filters
+
 
 @api_view(['POST','PUT'])
 def create_Formation(request,  pk=None):
@@ -74,24 +77,7 @@ def remove_formation(request, formation_id):
     except Exception as e:
         return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-##################################################################################################################
 
-# @api_view(['POST'])
-# def create_Inscrit(request):
-#     if request.method == 'POST':
-#         serializer = InscritSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])  # Permet seulement aux utilisateurs authentifiés de lister les offres
-# def liste_Inscrits(request):
-#     inscrit = Inscrit.objects.all()  # Récupérer toutes les offres
-#     serializer = InscritSerializer(inscrit, many=True)  # Sérialiser les données
-#     return Response(serializer.data, status=status.HTTP_200_OK)
-    
 
 
 @api_view(['POST'])
@@ -170,48 +156,6 @@ def create_Seance(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-# @api_view(['POST'])
-# def create_Seance(request):
-#     if request.method == 'POST':
-#         # Récupérer les données envoyées dans la requête
-#         user_ids = request.data.get('user_ids', [])
-#         formation_id = request.data.get('formation_id')
-#         module_id = request.data.get('module_id')
-#         lieu = request.data.get('lieu')
-#         date_formation = request.data.get('date_formation')
-#         heure_debut = request.data.get('heure_debut')
-#         heure_fin = request.data.get('heure_fin')
-
-#         if not user_ids:
-#             return Response({"error": "No users selected"}, status=status.HTTP_400_BAD_REQUEST)
-
-#         # Créer une séance pour chaque utilisateur
-#         created_seances = []
-#         for user_id in user_ids:
-#             user = CustomUser.objects.get(id=user_id)  # Récupérer l'utilisateur
-#             module = Module.objects.get(id=module_id)  # Récupérer le module
-#             formation = Formation.objects.get(id=formation_id)  # Récupérer la formation
-
-#             # Créer une nouvelle séance pour chaque utilisateur
-#             seance = Seance(
-#                 lieu=lieu,
-#                 date_formation=date_formation,
-#                 heure_debut=heure_debut,
-#                 heure_fin=heure_fin,
-#                 statut='attente',  # Statut par défaut
-#                 module=module,
-#                 formation=formation,
-#                 user=user
-#             )
-#             seance.save()  # Sauvegarder la séance
-#             created_seances.append(seance)  # Ajouter la séance créée à la liste
-
-#         # Sérialiser les séances créées pour la réponse
-#         serializer = SeanceSerializer(created_seances, many=True)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-
 
 
 @api_view(['GET'])
@@ -327,25 +271,6 @@ def annonce_detail(request, annonce_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-
-        
-
-# from rest_framework.views import APIView
-# class EncadrantAPIView(APIView):
-#     def post(self, request):
-#         client_email = request.data.get('email', None)
-#         if client_email:
-#             if Encadrant.objects.filter(email=client_email).exists():
-#                 return Response({"message": "Client avec cet email existe déjà"}, status=status.HTTP_400_BAD_REQUEST)
-            
-#         serializer = EncadrantSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save() 
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
 @api_view(['GET'])
 def get_nombre_programme_talent_suivi(request, id):
     try:
@@ -353,3 +278,12 @@ def get_nombre_programme_talent_suivi(request, id):
         return Response(count)
     except Exception as e:
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FormationListView(generics.ListAPIView):
+    queryset = Formation.objects.all()   
+    serializer_class = FormationSerializer
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    filterset_fields = ['niveau'] 
+    search_fields = ['titre']
+   

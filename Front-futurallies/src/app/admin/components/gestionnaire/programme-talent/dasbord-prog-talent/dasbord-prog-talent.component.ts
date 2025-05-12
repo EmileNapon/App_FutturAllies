@@ -20,14 +20,8 @@ import { AnnonceService } from '../services/annonce.service';
     standalone: false
 })
 export class GestionnaireDasbordProgTalentComponent {
-  showAnnonce!: boolean;
-  showFormation!: boolean;
-  showGroupe!: boolean;
-  showListe!: boolean;
-  showCalendar!: boolean;
-  showExo!: boolean;
-  showWebinar!: boolean;
-  showAjoutModule!: boolean;
+  
+
 
   utilisateurs: CustomUser[] = [];
   etudiants: CustomUser[] = [];
@@ -49,14 +43,31 @@ FiltresSeances:any[]=[]
 seances:any[]=[]
 annonceForm!: FormGroup;
 
+statuts:boolean=true
 
 formationId!:number
 formationid!:number
 formationWithModules: any[]=[]
 
+annonces: any[] = [];
+
+filtereAnnonces:any[]=[]
+formationId_for_annonce!:number
+
 formationForm!: FormGroup;
 
+showFormation:boolean= false;
+showGroupe:boolean = false;
+showListe: boolean = false;
+showCalendar:boolean = false;
+showExo: boolean = false;
+showWebinar:boolean= false;
+showAjoutModule: boolean = false;
 
+
+isAnnonceCreationVisible:boolean =false
+
+showAnnonce:boolean=false
 
   constructor(
     private utilisateurService: UtilisateurService,
@@ -87,30 +98,13 @@ formationForm!: FormGroup;
   
   ngOnInit():void{
     this.dasbordId = this.route.snapshot.paramMap.get('dasbordId');
-    
+    this.formationId_for_annonce = this.route.snapshot.params['dasbordId'];
     this.loadFormations()
-    this.showAnnonce = true;
-    this.showFormation = false;
-    this.showGroupe = false;
-    this.showListe = false;
-    this.showCalendar = false;
-    this.showExo = false;
-    this.showWebinar = false;
-    this.showAjoutModule = false;
 
-  
+
+
+    console.log('gggggggggggggg')
    
-
-    // this.utilisateurService.getEtudiants().subscribe((data: CustomUser[]) => {
-    //   this.etudiants = data;
-    // });
-
-    // this.utilisateurService.getEtudiants().subscribe((data: Etudiant[]) => {
-    //   this.etudiants = data;
-    // });
-    // this.utilisateurService.getEncadrants().subscribe((data: Encadrant[]) => {
-    //   this.encadrants = data;
-    // });
     this.shutDetail = true;
     this.showDetail = false;
 
@@ -122,10 +116,6 @@ formationForm!: FormGroup;
 
     this.InitForm();
     this.annonceForm.patchValue({
-     // date_publication: new Date(),
-      //heure: new Date().getTime,
-      // heure: new Date().getTime,
-      
     })
 
 
@@ -165,13 +155,6 @@ formationForm!: FormGroup;
     this.formationForm = this.fb.group({
       titre: ['', Validators.required],
       type: ['', Validators.required],
-      // niveau: ['', Validators.required],
-      // prix: [0, [Validators.required, Validators.min(0)]],
-      // duree: ['', Validators.required],
-      // nombre: ['', [Validators.required, Validators.min(1)]],
-      // location: ['', Validators.required],
-      // resume: ['', Validators.required],
-      // description: ['', Validators.required]
     });
   }
 
@@ -340,6 +323,7 @@ getGroupes() {
       (data) => {
         this.formations = data;
         this.filterDataInscrit()
+        this.loadAnnonces()
 
       },
       (error) => {
@@ -464,10 +448,6 @@ loadSeances(): void {
   );
 }
 
-// filtreSeanceFormateur():void{
-//   this.filtreEncadrants=this.encadrants.filter(user=>this.seances.some(seance => seance.user.includes(user.id)))
-//   console.log('@@@@@@@@@@@@@@', this.filtreEncadrants)
-// }
 
 // suppression de seances
 deleteSeance(id: number): void {
@@ -481,21 +461,15 @@ deleteSeance(id: number): void {
 
 
 
-filterData1(): void {
-//  console.log('[[[[]]]]==============================]', this.modulesFormations)
-//  this.FiltresmodulesFormations= this.modulesFormations.filter(moduleFormation=>moduleFormation.formation==this.dasbordId);
-//  this.FiltresModules= this.modules.filter(modul=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==modul.id));
- //this.FiltresSeances= this.seances.filter(seance=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==seance.module));
-// console.log('kkkkkkkkkkkkkkkkkkkkkkkkoo',this.FiltresmodulesFormations)
-}
 
 
 
-statuts:boolean=false
 statuts2:boolean=true
 // ismodify:boolean=false
 isStatut():void{
-  this.statuts=true
+  this.showAnnonce=false
+  this.statuts=false
+  this.isAnnonceCreationVisible=true
   this.statuts2=!this.statuts2
 }
 
@@ -517,43 +491,23 @@ isStatut():void{
   }
 
   annulerAnnonce() :void{
-
+    this.showAnnonce = true;
+    this.showFormation = false;
+    this.showGroupe = false;
+    this.showListe = false;
+    this.showCalendar = false;
+    this.showExo = false;
+    this.showWebinar = false;
+    this.showAjoutModule = false;
+    this.shutDetail = true;
+    this.showDetail = false;
     this.statuts=false
-    this.statuts2=!this.statuts2
-   
+    this.ngOnInit()
+    
+    
+    
   }
   
-//
-
-  // onModify(annonceId: number): void {
-  //   this.annonceService.getAnnonceById(this.annonceId).subscribe((annonce: Annonce) => {
-  //     this.annonceForm.patchValue({
-  //         titre: annonce.titre,
-  //         lieu: annonce.lieu,
-  //         dateCours: annonce.dateCours,
-  //         description: annonce.description,
-  //         datePublication: annonce.datePublication,
-  //         // heure: annonce.heure
-  //       });
-  //   });
-  // }
-
-  // updateModule(): void {
-  //   if (this.annonceForm.valid) {
-  //     const updatedAnnonce: Annonce = { id: this.annonceId, ...this.annonceForm.value };
-  //     this.annonceService.updateAnnonce(updatedAnnonce).subscribe(() => {
-  //       this.statuts=false;
-  //       this.ismodify=false;
-  //     });
-  //   }
-  // }
-
-  // isModify():void{
-  //   this.statuts=false
-  //   this.ismodify=!this.ismodify
-  // }
-
-
 
 
   
@@ -584,6 +538,36 @@ isStatut():void{
     // Retourne les modules correspondants
     return this.modules.filter(module => moduleIds.includes(module.id));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+    // Charger les annonces à partir du service
+    loadAnnonces(): void {
+      this.annonceService.getAnnonces().subscribe(data => {
+        this.annonces = data;
+        this.filtereAnnonces= this.annonces.filter(annon => annon.formation==this.formationId_for_annonce);
+       console.log('filtereAnnonces',this.filtereAnnonces, 'this.formationId', this.formationId_for_annonce)
+      });
+    }
+
+  supprimerAnnonce(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+      this.annonceService.deleteAnnonce(id).subscribe(() =>  {
+        this.loadAnnonces();
+      });
+      
+    }
+  }
+
 
 
 }

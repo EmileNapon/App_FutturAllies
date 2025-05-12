@@ -12,7 +12,17 @@ import { ModuleFormationService } from '../services/moduleFormation.service';
     standalone: false
 })
 export class GestionnaireFormationComponent implements OnInit {
-  formations: any[] = [];
+  
+  formationsActifs:number=0
+  formationsNotActifs:number=0
+  formations: Formation[] = [];
+  loading:boolean=false
+
+  page: number = 1; // Current page
+  size: number = 5; // Default items per page
+  sizeOptions: number[] = [5, 10, 20, 100]; // Page size options
+  totalPages: number = 1; // Total number of pages
+  paginatedFormations: Formation[] = []; // Paginated apprenants for display
 
 
   module : any[]=[]
@@ -20,18 +30,22 @@ export class GestionnaireFormationComponent implements OnInit {
   formationId!:number
   formationWithModules: any[]=[]
 
+  searchTerm: string = '';
+  sortOrder: string = '';
+  
+
   constructor(
     private formationService: FormationService,
     private router: Router,
     private moduleService : ModuleService,
     private moduleFormationService  : ModuleFormationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
   ) {}
 
 
   ngOnInit(): void {
     this.formationId = this.route.snapshot.params['FormationId'];
-    this.loadFormations();
+    this.loadFormations1();
     this.loadModules()
     this.loadModulesFormations()
   }
@@ -40,6 +54,7 @@ export class GestionnaireFormationComponent implements OnInit {
     this.formationService.getFormations().subscribe(
       (data) => {
         this.formations = data;
+        console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv',this.formations)
       },
       (error) => {
         console.error('Erreur lors du chargement des formations:', error);
@@ -85,16 +100,83 @@ export class GestionnaireFormationComponent implements OnInit {
 
 
   deleteFormation(id: number): void {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ? ')) {
       this.formationService.deleteFormation(id).subscribe(() => {
         this.loadFormations(); // Recharger la liste après la suppression
       });
     }
   }
 
-  onSelectProgrammeTalent(DasbordFormationId: number): void {
+  onSelectFormation(DasbordFormationId: number): void {
     this.router.navigate([`/admin/${DasbordFormationId}/programme-talent`]); 
   }
     
 
-}
+
+
+
+
+  loadFormations1(): void {
+
+    this.loading = true;
+    const filters: any = { };
+  
+    if (this.searchTerm) filters.search = this.searchTerm;
+    if (this.sortOrder) filters.ordering = this.sortOrder;
+
+    this.formationService.getFormations1(filters).subscribe(
+      (data) => {
+        this.formations = data;
+        this.totalPages = Math.ceil(this.formations.length / this.size);
+        this.updatePaginatedFormations();
+        this.loading = false;
+      },
+      () => {
+        this.loading = false;
+      }
+    );
+  }
+
+
+  updatePaginatedFormations(): void {
+    const startIndex = (this.page - 1) * this.size;
+    const endIndex = startIndex + this.size;
+    this.paginatedFormations = this.formations.slice(startIndex, endIndex);
+  }
+
+
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.updatePaginatedFormations();
+    }
+  }
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.updatePaginatedFormations();
+    }
+
+  }
+  changePageSize(newSize: number): void {
+    if (this.sizeOptions.includes(newSize)) {
+      this.size = newSize;
+      this.page = 1; // Reset to first page
+      this.totalPages = Math.ceil(this.formations.length / this.size);
+      this.updatePaginatedFormations();
+    }
+  }
+
+  onPageSizeChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const newSize = parseInt(selectElement.value, 10);
+    this.changePageSize(newSize);
+  }
+
+  }
+
+
+
+
+

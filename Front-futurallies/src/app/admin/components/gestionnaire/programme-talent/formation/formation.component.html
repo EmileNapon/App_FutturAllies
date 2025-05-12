@@ -2,26 +2,201 @@
 
 
 
+<!--
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0"><i class="fas fa-chalkboard-teacher me-2"></i>Gestion des Formations </h1>
+            <button routerLink='/admin/ajouter-formation' class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Ajouter une formation
+            </button>
+        </div>
 
+       
+        <div class="search-container">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Rechercher une formation..."  [(ngModel)]="searchTerm" (input)="loadFormations1()">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <select class="form-select">
+                        <option selected>Tous les types</option>
+                        <option>Formation présentielle</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <select class="form-select" [(ngModel)]="sortOrder" (change)="loadFormations1()">
+                        <option selected>Tous les niveaux</option>
+                        <option>Débutant</option>
+                        <option>Intermédiaire</option>
+                        <option>Avancé</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Localisation</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let formation of formations">
-      <td>{{ formation.titre }}</td>
-      <td>{{ formation.localisation }}</td>
-      <td>
-        <a class="btn btn-warning" (click)="onSelectProgrammeTalent(formation.id)">
-          Voir formation
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<button routerLink='/admin/ajouter-formation' class='btn btn-secondary'> Ajouter un programme talent</button>
+       
+        <div class="row">
+            
+            <div class="col-12">
+                <div class="card formation-card"  *ngFor="let formation of paginatedFormations">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="card-title mb-0 me-3">{{ formation.titre }}</h5>
+                                    <span class="badge badge-type text-white me-2">{{ formation.type}}</span>
+                                    <span class="badge badge-niveau text-white">{{ formation.niveau}}</span>
+                                </div>
+                                <div class="d-flex flex-wrap mb-3">
+                                    <div class="me-4"><i class="far fa-calendar-alt me-2"></i>{{formation.date}}</div>
+                                    <div class="me-4"><i class="far fa-clock me-2"></i>{{formation.duree}}</div>
+                                    <div class="me-4"><i class="fas fa-users me-2"></i>{{formation.nombre}}</div>
+                                    <div><i class="fas fa-map-marker-alt me-2"></i>{{formation.localisation}}</div>
+                                </div>
+                                <p class="card-text">Maîtrisez les concepts avancés d'Angular pour développer des applications professionnelles.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex flex-column h-100 justify-content-between">
+                                    <div class="text-end mb-3">
+                                        <span class="price-highlight">{{formation.prix}}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button (click)="onSelectProgrammeTalent(formation.id)" class="btn btn-primary btn-action" title="Détails">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+
+        
+        <div class="pagination d-flex justify-content-center align-items-center mt-3">
+            <button class="btn btn-outline-primary me-2" [disabled]="page === 1" (click)="prevPage()">Précédent</button>
+            <span>Page {{ page }} de {{ totalPages }}</span>
+            <button   class="btn btn-outline-primary ms-2" [disabled]="page === totalPages" (click)="nextPage()">Suivant</button>
+        </div>
+    </div>
+</body>
+
+-->
+
+<body style='font-size:120%'>
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Main Content -->
+            <div class="col-md-12 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0"  style='font-size:160%'>Gestion des Formations</h2>
+                    <button routerLink='/admin/ajouter-formation' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormationModal"  style='font-size:120%'>
+                        <i class="fas fa-plus me-2"></i>Ajouter une formation
+                    </button>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0"  style='font-size:80%'>Filtres</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="searchInput" class="form-label"  style='font-size:100%'>Recherche</label>
+                                    <input type="text" class="form-control" placeholder="Rechercher une formation..."  name="searchTerm"   [(ngModel)]="searchTerm" (input)="loadFormations1()">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="typeFilter" class="form-label"  style='font-size:100%'>Type</label>
+                                    <select class="form-select" id="typeFilter">
+                                        <option value="">Programme talent</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="dateFilter" class="form-label">Date</label>
+                                    <input type="text" class="form-control datepicker" id="dateFilter" placeholder="Sélectionner">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="reset" class="btn btn-outline-secondary">
+                                        <i class="fas fa-undo me-1"></i>Réinitialiser
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Formations Table -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"  style='font-size:100%'>Liste des Formations</h5>
+                        <div class="text-muted"  style='font-size:100%'>Total: {{formations.length}} formations</div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr  style='font-size:115%'>
+                                        <th width="5%">ID</th>
+                                        <th width="20%">Titre</th>
+                                        <th width="10%">Type</th>
+                                        <th width="10%">Niveau</th>
+                                        <th width="10%">Date</th>
+                                        <th width="10%">Prix</th>
+                                        <th width="10%">Durée</th>
+                                        <th width="10%">Places</th>
+                                        <th width="15%">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let formation of paginatedFormations, let i =index;"  style='font-size:130%'>
+                                        <td>{{i+1}}</td>
+                                        <td>{{ formation.titre }}</td>
+                                        <td><span class="badge bg-primary status-badge">{{ formation.type}}</span></td>
+                                        <td><span class="badge bg-warning text-dark status-badge">{{ formation.niveau}}</span></td>
+                                        <td>{{formation.date}}</td>
+                                        <td>{{formation.prix}}</td>
+                                        <td>{{formation.duree}}</td>
+                                        <td>15/{{formation.nombre}}</td>
+                                        <td class="action-btns">
+                                            <div class="d-flex justify-content-center">
+                                                <button (click)="onSelectFormation(formation.id)" class="btn btn-primary btn-action" title="Détails">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation" style='font-size:100%'>
+                            <div class="pagination d-flex justify-content-center align-items-center mt-3">
+                                <button class="btn btn-outline-primary me-2" [disabled]="page === 1" (click)="prevPage()">Précédent</button>
+                                <span>Page {{ page }} de {{ totalPages }}</span>
+                                <button   class="btn btn-outline-primary ms-2" [disabled]="page === totalPages" (click)="nextPage()">Suivant</button>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</body>
+
