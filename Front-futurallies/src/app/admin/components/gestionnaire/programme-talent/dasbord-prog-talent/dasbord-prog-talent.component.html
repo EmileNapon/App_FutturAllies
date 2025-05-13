@@ -36,7 +36,7 @@
           <div class="bg-light p-3 border-bottom">
               <div class="row d-flex align-items-center justify-content-between" *ngIf="showAnnonce">
                   <div class="col-auto">
-                      <button (click)='isStatut()' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormationModal"  style='font-size:120%'>
+                      <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormationModal"  style='font-size:120%'>
                         <i class="fas fa-plus me-2"></i>Créer une annonce
                     </button>
                   </div>
@@ -551,15 +551,30 @@
                                           
                                           <!-- Annonces Tab -->
                                           <div class="tab-pane fade" id="annonces" role="tabpanel" aria-labelledby="annonces-tab" >
-                                              <button (click)='isStatut()' class="btn btn-primary mb-3" *ngIf='statuts'>
-                                                  <i class="fas fa-plus me-2"></i> Créer une annonce JJ
-                                              </button>
+                                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+  
+                                                <button (click)="isCreateFormulaireAnnonce()" 
+                                                        class="btn btn-primary me-3 mb-2" 
+                                                        *ngIf="showAnnonceButton">
+                                                  <i class="fas fa-plus me-2"></i> Créer une annonce
+                                                </button>
+                                              
+                                                <div class="mb-2" *ngIf='showAnnonceList'>
+                                                  <label class="me-2">Afficher :</label>
+                                                  <select [(ngModel)]="nombreAffichage" class="form-select d-inline-block w-auto">
+                                                    <option *ngFor="let option of optionsAffichage" [value]="option">
+                                                      {{ option === 0 ? 'Tout' : option }}
+                                                    </option>
+                                                  </select>
+                                                </div>
+                                              
+                                              </div>
+                                              
 
 
 
-
-                                              <div class="container my-4" >                                             
-                                                  <div class="container mt-4" *ngIf='isAnnonceCreationVisible'>
+                                              <div class="container my-4" *ngIf='showAnnonceFormulaire'>                                             
+                                                  <div class="container mt-4">
                                                   
                                                     <form [formGroup]="annonceForm" (ngSubmit)="ajouterAnnonce()">
                                                       <!-- Titre de l'annonce -->
@@ -610,12 +625,12 @@
                                     
 
 
-                                            <div *ngIf="showAnnonce">
-                                              <div class="card mb-3" *ngFor="let annonce of filtereAnnonces">
+                                            <div *ngIf='showAnnonceList' >
+                                              <div class="card mb-3" *ngFor="let annonce of  annoncesAffichees()">
                                                   <div class="card-body">
                                                       <div class="d-flex justify-content-between align-items-start mb-2">
-                                                          <h5 class="card-title mb-0">{{ annonce.titre }} nnnnnnn</h5>
-                                                          <span class="badge bg-info text-dark">Nouveau bbbbb</span>  
+                                                          <h5 class="card-title mb-0">{{ annonce.titre }} </h5>
+                                                          <span class="badge bg-info text-dark">Nouveau </span>  
                                                       </div>
                                                       <p class="card-text text-muted small mb-2">Publié le  {{ annonce.date_publication | date: 'dd/MM/yyyy' }} à {{ annonce.heure }}</p>
                                                       <p class="card-text">{{ annonce.description }}</p>

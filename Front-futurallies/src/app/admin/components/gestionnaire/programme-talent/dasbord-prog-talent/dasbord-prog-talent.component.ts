@@ -464,13 +464,16 @@ deleteSeance(id: number): void {
 
 
 
-statuts2:boolean=true
+showAnnonceList:boolean=true
+showAnnonceButton:boolean=true
+showAnnonceFormulaire:boolean=false
 // ismodify:boolean=false
-isStatut():void{
-  this.showAnnonce=false
-  this.statuts=false
-  this.isAnnonceCreationVisible=true
-  this.statuts2=!this.statuts2
+isCreateFormulaireAnnonce():void{
+  this.showAnnonceList=false
+  this.showAnnonceButton=false
+  this.showAnnonceFormulaire=true
+  console.log('this.showAnnonceFormulaire=true', this.showAnnonceFormulaire)
+
 }
 
 
@@ -478,10 +481,13 @@ isStatut():void{
   ajouterAnnonce(): void {
     if (this.annonceForm.valid) {
       let newAnnonce: Annonce =this.annonceForm.value;
-      console.log('annonnnnnnnnnnnnnnnn',this.annonceForm.value)
       this.annonceService.addAnnonce(newAnnonce).subscribe(() => {
-        this.statuts=false
-        this.statuts2=true
+        this.showAnnonceList=true
+        this.showAnnonceButton=true
+        this.showAnnonceFormulaire=false
+        this.loadAnnonces()
+        this.annonceForm.reset();
+ 
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de annonce', error); // Gérer les erreurs
@@ -491,7 +497,12 @@ isStatut():void{
   }
 
   annulerAnnonce() :void{
-    this.showAnnonce = true;
+    this.showAnnonceList=true
+    this.showAnnonceButton=true
+    this.showAnnonceFormulaire=false
+
+
+
     this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
@@ -502,9 +513,7 @@ isStatut():void{
     this.shutDetail = true;
     this.showDetail = false;
     this.statuts=false
-    this.ngOnInit()
-    
-    
+
     
   }
   
@@ -548,14 +557,23 @@ isStatut():void{
 
 
 
-
+  nombreAffichage: number = 5; // Valeur par défaut
+  optionsAffichage: number[] = [3, 5, 10, 100, 0]; // 0 pour 'Tout'
+  
+  
+   annoncesAffichees() {
+    if (this.nombreAffichage == 0) {
+      return this.filtereAnnonces;
+    }
+    return this.filtereAnnonces.slice(0, this.nombreAffichage);
+  }
+  
 
     // Charger les annonces à partir du service
     loadAnnonces(): void {
       this.annonceService.getAnnonces().subscribe(data => {
         this.annonces = data;
         this.filtereAnnonces= this.annonces.filter(annon => annon.formation==this.formationId_for_annonce);
-       console.log('filtereAnnonces',this.filtereAnnonces, 'this.formationId', this.formationId_for_annonce)
       });
     }
 
