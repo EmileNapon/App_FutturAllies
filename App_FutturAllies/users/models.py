@@ -42,7 +42,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=30, blank=True)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='apprenant')
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField()
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     fonction = models.TextField(max_length=200, blank=True, null=True)

@@ -32,7 +32,12 @@ export class EtudiantComponent implements OnInit {
     this.loadInscrits()
    
   }
-
+  loadUser():void{
+    this.utilisateurService.getEtudiants().subscribe((data) => {
+      this.etudiants = data;
+    
+    });
+  } 
   loadInscrits(): void {
     this.DasbordService.getInscrits().subscribe(
       (data) => { 
@@ -42,12 +47,7 @@ export class EtudiantComponent implements OnInit {
     );
   } 
 
-  loadUser():void{
-    this.utilisateurService.getEtudiants().subscribe((data) => {
-      this.etudiants = data;
-    
-    });
-  }
+
 
   EtudiantParFormation(): void {
     if(this.formationId){

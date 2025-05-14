@@ -2,212 +2,17 @@
 
     
   <div class="container-fluid">
-      <div >
-        <!-- Sidebar gauche -->
-        <nav class="navbar navbar-expand-lg bg-light" style='font-size:150%;'>
-          <ul class="nav d-flex flex-row justify-content-around w-10">
-            <li class="nav-item">
-              <a class="nav-link text-black" (click)="onShowAnnonce()">Annonces</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" (click)="onShowFormation()">Formation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" (click)="onShowCalendar()">Calendrier complet</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" (click)="onShowListe()">Utilisateurs de la cohorte</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-black" (click)="onShowExo()">TD & Examens</a>
-            </li>
-          </ul>
-        </nav>
-        
-    
 
-
-
-
-        
-        <!-- Conteneur principal -->
         <main class="col-10" style='font-size:120%;'>
-          <!-- Titre en haut -->
-          <div class="bg-light p-3 border-bottom">
-              <div class="row d-flex align-items-center justify-content-between" *ngIf="showAnnonce">
-                  <div class="col-auto">
-                      <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFormationModal"  style='font-size:120%'>
-                        <i class="fas fa-plus me-2"></i>Créer une annonce
-                    </button>
-                  </div>
 
-              </div>
-              <div class="row d-flex align-items-center justify-content-between" *ngIf="showFormation">
-                  <div class="col">
-                      <h1 class="text-left">Les Programme de formation Talent</h1>
-                  </div>
-              </div> 
-
-              <div class="row d-flex align-items-center justify-content-between" *ngIf="showListe">
-                  <div class="col">
-                      <h1 class="text-left">Liste des participants de la cohorte</h1>
-                  </div>
-              </div> 
-              <div class="row d-flex align-items-center justify-content-between" *ngIf="showCalendar">
-                  <div class="col">
-                      <h1 class="text-left">Liste des modules</h1>
-                  </div>
-                  <div class="col-auto">
-                      <button type="button" class="btn btn-secondary btn-lg" (click)="onSelectFormationModule(dasbordId)">Ajouter des modules</button>
-                  </div>
-              </div>
-              <div class="row d-flex align-items-center justify-content-between"  *ngIf="showExo">
-                  <div class="col">
-                      <h1 class="text-left">Programme des Exercices et Examens</h1>
-                  </div>
-              </div> 
-            
-                               
-            
-  
-          </div>
-    
-          <!------------------------- Contenu principal ------------------------------------->
-  
-   
-
-
-            <div class="container my-4" *ngIf="showFormation">
-
-             
-            <!-- <div class="offer-card" *ngFor="let formation of filteredIncritsFormations">
-                <div class="offer-card"  >  
-                    <div class="offer-header">  
-                        <h2>{{ formation.titre }}</h2>  
-                    </div>  
-                    
-                </div>
-
-                
-            
-                <div >
-                   
-                  <div class="offer-info">
-                    <div class="info-section">
-                        <div class="info-item">
-                            <p><strong>Type :</strong> {{ formation.type }}</p>
-                        </div>
-                        <div class="info-item">
-                            <p><strong>Entreprise :</strong> {{ formation.localisation }}</p>
-                        </div>
-                    </div>
-                </div>
-                
-
-                    <div *ngIf="showDetail">
-                          <div class="details-cards"> 
-                            <div class="info-item" *ngFor="let module of filterModulesForFormation(formation.id)">
-                              <p><strong>Module :</strong> {{ module.nom_module }}</p>
-                          </div>
-                            
-                            <div class="info-item">
-                              <p><strong>Nombre de places :</strong> {{ formation.nombre }}</p>
-                          </div>
-                          <div class="info-item">
-                              <p><strong>Prix :</strong> {{ formation.prix }} CFA</p>
-                          </div>
-                          
-                          <div class="info-item">
-                              <p><strong>Durée :</strong> {{ formation.duree }}</p>
-                          </div>
-                          <div class="info-item">
-                              <p><strong>Niveau requis :</strong> {{ formation.niveau }}</p>
-                          </div>
-                          <div class="info-item">
-                              <p><strong>Date de formation :</strong> {{ formation.date }}</p>
-                          </div> 
-                                <div class="description-card">  
-                                    <h4>Resume du programme de formation</h4>  
-                                      <p>{{ formation.resume }}</p>  
-                                    </div>  
-
-                                <div class="description-card">  
-                                    <h4>Description du programme de formation</h4>  
-                                    <p>{{ formation.description }}</p>  
-                                </div> 
-                              </div>  
-                       </div>
-
-
-                    <div class="row" *ngIf="shutDetail">
-                      <div class="text-end" >
-                          <button class="btn btn-outline-secondary" style="color: red;" (click)="onShutDetail()">Voir les details</button>  
-                      </div>
-                  </div>
-          
-                  <div class="text-end d-flex " *ngIf="showDetail">
-                      <div class="mx-2">
-                          <button class="btn btn-outline-danger" (click)="onShowDetail()">Réduire</button>
-                      </div>
-                      <div class="text-end">
-                        <button class="btn btn-warning mx-2" (click)='onSelectFormation(formation.id)'>Modifier</button>
-                        <button class="btn btn-danger" (click)="deleteFormation(formation.id)">Supprimer</button>
-                      </div>
-                  </div>
-                </div> 
-              </div>-->
-
-
-
-
-
-
-
-                  <!-- Admin Header -->
-                  <div class="admin-header">
-                      <div class="container">
-                          <div class="row align-items-center">
-                              <div class="col-md-6">
-                                  <h1><i class="fas fa-graduation-cap me-2"></i>Formation Admin</h1>
-                              </div>
-                              <div class="col-md-6 text-end">
-                                  <span class="me-3">Admin User</span>
-                                  <img src="https://via.placeholder.com/40" alt="Profile" class="rounded-circle">
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+            <div class="container my-4" >
               
                   <div class="container">
                       <div class="row">
-                          <!-- Sidebar -->
-                          <div class="col-md-3 mb-4">
-                              <div class="sidebar">
-                                  <h5 class="sidebar-title">Menu Admin</h5>
-                                  <div class="sidebar-item active">
-                                      <a href="#"><i class="fas fa-home"></i> Dashboard</a>
-                                  </div>
-                                  <div class="sidebar-item">
-                                      <a (click)="onShowFormation()"><i class="fas fa-chalkboard-teacher"></i> Formations</a>
-                                  </div>
-                                  <div class="sidebar-item">
-                                      <a (click)="onShowListe()"><i class="fas fa-users"></i> Utilisateurs</a>
-                                  </div>
-                                  <div class="sidebar-item">
-                                      <a (click)="onShowCalendar()"><i class="fas fa-calendar-alt"></i> Séances</a>
-                                  </div>
-                                  <div class="sidebar-item">
-                                      <a (click)="onShowAnnonce()"><i class="fas fa-bullhorn"></i> Annonces</a>
-                                  </div>
-                                  <div class="sidebar-item">
-                                    <a (click)="onShowExo()"><i class="fas fa-bullhorn"></i> TD & Examens</a>
-                                </div>
-                                  
-                              </div>
-                          </div>
+
               
                           <!-- Main Content -->
-                          <div class="col-md-9">
+                          <div class="col-md-16">
                               <div class="card">
                                   <div class="card-header d-flex justify-content-between align-items-center">
                                       <h4 class="mb-0">Détails de la Formation</h4>
@@ -223,11 +28,20 @@
                                                   <i class="fas fa-info-circle me-1"></i> Détails
                                               </button>
                                           </li>
+
+                                          <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="formateurs-tab" data-bs-toggle="tab" data-bs-target="#formateurs" type="button" role="tab" aria-controls="formateurs" aria-selected="false">
+                                                <i class="fas fa-users me-1"></i> Formateurs <span class="badge bg-primary rounded-pill">24</span>
+                                            </button>
+                                        </li>
                                           <li class="nav-item" role="presentation">
                                               <button class="nav-link" id="inscrits-tab" data-bs-toggle="tab" data-bs-target="#inscrits" type="button" role="tab" aria-controls="inscrits" aria-selected="false">
                                                   <i class="fas fa-users me-1"></i> Inscrits <span class="badge bg-primary rounded-pill">24</span>
                                               </button>
                                           </li>
+
+
+
                                           <li class="nav-item" role="presentation">
                                               <button class="nav-link" id="seances-tab" data-bs-toggle="tab" data-bs-target="#seances" type="button" role="tab" aria-controls="seances" aria-selected="false">
                                                   <i class="fas fa-calendar-alt me-1"></i> Séances
@@ -238,224 +52,108 @@
                                                   <i class="fas fa-bullhorn me-1"></i> Annonces
                                               </button>
                                           </li>
+
+                                          <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="annonces-tab" data-bs-toggle="tab" data-bs-target="#annonces" type="button" role="tab" aria-controls="annonces" aria-selected="false">
+                                                <i class="fas fa-bullhorn me-1"></i> TD & exercices
+                                            </button>
+                                        </li>
                                       </ul>
                                       
                                       <div class="tab-content p-3" id="formationTabsContent">
                                           <!-- Détails Tab -->
-                                          <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
-                                              <div class="row">
-                                                  <div class="col-md-8">
-                                                      <h4 class="mb-4">Développement Web Full Stack</h4>
-                                                      
-                                                      <div class="row mb-4">
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Type de formation:</p>
-                                                              <p class="info-value">Certifiante</p>
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Niveau:</p>
-                                                              <p class="info-value">Intermédiaire</p>
-                                                          </div>
-                                                      </div>
-                                                      
-                                                      <div class="row mb-4">
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Date de début:</p>
-                                                              <p class="info-value">15 Mars 2023</p>
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Durée:</p>
-                                                              <p class="info-value">3 mois</p>
-                                                          </div>
-                                                      </div>
-                                                      
-                                                      <div class="row mb-4">
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Prix:</p>
-                                                              <p class="info-value">2,500.00 €</p>
-                                                          </div>
-                                                          <div class="col-md-6">
-                                                              <p class="info-label">Nombre de places:</p>
-                                                              <p class="info-value">25</p>
-                                                          </div>
-                                                      </div>
-                                                      
-                                                      <div class="mb-4">
-                                                          <p class="info-label">Localisation:</p>
-                                                          <p class="info-value">FIDALLI, 123 Rue de la Formation, Paris</p>
-                                                      </div>
-                                                      
-                                                      <div class="mb-4">
-                                                          <p class="info-label">Résumé:</p>
-                                                          <p class="info-value">Formation intensive en développement web couvrant les technologies front-end et back-end pour devenir développeur full-stack.</p>
-                                                      </div>
-                                                      
-                                                      <div class="mb-4">
-                                                          <p class="info-label">Description complète:</p>
-                                                          <p class="info-value">Cette formation vous permettra de maîtriser les technologies clés du développement web moderne. Vous apprendrez HTML, CSS, JavaScript, React pour le front-end, ainsi que Node.js, Express et MongoDB pour le back-end. La formation inclut des projets pratiques et une certification finale.</p>
-                                                      </div>
+                                          <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab" *ngFor="let formation of filteredIncritsFormations">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <h4 class="mb-4">{{ formation.titre }}</h4>
+                                                    
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Type de formation:</p>
+                                                            <p class="info-value">{{ formation.type }}</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Niveau:</p>
+                                                            <p class="info-value">{{ formation.niveau }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Date de début:</p>
+                                                            <p class="info-value">{{ formation.date }}</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Durée:</p>
+                                                            <p class="info-value"> {{ formation.duree }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Prix:</p>
+                                                            <p class="info-value">{{ formation.prix }} cfa</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="info-label">Nombre de places:</p>
+                                                            <p class="info-value">{{ formation.nombre }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="mb-4">
+                                                        <p class="info-label">Localisation:</p>
+                                                        <p class="info-value">{{ formation.localisation }}</p>
+                                                    </div>
+                                                    
+                                                    <div class="mb-4">
+                                                        <p class="info-label">Résumé:</p>
+                                                        <p class="info-value">{{ formation.resume }}</p>
+                                                    </div>
+                                                    
+                                                    <div class="mb-4">
+                                                        <p class="info-label">Description complète:</p>
+                                                        <p class="info-value">{{ formation.description }}</p>
+                                                    </div>
+                                                    
                                                   </div>
-                                                  
-                                                  <div class="col-md-4">
-                                                      <div class="card mb-4">
-                                                          <div class="card-header bg-secondary text-white">
-                                                              <h5 class="mb-0">Statistiques</h5>
-                                                          </div>
-                                                          <div class="card-body">
-                                                              <div class="d-flex justify-content-between mb-3">
-                                                                  <span>Inscrits:</span>
-                                                                  <span class="fw-bold">24/25</span>
-                                                              </div>
-                                                              <div class="progress mb-3">
-                                                                  <div class="progress-bar bg-success" role="progressbar" style="width: 96%" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100"></div>
-                                                              </div>
-                                                              
-                                                              <div class="d-flex justify-content-between mb-3">
-                                                                  <span>Séances complétées:</span>
-                                                                  <span class="fw-bold">8/12</span>
-                                                              </div>
-                                                              <div class="progress mb-3">
-                                                                  <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                                              </div>
-                                                              
-                                                              <div class="d-flex justify-content-between mb-3">
-                                                                  <span>Taux de satisfaction:</span>
-                                                                  <span class="fw-bold">4.7/5</span>
-                                                              </div>
-                                                              <div class="progress mb-3">
-                                                                  <div class="progress-bar bg-warning" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
-                                                              </div>
-                                                          </div>
-                                                      </div>
-                                                      
-                                                      <div class="card">
-                                                          <div class="card-header bg-secondary text-white">
-                                                              <h5 class="mb-0">Actions rapides</h5>
-                                                          </div>
-                                                          <div class="card-body">
-                                                              <button class="btn btn-action w-100 mb-2">
-                                                                  <i class="fas fa-envelope me-2"></i> Envoyer un email
-                                                              </button>
-                                                              <button class="btn btn-action w-100 mb-2">
-                                                                  <i class="fas fa-calendar-plus me-2"></i> Ajouter une séance
-                                                              </button>
-                                                              <button class="btn btn-action w-100 mb-2">
-                                                                  <i class="fas fa-bullhorn me-2"></i> Créer une annonce
-                                                              </button>
-                                                              <button class="btn btn-action w-100">
-                                                                  <i class="fas fa-file-pdf me-2"></i> Générer un rapport
-                                                              </button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
+                                            </div>
+                              
+                                          <div class="text-end d-flex " >
+                                              <div class="text-end">
+                                                  <button class="btn btn-warning mx-2" (click)='onSelectFormation(formation.id)'>Modifier</button>
+                                                  <button class="btn btn-danger" (click)="deleteFormation(formation.id)">Supprimer</button>
                                               </div>
                                           </div>
-                                          
+                                        </div>                                    
                                           <!-- Inscrits Tab -->
+                                          <div class="tab-pane fade" id="formateurs" role="tabpanel" aria-labelledby="formateurs-tab">
+                                              <div class="search-box">
+                                                  <i class="fas fa-search"></i>
+                                                  <input type="text" class="form-control" placeholder="Rechercher un formateurs...">
+                                              </div>
+                                              
+                                              <div class="container" >
+                                                <div class="container "><app-encadrant/></div>
+                                            </div> 
+                                          </div>
+
+                                                                                    <!-- Inscrits Tab -->
                                           <div class="tab-pane fade" id="inscrits" role="tabpanel" aria-labelledby="inscrits-tab">
                                               <div class="search-box">
                                                   <i class="fas fa-search"></i>
                                                   <input type="text" class="form-control" placeholder="Rechercher un inscrit...">
                                               </div>
                                               
-                                              <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                      <thead>
-                                                          <tr>
-                                                              <th>Nom</th>
-                                                              <th>Email</th>
-                                                              <th>Téléphone</th>
-                                                              <th>Domaine d'étude</th>
-                                                              <th>Niveau d'étude</th>
-                                                              <th>Date d'inscription</th>
-                                                              <th>Actions</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td>
-                                                                  <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-2">
-                                                                  Jean Dupont
-                                                              </td>
-                                                              <td>jean.dupontemail.com</td>
-                                                              <td>06 12 34 56 78</td>
-                                                              <td>Informatique</td>
-                                                              <td>Licence</td>
-                                                              <td>15/02/2023</td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-eye"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>
-                                                                  <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-2">
-                                                                  Marie Martin
-                                                              </td>
-                                                              <td>marie.martinemail.com</td>
-                                                              <td>07 23 45 67 89</td>
-                                                              <td>Design</td>
-                                                              <td>Bac+2</td>
-                                                              <td>18/02/2023</td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-eye"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>
-                                                                  <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-2">
-                                                                  Pierre Lambert
-                                                              </td>
-                                                              <td>pierre.lambertemail.com</td>
-                                                              <td>06 98 76 54 32</td>
-                                                              <td>Mathématiques</td>
-                                                              <td>Master</td>
-                                                              <td>20/02/2023</td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-eye"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>
-                                                                  <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-2">
-                                                                  Sophie Bernard
-                                                              </td>
-                                                              <td>sophie.bernardemail.com</td>
-                                                              <td>06 45 67 89 01</td>
-                                                              <td>Commerce</td>
-                                                              <td>Bac+5</td>
-                                                              <td>22/02/2023</td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-eye"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                      </tbody>
-                                                  </table>
-                                              </div>
-                                              
-                                              <nav aria-label="Page navigation">
-                                                  <ul class="pagination justify-content-center">
-                                                      <li class="page-item disabled">
-                                                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
-                                                      </li>
-                                                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                      <li class="page-item">
-                                                          <a class="page-link" href="#">Suivant</a>
-                                                      </li>
-                                                  </ul>
-                                              </nav>
+                                              <div class="container" >
+                                                <div class="container "><app-etudiant/></div>
+                                            </div> 
                                           </div>
                                           
                                           <!-- Séances Tab -->
                                           <div class="tab-pane fade" id="seances" role="tabpanel" aria-labelledby="seances-tab">
                                               <div class="d-flex justify-content-between mb-3">
-                                                  <button class="btn btn-primary">
-                                                      <i class="fas fa-plus me-2"></i> Ajouter une séance
+                                                  <button (click)="onSelectFormationModule(dasbordId)" class="btn btn-primary">
+                                                      <i class="fas fa-plus me-2"></i> Ajouter une module
                                                   </button>
                                                   <div class="btn-group">
                                                       <button class="btn btn-outline-secondary">Toutes</button>
@@ -465,88 +163,94 @@
                                                   </div>
                                               </div>
                                               
-                                              <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                      <thead>
-                                                          <tr>
-                                                              <th>Date</th>
-                                                              <th>Heure</th>
-                                                              <th>Module</th>
-                                                              <th>Lieu</th>
-                                                              <th>Formateur</th>
-                                                              <th>Statut</th>
-                                                              <th>Actions</th>
-                                                          </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                          <tr>
-                                                              <td>15/03/2023</td>
-                                                              <td>09:00 - 12:00</td>
-                                                              <td>Introduction au HTML/CSS</td>
-                                                              <td>Salle A1</td>
-                                                              <td>Thomas Moreau</td>
-                                                              <td><span class="status-badge status-confirmed">Confirmé</span></td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-edit"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>17/03/2023</td>
-                                                              <td>09:00 - 12:00</td>
-                                                              <td>JavaScript Fondamentaux</td>
-                                                              <td>Salle A1</td>
-                                                              <td>Thomas Moreau</td>
-                                                              <td><span class="status-badge status-confirmed">Confirmé</span></td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-edit"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>20/03/2023</td>
-                                                              <td>14:00 - 17:00</td>
-                                                              <td>React Introduction</td>
-                                                              <td>Salle B2</td>
-                                                              <td>Sophie Leroy</td>
-                                                              <td><span class="status-badge status-pending">En attente</span></td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-edit"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                          <tr>
-                                                              <td>22/03/2023</td>
-                                                              <td>14:00 - 17:00</td>
-                                                              <td>Node.js Basics</td>
-                                                              <td>Salle B2</td>
-                                                              <td>Marc Dubois</td>
-                                                              <td><span class="status-badge status-cancelled">Annulé</span></td>
-                                                              <td>
-                                                                  <button class="btn btn-sm btn-primary me-1"><i class="fas fa-edit"></i></button>
-                                                                  <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                                              </td>
-                                                          </tr>
-                                                      </tbody>
-                                                  </table>
-                                              </div>
                                               
-                                              <div class="d-flex justify-content-between align-items-center mt-3">
-                                                  <div>Affichage de 1 à 4 sur 12 séances</div>
-                                                  <nav aria-label="Page navigation">
-                                                      <ul class="pagination mb-0">
-                                                          <li class="page-item disabled">
-                                                              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
-                                                          </li>
-                                                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                          <li class="page-item">
-                                                              <a class="page-link" href="#">Suivant</a>
-                                                          </li>
-                                                      </ul>
-                                                  </nav>
-                                              </div>
+
+                                              <body class="bg-light">
+                                                <div class="container-fluid ">
+                                                    <div class="card shadow">
+                                                        <div class="card-body">
+                                                            <h1 class="h3 mb-4">Gestion des Modules et Séances</h1>
+                                                            
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-bordered">
+                                                                    <thead class="table-dark">
+                                                                        <tr>
+                                                                            <th style="width: 5%" class="text-center align-middle">Code</th>
+                                                                            <th style="width: 20%" class="text-center align-middle">Module</th>
+                                                                            <th style="width: 75%">
+                                                                                <table class="table table-seances mb-0">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th colspan="6" class="text-center">Séances</th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th style="width: 20%">Lieu</th>
+                                                                                            <th style="width: 20%">Formateur</th>
+                                                                                            <th style="width: 15%">Date</th>
+                                                                                            <th style="width: 15%">Heure</th>
+                                                                                            <th style="width: 10%">Statut</th>
+                                                                                            <th style="width: 20%">Actions</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                </table>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <!-- Module 1 -->
+                                                                        <tr class="module-row" *ngFor="let modules of FiltresModules; let i = index">
+                                                                            <td class="text-center align-middle">{{ modules.code }}</td>
+                                                                            <td class="text-center align-middle">{{ modules.nom_module }}</td>
+                                                                            <td class="p-0">
+                                                                                <table class="table table-seances mb-0">
+                                                                                    <tbody>
+                                                                                        <!-- Séance 1 -->
+                                                                                        <tr class="seance-row" *ngFor="let seance of seancesAvecEncadrants">
+                                                                                            <td  *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 20%">{{ seance.lieu }}</td>
+                                                                                            <td style="width: 20%" *ngIf='seance.module==modules.id && seance.formation==dasbordId'>
+                                                                                                <div *ngFor="let encadrant of  seance.encadrants" >
+                                                                                                    <div>{{ encadrant.prenom }}</div>
+                                                                                                    <div>{{ encadrant.nom }}</div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 15%">{{ seance.date_formation }}</td>
+                                                                                            <td *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 15%">{{ seance.heure_debut }}-{{ seance.heure_fin }}</td>
+                                                                                            <td *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 10%">
+                                                                                                <span class="badge badge-confirmed">{{ seance.statut }}</span>
+                                                                                            </td>
+                                                                                            <td *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 20%">
+                                                                                                <div class="d-flex gap-2">
+                                                                                                    <button [routerLink]="['/admin/modification-seance', seance.id]" class="btn btn-warning btn-sm">
+                                                                                                        <i class="fas fa-edit"></i> Modifier
+                                                                                                    </button>
+                                                                                                    <button (click)="deleteSeance(seance.id)" class="btn btn-danger btn-sm">
+                                                                                                        <i class="fas fa-trash"></i> Supprimer
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div class="module-actions p-2 d-flex justify-content-end gap-2">
+                                                                                    <button  (click)="deleteModule(modules.id)" class="btn btn-danger btn-sm">
+                                                                                        <i class="fas fa-times"></i> Retirer le module
+                                                                                    </button>
+                                                                                    <button (click)="onSelectModule(dasbordId,modules.id)" class="btn btn-secondary btn-sm">
+                                                                                        <i class="fas fa-plus"></i> Ajouter une séance
+                                                                                    </button>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </body>
+                                
+                                          
                                           </div>
                                           
                                           <!-- Annonces Tab -->
@@ -686,47 +390,7 @@
                       </div>
                   </footer>
               -->
-                  <!-- Bootstrap JS -->
-                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-                  <!-- Custom JS -->
-                  <script>
-                      // Activer les tooltips
-                      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                          return new bootstrap.Tooltip(tooltipTriggerEl)
-                      });
-                      
-                      // Gestion des onglets - Stocker l'onglet actif
-                      document.addEventListener('DOMContentLoaded', function() {
-                          var tabEls = document.querySelectorAll('button[data-bs-toggle="tab"]');
-                          
-                          tabEls.forEach(function(tabEl) {
-                              tabEl.addEventListener('click', function(event) {
-                                  localStorage.setItem('lastTab', event.target.getAttribute('id'));
-                              });
-                          });
-                          
-                          var lastTab = localStorage.getItem('lastTab');
-                          if (lastTab) {
-                              var tab = new bootstrap.Tab(document.getElementById(lastTab));
-                              tab.show();
-                          }
-                      });
-                      
-                      // Fonction pour confirmer la suppression
-                      function confirmDelete() {
-                          return confirm('Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.');
-                      }
-                      
-                      // Ajouter des écouteurs d'événements à tous les boutons de suppression
-                      document.querySelectorAll('.btn-danger').forEach(button => {
-                          button.addEventListener('click', function(e) {
-                              if (!confirmDelete()) {
-                                  e.preventDefault();
-                              }
-                          });
-                      });
-                  </script>
+
              
               
             
@@ -770,26 +434,7 @@
            <div class="addModuleContainer" *ngIf="showAjoutModule">
             <h2>Ajouter des modules</h2>
 
-            <!-- <div class="row">
-              <div class="col-md-6">
-                <h6>Modules disponibles</h6>
-                <div *ngFor="let module of modules">
-                  <input type="checkbox" (change)="onModuleSelectionChange(module.id, $event)">
-                  <label>{{ module.nom_module }}</label>
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                <h6>Formateurs enregistés</h6>
-                <div *ngFor="let selected of selectedModules">
-                  <h6>Choisir des formateurs pour le module {{ getModuleName(selected.moduleId) }}</h6>
-                  <div *ngFor="let formateur of encadrants">
-                    <input type="checkbox" (change)="onFormateurSelectionChange(selected.moduleId, formateur.id, $event)">
-                    <label>{{ formateur.nom }}</label>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
             <div class="row">
               <div class="col-md-6">
                 <h6>Modules disponibles</h6>
@@ -871,12 +516,7 @@
                                       <td *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 15%;">{{ seance.heure_debut }}-{{ seance.heure_fin }}</td> 
                                       <td  *ngIf='seance.module==modules.id && seance.formation==dasbordId' style="width: 10%;"><div style="height: 70%; background-color: aqua; border-radius: 10px; margin: 5px; padding: 5px;">{{ seance.statut }}</div>
                                       </td>
-                                      <!-- <td style="width: 10%;"><i [ngClass]="{
-                                        'badge-confirmed': seance.statut === 'Confirmé',
-                                        'badge-pending': seance.statut === 'En attente',
-                                        'badge-cancelled': seance.statut === 'Annulé'
-                                    }">{{ seance.statut }}</i>
-                                    </td> -->
+
 
 
                      
@@ -927,8 +567,7 @@
       </div>
   
       
-    </div>
-    
+
         
   </body>
 
