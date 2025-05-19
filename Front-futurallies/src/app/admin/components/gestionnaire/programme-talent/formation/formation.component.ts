@@ -116,6 +116,8 @@ export class GestionnaireFormationComponent implements OnInit {
 
 
 
+
+
   loadFormations1(): void {
 
     this.loading = true;

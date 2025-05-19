@@ -61,7 +61,7 @@ const routes: Routes = [
   { path: 'application/:id', component: OfferApplicationComponent },
 
   // Redirection pour les routes inconnues (404)
-  { path: '**', redirectTo: 'dashboard' },
+  // { path: '**', redirectTo: 'dashboard' },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

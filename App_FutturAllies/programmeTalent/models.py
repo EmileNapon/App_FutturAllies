@@ -18,10 +18,6 @@ class Formation(models.Model):
     description=models.TextField(max_length=800)
  
 
-class Group(models.Model):
-    # Vous pouvez ajouter d'autres champs pertinents ici
-    pass  # Remplacez-le par les champs appropriés pour votre groupe
-
 class Inscrit(models.Model):
     formation = models.ForeignKey(Formation, on_delete=models.CASCADE)  # Relation vers Formation
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Relation vers Formation
@@ -58,21 +54,6 @@ class Seance(models.Model):
     formation= models.ForeignKey(Formation, on_delete=models.CASCADE, default=1)  # Relation vers Module
     user = models.ManyToManyField(CustomUser)
 
-
-# class Seance_user(models.Model):
-#     seance=models.ForeignKey(Seance, on_delete=models.CASCADE, default=1)
-#     customuser = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
-    
-class AffectationStage(models.Model):
-    inscrit = models.ForeignKey(Inscrit, on_delete=models.CASCADE)  # Relation vers Inscrit
-   ## offre = models.ForeignKey(Offre, on_delete=models.CASCADE, default=1)  # Relation vers Inscrit
-    date_affectation = models.DateField(default=date.today)
-    group=models.ForeignKey(Group,on_delete=models.CASCADE, null=True)
-
-########################################################################################
-
-
-
 class Annonce(models.Model):
     titre = models.CharField(max_length=255)  # Titre de l'annonce
     lieu = models.CharField(max_length=255)   # Lieu de l'évènement
@@ -83,6 +64,22 @@ class Annonce(models.Model):
     formation= models.ForeignKey(Formation, on_delete=models.CASCADE, default=1)  # Relation vers Module
     def __str__(self):
         return self.titre
+
+   
+class Group(models.Model):
+    # Vous pouvez ajouter d'autres champs pertinents ici
+    pass  # Remplacez-le par les champs appropriés pour votre groupe
+
+
+ 
+class AffectationStage(models.Model):
+    inscrit = models.ForeignKey(Inscrit, on_delete=models.CASCADE)  # Relation vers Inscrit
+   ## offre = models.ForeignKey(Offre, on_delete=models.CASCADE, default=1)  # Relation vers Inscrit
+    date_affectation = models.DateField(default=date.today)
+    group=models.ForeignKey(Group,on_delete=models.CASCADE, null=True)
+
+########################################################################################
+
 
 
 

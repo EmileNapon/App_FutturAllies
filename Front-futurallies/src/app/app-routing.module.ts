@@ -40,21 +40,19 @@ import { DashboardComponent } from './offer/components/dashboard/dashboard/dashb
 
 import { UserProfileTypeComponent } from './payment/components/user-profile-type/user-profile-type.component';
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
+import { FormateurEvaluationComponent } from './admin/components/gestionnaire/formateur/formateur-Evaluation/formateur-Evaluation';
+import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
 
 
 
 const routes: Routes = [
 
 
-{path: "test1", component: AcceuilNosServicesComponent},
-
-
   {path:'subscription', component:UserProfileTypeComponent}, 
 
-
-
+  {path: 'dashboard/formateur', component: FormateurDashboardComponent},
   
-
+  { path: 'formateur/evaluation', component: FormateurEvaluationComponent},
   {path:'',component:AcceuilComponent},
   {path:'dasbord',component : DasbordEtudiantComponent},
   {path:'facturation', component:FacturationComponent},

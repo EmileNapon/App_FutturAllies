@@ -10,19 +10,25 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class UtilisateurService {
+
   private apiUrl = environment.apiUrl;
 
-
+  
   constructor(private http: HttpClient) { }
+
+
+  getEncadrants(): Observable<CustomUser[]> {
+    return this.http.get<CustomUser[]>(`${this.apiUrl}/encadrants`);   
+  }
 
 
   // Méthode générique pour récupérer tous les utilisateurs
   getUtilisateurs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/formation/list_users/`);
+    return this.http.get<any[]>(`${this.apiUrl}/users/`);
   }
 
   // Méthode pour filtrer par rôle
-  getUtilisateursByRole(role: 'etudiant' | 'employeur' | 'formateur'): Observable<CustomUser[]> {
+  getUtilisateursByRole(role: 'apprenant' | 'employeur' | 'formateur'): Observable<CustomUser[]> {
     return this.getUtilisateurs().pipe(
       map((utilisateurs: CustomUser[]) => utilisateurs.filter(utilisateur => utilisateur.role === role))
     );
@@ -30,7 +36,7 @@ export class UtilisateurService {
 
   // Méthodes spécifiques utilisant le filtre par rôle
   getEtudiants(): Observable<CustomUser[]> {
-    return this.getUtilisateursByRole('etudiant');
+    return this.getUtilisateursByRole('apprenant');
   }
 
   getEmployeurs(): Observable<CustomUser[]> {
@@ -46,15 +52,19 @@ export class UtilisateurService {
     return this.http.post<CustomUser>(`${this.apiUrl}/register/`, newUser);
   }
 
+  //   // Création d'un utilisateur (par exemple un formateur)
+  // createEncadrant(newEncadrant: any): Observable<any> {
+  //   return this.http.post<CustomUser>(this.addEncadrantUrl, newEncadrant);
+  // }
   // Modification d'un utilisateur
-  updateUser(id: number, updatedUser: CustomUser): Observable<CustomUser> {
-    const url = `${this.apiUrl}/formation/list_users/${id}`;
+  updateEncadrant(id: number, updatedUser: any): Observable<any> {
+    const url = `${this.apiUrl}/users/${id}/`;
     return this.http.put<CustomUser>(url, updatedUser);
   }
 
   // Suppression d'un utilisateur
   deleteUser(id: number): Observable<void> {
-    const url = `${this.apiUrl}/formation/list_users/${id}`;
+    const url = `${this.apiUrl}/users/${id}`;
     return this.http.delete<void>(url);
   }
 

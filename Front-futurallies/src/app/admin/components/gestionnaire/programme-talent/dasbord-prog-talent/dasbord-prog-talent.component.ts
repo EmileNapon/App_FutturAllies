@@ -81,18 +81,6 @@ showAnnonce:boolean=false
   ) { }
 
 
-///////////////////////////////////////////////////
-
-// updateFormation(): void {
-//   if (this.formationForm.valid) {
-//     const updatedFormation: Formation = { id: this.formationId, ...this.formationForm.value };
-//     this.formationService.updateFormation(updatedFormation).subscribe(() => {
-//       console.log('|||||||||||||||||||||||||||||||||||||||||||||||------|||||||||||||||')
-//     });
-//   }
-// }
-
-///////////////////////////////////////////////////
 
 
   
@@ -275,14 +263,6 @@ getGroupes() {
   return groupes;
 }
 
-
-
-
-
-
- 
-
-
   // Méthode pour obtenir le nom d'un module à partir de son ID
   getModuleName(moduleId: number): string {
     const module = this.modules.find(m => m.id === moduleId);
@@ -440,7 +420,6 @@ loadSeances(): void {
       }));
       console.log('@@@@@@@@@@@@@@', this.seancesAvecEncadrants)
       
-
     },
     (error) => {
       console.error('Erreur lors du chargement des formations:', error);

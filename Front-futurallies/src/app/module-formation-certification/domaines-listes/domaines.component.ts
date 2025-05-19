@@ -18,16 +18,14 @@ export class ModuleComponent implements OnInit {
   filteredModules: any[] = [];
 
   ngOnInit(): void {
-    // Récupérer l'ID du domaine à partir de l'URL
     this.domaineId = this.router.snapshot.paramMap.get('domaineId');
-    //console.log(this.domaineId)
     this.loadModules();
   }
 
   loadModules(): void {
     this.moduleService.getModules().subscribe(data => {
       this.modules = data;
-      this.filterModules(); // Filtrer les matières en fonction de l'ID du domaine
+      this.filterModules(); 
       
     });
   }
@@ -40,6 +38,6 @@ export class ModuleComponent implements OnInit {
   }
 
   onSelectModule(coursId: string): void {
-    this.route.navigate([`/modules/${coursId}/cours`]); // Redirection vers la page des matières du domaine sélectionné
+    this.route.navigate([`/modules/${coursId}/cours`]); 
   }
 }

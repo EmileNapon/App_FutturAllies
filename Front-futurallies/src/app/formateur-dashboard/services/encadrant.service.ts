@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class UtilisateurService {
   private apiUrl = environment.apiUrl;
+  //private apiUrl = 'http://127.0.0.1:8000/fidalli/formation/list_users/';  // URL vers votre fichier JSON ou API
+ // private addUrl = 'http://127.0.0.1:8000/fidalli/register/';  // URL vers l'API pour les groupes
 
 
   constructor(private http: HttpClient) { }

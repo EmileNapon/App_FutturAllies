@@ -1,14 +1,16 @@
+
 import { Component, OnInit } from '@angular/core';
-import { CustomUser, Group, Module } from '../models/tousModel';
-import { UtilisateurService } from '../services/utilisateur.service';
-import { ModuleService } from '../services/module.service';
-import { AnnonceService } from '../services/annonce.service';
-import { GroupeService } from '../services/groupe.service';
-import { SeanceService } from '../services/seance.service';
-import { ModuleFormationService } from '../services/moduleFormation.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Annonce, CustomUser, Module } from '../../programme-talent/models/tousModel';
+import { UtilisateurService } from '../../programme-talent/services/utilisateur.service';
+import { ModuleService } from '../../programme-talent/services/module.service';
+import { ModuleFormationService } from '../../programme-talent/services/moduleFormation.service';
+import { FormationService } from '../../programme-talent/services/formation.service';
 import { DasbordEtudiantService } from 'src/app/dasbord-etudiant/service-model/dasbord-etudiant.service';
-import { AuthService } from 'src/app/gestion-utilisateurs/connexion/service-connexion/service-connexion.service';
+import { SeanceService } from '../../programme-talent/services/seance.service';
+import { AnnonceService } from '../../programme-talent/services/annonce.service';
+
 
 @Component({
     selector: 'app-formateur-dashboard',
@@ -18,12 +20,6 @@ import { AuthService } from 'src/app/gestion-utilisateurs/connexion/service-conn
 })
 export class FormateurDashboardComponent implements OnInit {
 
-  showAnnonce!: boolean;
-  showGroupe!: boolean;
-  showListe!: boolean;
-  showCalendar!: boolean;
-  showExo!: boolean;
-  showWebinar!: boolean;
 
   utilisateurs: CustomUser[] = [];
   etudiants: CustomUser[] = [];
@@ -32,67 +28,139 @@ export class FormateurDashboardComponent implements OnInit {
   modules: Module[] = [];
   selectedModules: { moduleId: number, formateurIds: number[] }[] = [];  // Stocker les formateurs pour chaque module
 
-  // -------------------
-  annonces: any[] = [];
-  groupes: Group[] = [];
-  seances: any[] = [];
-  modulesFormations:any[]=[]
-  FiltresModules: Module[]=[]
-  formationId!:string
-  FiltresmodulesFormations:any[]=[]
-  FiltresSeances: any[]=[]
-  inscrits:any[]=[]
-  filteredIncrits:any[]=[]
+  formations: any[] = [];
+  dasbordId: any;
+    
+  shutDetail!: boolean;
+  showDetail!: boolean;
 
-  Filtresformation:any[]=[]
+modulesFormations:any[]=[]
+FiltresmodulesFormations: any[]=[]
+FiltresModules:any[]=[]
+FiltresSeances:any[]=[]
+seances:any[]=[]
+annonceForm!: FormGroup;
+
+statuts:boolean=true
+
+formationId!:number
+formationid!:number
+formationWithModules: any[]=[]
+
+annonces: any[] = [];
+
+filtereAnnonces:any[]=[]
+formationId_for_annonce!:number
+
+formationForm!: FormGroup;
+
+showFormation:boolean= false;
+showGroupe:boolean = false;
+showListe: boolean = false;
+showCalendar:boolean = false;
+showExo: boolean = false;
+showWebinar:boolean= false;
+showAjoutModule: boolean = false;
 
 
-  user!:number
-  userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null, id:string | null } | null = null;
+isAnnonceCreationVisible:boolean =false
 
-
-  FiltresEtudiantParFormation:any[]=[]
+showAnnonce:boolean=false
 
   constructor(
     private utilisateurService: UtilisateurService,
     private moduleService: ModuleService,
-    private annonceService: AnnonceService,
-    private groupeSeance: GroupeService,
-    private seanceService: SeanceService,
-    private moduleFormationService: ModuleFormationService,
-    private router: Router,   private route: ActivatedRoute,
-    private serviceAuth: AuthService, private DasbordService: DasbordEtudiantService, 
+    private moduleFormationService: ModuleFormationService, 
+    private formationService :FormationService,
+    private router: Router, private route: ActivatedRoute, private DasbordService: DasbordEtudiantService,   
+    private seanceService: SeanceService,private fb: FormBuilder, 
+    private annonceService: AnnonceService, 
+    
   ) { }
+
+
+///////////////////////////////////////////////////
+
+// updateFormation(): void {
+//   if (this.formationForm.valid) {
+//     const updatedFormation: Formation = { id: this.formationId, ...this.formationForm.value };
+//     this.formationService.updateFormation(updatedFormation).subscribe(() => {
+//       console.log('|||||||||||||||||||||||||||||||||||||||||||||||------|||||||||||||||')
+//     });
+//   }
+// }
+
+///////////////////////////////////////////////////
+
+
   
   ngOnInit():void{
-    this.formationId = this.route.snapshot.params['DasbordFormationId'];
+    this.dasbordId = this.route.snapshot.paramMap.get('dasbordId');
+    this.formationId_for_annonce = this.route.snapshot.params['dasbordId'];
+    this.loadFormations()
 
-    this.userInfo = this.serviceAuth.getUserInfo();
-    this.showAnnonce = true;
-    // this.showFormation = false;
-    this.showGroupe = false;
-    this.showListe = false;
-    this.showCalendar = false;
-    this.showExo = false;
-    this.showWebinar = false;
-    // this.showAjoutModule = false;
 
-    this.loadModules();
-   this.loadAnnonces();
-    this.loadSeances();
-    this.loadModulesFormations()
+
+    console.log('gggggggggggggg')
+   
+    this.shutDetail = true;
+    this.showDetail = false;
+
+   
     this.loadModules()
+    this.loadFormateurs()
+    this.loadSeances()
+
+
+    this.InitForm();
+    this.annonceForm.patchValue({
+    })
+
+
+    this.formationId = this.route.snapshot.params['id'];
+    this.formationid=this.formationId
+
+    
+    this.annonceForm.patchValue({
+      date_publication: new Date(),
+      heure: new Date().getTime,
+      // heure: new Date().getTime,
+    });
+       
       
-   this.loadUser();
-   this.loadInscrits()
-
-
-
 
   }
 
+  
+  InitForm():void{
+    this.annonceForm = this.fb.group({
+      titre: ['', Validators.required],
+      lieu: ['', Validators.required],
+      date_cours: ['', Validators.required],
+      description: ['', Validators.required],
+      heure: ['', Validators.required],
+      formation : this.dasbordId
+    });
+  }
+
+
+
+
+
+  iniFormsFormation():void{
+
+
+    this.formationForm = this.fb.group({
+      titre: ['', Validators.required],
+      type: ['', Validators.required],
+    });
+  }
+
+  
+
   onShowAnnonce(){
     this.showAnnonce = true;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = false;
@@ -102,6 +170,7 @@ export class FormateurDashboardComponent implements OnInit {
 
   onShowFormation(){
     this.showAnnonce = false;
+    this.showFormation = true;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = false;
@@ -111,6 +180,7 @@ export class FormateurDashboardComponent implements OnInit {
 
   onShowGroupe(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = true;
     this.showListe = false;
     this.showCalendar = false;
@@ -120,6 +190,7 @@ export class FormateurDashboardComponent implements OnInit {
 
   onShowListe(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = true;
     this.showCalendar = false;
@@ -129,15 +200,18 @@ export class FormateurDashboardComponent implements OnInit {
 
   onShowCalendar(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = true;
     this.showExo = false;
     this.showWebinar = false;
+    
   }
 
   onShowExo(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = false;
@@ -147,6 +221,7 @@ export class FormateurDashboardComponent implements OnInit {
 
   onShowWebinaire(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = false;
@@ -156,81 +231,135 @@ export class FormateurDashboardComponent implements OnInit {
 
   onAjoutModule(){
     this.showAnnonce = false;
+    this.showFormation = false;
     this.showGroupe = false;
     this.showListe = false;
     this.showCalendar = true;
     this.showExo = false;
     this.showWebinar = false;
+    this.showAjoutModule = true;
 
   }
 
+  onShutAjoutModule(){
+    this.showAjoutModule = false;
+  }
+  
 
-  // Charger les annonces à partir du service
-  loadAnnonces(): void {
-    this.annonceService.getAnnonces().subscribe(data => {
-      this.annonces = data;
-      console.log(this.annonces)
+
+
+
+
+
+
+  onShutDetail(){
+    this.shutDetail = false;
+    this.showDetail = true;
+  }
+  onShowDetail(){
+    this.shutDetail = true;
+    this.showDetail = false;
+  }
+ 
+getGroupes() {
+  const groupes = [];
+  for (let i = 0; i < this.utilisateurs.length; i += 3) {
+      // Filtrer uniquement les étudiants pour former les groupes
+      const etudiants = this.utilisateurs.filter(user => user.role === 'etudiant');
+      
+      // Ajouter les étudiants par groupes de 3
+      groupes.push(etudiants.slice(i, i + 3));
+  }
+  return groupes;
+}
+
+
+
+
+
+
+ 
+
+
+  // Méthode pour obtenir le nom d'un module à partir de son ID
+  getModuleName(moduleId: number): string {
+    const module = this.modules.find(m => m.id === moduleId);
+    return module ? module.nom_module : 'Module inconnu';
+  }
+  
+
+  // Gestion de la sélection des modules
+  onModuleSelectionChange(moduleId: number, event: any): void {
+    if (event.target.checked) {
+      // Ajouter le module à la sélection s'il n'existe pas déjà
+      if (!this.selectedModules.some(selected => selected.moduleId === moduleId)) {
+        this.selectedModules.push({ moduleId, formateurIds: [] });
+      }
+    } else {
+      // Retirer le module de la sélection si la case est décochée
+      this.selectedModules = this.selectedModules.filter(selected => selected.moduleId !== moduleId);
+    }
+  }
+
+  // Gestion de la sélection des formateurs pour un module
+  onFormateurSelectionChange(moduleId: number, formateurId: number, event: any): void {
+    const module = this.selectedModules.find(selected => selected.moduleId === moduleId);
+    if (module) {
+      if (event.target.checked) {
+        // Ajouter le formateur sélectionné à la liste des formateurs pour ce module
+        module.formateurIds.push(formateurId);
+      } else {
+        // Retirer le formateur s'il est désélectionné
+        module.formateurIds = module.formateurIds.filter(id => id !== formateurId);
+      }
+    }
+  }
+  
+
+  loadFormations(): void {
+    this.formationService.getFormations().subscribe(
+      (data) => {
+        this.formations = data;
+        this.filterDataInscrit()
+        this.loadAnnonces()
+
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des formations:', error);
+      }
+    );
+  }
+
+  filteredIncritsFormations:any[]=[]
+
+
+  filterDataInscrit(): void {
+    
+    this.filteredIncritsFormations= this.formations.filter(formation => formation.id==this.dasbordId);
+}
+
+
+
+deleteFormation(id: number): void {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+    this.formationService.deleteFormation(id).subscribe(() => {
+      this.router.navigate([`/admin/formation`]);
     });
   }
-
-
-loadGroupe(){
-  this.groupeSeance.getGroupes().subscribe((groupes: Group[]) =>{
-    this.groupes = groupes;
-  });
-}
-
-
-
-
-loadUser(){
-  this.utilisateurService.getEtudiants().subscribe((data: CustomUser[]) => {
-    this.etudiants = data;   
-  });
-}
-
-loadInscrits(): void {
-  this.DasbordService.getInscrits().subscribe(
-    (data) => { 
-      this.inscrits = data;
-      console.log("mmmm",this.inscrits)
-      this.EtudiantParFormation()
-    }
-  );
-} 
-
-
-EtudiantParFormation(): void {
-  if(this.formationId){
-    this.Filtresformation= this.inscrits.filter(inscrit => inscrit.formation==this.formationId);
-    this.FiltresEtudiantParFormation= this.etudiants.filter(user => this.Filtresformation.some(inscrit => inscrit.user==user.id ));
-  }
-
 }
 
 
 
 
 
-loadModulesFormations(): void {
-  
-  this.moduleFormationService.getModuleFormations().subscribe(
-    (data) => {
-      this.modulesFormations = data;
-      this.filterData()
-    },
-    (error) => {
-      console.error('Erreur lors du chargement des modules:', error);
-    }
-  );
-}
 
 
 loadModules(): void {
   this.moduleService.getModules().subscribe(
     (data) => {
       this.modules = data;
-      console.log('FiltresSeances=',this.modules)
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkk', this.modules)
+      this.loadModulesFormations()
     },
     (error) => {
       console.error('Erreur lors du chargement des modules:', error);
@@ -239,10 +368,77 @@ loadModules(): void {
 }
 
 
+loadModulesFormations(): void {
+  this.moduleFormationService.getModuleFormations().subscribe(
+    (data) => {
+      this.modulesFormations = data;
+      this.FiltresmodulesFormations= this.modulesFormations.filter(moduleFormation=>moduleFormation.formation==this.dasbordId);
+      this.FiltresModules= this.modules.filter(modul=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==modul.id));
+    this.loadSeances()
+    },
+    (error) => {
+      console.error('Erreur lors du chargement des modules:', error);
+    }
+  );
+}
+
+
+// Supprimer module 
+deleteModule( id: number): void {
+  
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+    // Étape 1: Récupérer les séances liées au module
+    const seancesDuModule = this.getSeancesByModule(id);
+
+    // Étape 2: Supprimer les séances liées au module
+    seancesDuModule.forEach(seance => {
+      this.seanceService.deleteSeance(seance.id).subscribe(
+        () => {
+          console.log(`Séance ${seance.id} supprimée`);
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression des séances:', error);
+        }
+      );
+    });
+    console.log('[[[[]]]]=========================|||||||=====]', this.dasbordId)
+    this.moduleFormationService.deleteModuleFormation(this.dasbordId,id).subscribe(() => {
+      this.loadModules(); // Recharger la liste après la suppression
+    });
+
+  }
+}
+
+
+
+
+filtreEncadrants:any[]=[]
+
+
+// Charger les formateurs (utilisateurs avec rôle 'encadrant')
+loadFormateurs(): void {
+  this.utilisateurService.getFormateurs().subscribe(
+    (data) => {
+      this.encadrants = data;
+    },
+    (error) => {
+      console.error('Erreur lors du chargement des formateurs:', error);
+    }
+  );
+}
+
+seancesAvecEncadrants:any[]=[]
 loadSeances(): void {
   this.seanceService.getSeances().subscribe(
     (data) => {
       this.seances = data;
+      this.seancesAvecEncadrants = this.seances.map(seance => ({
+        ...seance,
+        encadrants: this.encadrants.filter(user => seance.user.includes(user.id))
+      }));
+      console.log('@@@@@@@@@@@@@@', this.seancesAvecEncadrants)
+      
+
     },
     (error) => {
       console.error('Erreur lors du chargement des formations:', error);
@@ -251,24 +447,142 @@ loadSeances(): void {
 }
 
 
-filterData(): void {
-  console.log(this.formationId)
- this.FiltresmodulesFormations= this.modulesFormations.filter(moduleFormation=>moduleFormation.formation==this.formationId);
- this.FiltresModules= this.modules.filter(modul=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==modul.id));
- //this.FiltresSeances= this.seances.filter(seance=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==seance.module));
-
+// suppression de seances
+deleteSeance(id: number): void {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+    this.seanceService.deleteSeance(id).subscribe(() => {
+      this.loadSeances(); // Recharger la liste après la suppression
+      
+    });
+  }
 }
 
 
 
 
 
-// getSeancesByModule(moduleId: string): Seance[] {
-//   return this.seances.filter(seance => seance.moduleFormation_id.toString() === moduleId);
-// }
+
+showAnnonceList:boolean=true
+showAnnonceButton:boolean=true
+showAnnonceFormulaire:boolean=false
+// ismodify:boolean=false
+isCreateFormulaireAnnonce():void{
+  this.showAnnonceList=false
+  this.showAnnonceButton=false
+  this.showAnnonceFormulaire=true
+  console.log('this.showAnnonceFormulaire=true', this.showAnnonceFormulaire)
+
+}
+
+
+  // Méthode pour ajouter une nouvelle annonce
+  ajouterAnnonce(): void {
+    if (this.annonceForm.valid) {
+      let newAnnonce: Annonce =this.annonceForm.value;
+      this.annonceService.addAnnonce(newAnnonce).subscribe(() => {
+        this.showAnnonceList=true
+        this.showAnnonceButton=true
+        this.showAnnonceFormulaire=false
+        this.loadAnnonces()
+        this.annonceForm.reset();
+ 
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout de annonce', error); // Gérer les erreurs
+        }
+      );
+    }
+  }
+
+  annulerAnnonce() :void{
+    this.showAnnonceList=true
+    this.showAnnonceButton=true
+    this.showAnnonceFormulaire=false
+
+
+
+    this.showFormation = false;
+    this.showGroupe = false;
+    this.showListe = false;
+    this.showCalendar = false;
+    this.showExo = false;
+    this.showWebinar = false;
+    this.showAjoutModule = false;
+    this.shutDetail = true;
+    this.showDetail = false;
+    this.statuts=false
+
+    
+  }
   
 
 
+  
+  // Méthode pour filtrer les séances par module
+  getSeancesByModule(moduleId: number): any[] {
+    return this.seances.filter(seance => seance.module === moduleId);
+  }
+  
+  onSelectModule( formationId :string,seanceId: string): void {
+    this.router.navigate([`/admin/create/${formationId}/${seanceId}/seance`]);
+  }
+
+  
+  onSelectFormation(id: string): void {
+    this.router.navigate([`/admin/update/${id}/formation`]); 
+  }
+
+  onSelectFormationModule(id: string): void {
+    this.router.navigate([`/admin/Module-formation/${id}/formation`]); 
+  }
+
+
+  filterModulesForFormation(formationId: number): any[] {
+    // Filtre les relations ModuleFormation par formationId
+    const moduleIds = this.FiltresmodulesFormations.filter(moduleFormation => moduleFormation.formation === formationId)
+      .map(moduleFormation => moduleFormation.module);
+  
+    // Retourne les modules correspondants
+    return this.modules.filter(module => moduleIds.includes(module.id));
+  }
+
+
+
+
+
+
+
+
+
+
+  nombreAffichage: number = 5; // Valeur par défaut
+  optionsAffichage: number[] = [3, 5, 10, 100, 0]; // 0 pour 'Tout'
+  
+  
+   annoncesAffichees() {
+    if (this.nombreAffichage == 0) {
+      return this.filtereAnnonces;
+    }
+    return this.filtereAnnonces.slice(0, this.nombreAffichage);
+  }
+  
+
+    // Charger les annonces à partir du service
+    loadAnnonces(): void {
+      this.annonceService.getAnnonces().subscribe(data => {
+        this.annonces = data;
+        this.filtereAnnonces= this.annonces.filter(annon => annon.formation==this.formationId_for_annonce);
+      });
+    }
+
+  supprimerAnnonce(id: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')) {
+      this.annonceService.deleteAnnonce(id).subscribe(() =>  {
+        this.loadAnnonces();
+      });
+      
+    }
+  }
 
 
 }

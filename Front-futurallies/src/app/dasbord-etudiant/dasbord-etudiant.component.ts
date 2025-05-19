@@ -48,7 +48,6 @@ export class DasbordEtudiantComponent {
       (data) => { 
         this.formations = data;
         this.loadInscrits()   
-       console.log('((((((()))))))1',this.formations )
       }
     );
   }  
@@ -59,8 +58,6 @@ export class DasbordEtudiantComponent {
         this.inscrits = data;
         this.filteredIncrits= this.inscrits.filter(inscrit => inscrit.user == Number(this.userInfo?.id) );
         this.filteredIncritsFormations= this.formations.filter(formation => this.filteredIncrits.some(inscrit => inscrit.formation==formation.id ));
-        console.log('((((((()))))))',this.userInfo?.id  )
-        console.log('((((((()))))))',this.filteredIncritsFormations )
         this.filterData();
       }
     );

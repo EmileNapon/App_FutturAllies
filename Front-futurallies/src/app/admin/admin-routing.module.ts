@@ -35,6 +35,8 @@ import { AjoutEncadrantComponent } from './components/gestionnaire/programme-tal
 import { ModifEncadrantComponent } from './components/gestionnaire/programme-talent/encadrant/modif-encadrant/modif-encadrant.component';
 import { GestionnaireFormationDetailComponent } from './components/gestionnaire/programme-talent/formation/formation-detail/formation-detail.component';
 import { ajoutModuleComponent } from './components/gestionnaire/programme-talent/formation/ajout-formation/ajouterModule/ajouteModule.component';
+import { FormateurDashboardComponent } from './components/gestionnaire/formateur/formateur-dashboard/formateur-dashboard.component';
+import { FormateurEvaluationComponent } from './components/gestionnaire/formateur/formateur-Evaluation/formateur-Evaluation';
 
 
 
@@ -45,6 +47,10 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },  // Redirection vers dashboard si l'URL est vide
       { path: 'dashboard', component: DashboardComponent},
+      { path: 'formateur/evaluation', component: FormateurEvaluationComponent},
+      { path: 'formateur-dashboard', component: FormateurDashboardComponent},
+
+
 
       {path: 'apprenants', component: ListEtudiantsComponent},
       {path: 'apprenants/:detailApprenant/detail', component: DetailEtudiantsComponent},
@@ -61,8 +67,6 @@ const routes: Routes = [
       {path: 'entreprises/:updateEntreprise/update', component: EditEntrepriseComponent},
       {path:'create-entreprise', component:CreateEntreprisetComponent},
 
-      // {path: 'formateur', component: EncadrantComponent},
-      // {path: 'etudiants', component: EtudiantComponent},
 
       { path: 'list/:resourceType', component: ResourceListComponent },
       { path: 'list/:resourceType/:resourceChild', component: ResourceListComponent },
@@ -75,12 +79,6 @@ const routes: Routes = [
       {path:':idcoursGestionnaireId/chapitre', component:GestionnaireChapitreComponent},
       {path: 'formation', component: GestionnaireFormationComponent},
       {path: ':dasbordId/programme-talent', component: GestionnaireDasbordProgTalentComponent},
-      // {path: 'formation/:formationId/detail', component: GestionnaireFormationDetailComponent},
-      
-      // {path:'gestionnaire/:idchapitreGestionnaireId/gestionnaire-contenu', component:GestionnaireModifierContenuCoursComponent},
-      // {path:'gestionnaire/gestionnaire-certificat', component:GestionnaireCertificatComponent},
-      // {path:'gestionnaire/:certificatGestionnaireId/GestionnaireCertificat', component:GestionnaireCertificatCoursComponent},
-      
       {path: 'dasbord/:dasbordId/dasbord-prog-talent', component: GestionnaireDasbordProgTalentComponent},
       {path: 'formation', component: GestionnaireFormationComponent},
       { path: 'ajouter-formation', component: AjoutFormationComponent },
@@ -105,6 +103,7 @@ const routes: Routes = [
     ]
   }
 ];
+
 
 
 

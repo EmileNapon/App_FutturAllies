@@ -11,10 +11,6 @@ export class UtilisateurService {
 
   private apiUrl = environment.apiUrl;
 
-  //private apiUrl = 'http://127.0.0.1:8000/fidalli/users/';  // URL vers votre fichier JSON ou API
-  //private addUrl = 'http://127.0.0.1:8000/fidalli/register/';  // URL vers l'API pour les groupes
-  
-  //private addEncadrantUrl = 'http://127.0.0.1:8000/fidalli/encadrant/';  // URL vers l'API pour les groupes
   
   constructor(private http: HttpClient) { }
 
@@ -48,11 +44,7 @@ export class UtilisateurService {
     return this.http.post<CustomUser>(`${this.apiUrl}/register/`, newUser);
   }
 
-  //   // Création d'un utilisateur (par exemple un formateur)
-  // createEncadrant(newEncadrant: any): Observable<any> {
-  //   return this.http.post<CustomUser>(this.addEncadrantUrl, newEncadrant);
-  // }
-  // Modification d'un utilisateur
+
   updateUer(id: number, updatedUser: CustomUser): Observable<CustomUser> {
     const url = `${this.apiUrl}/users/${id}`;
     return this.http.put<CustomUser>(url, updatedUser);
@@ -69,14 +61,4 @@ export class UtilisateurService {
   }
 
 
-
-  // // Méthode pour sauvegarder les groupes
-  // saveGroupes(groupes: Group[]): Observable<Group> {
-  //   return this.http.post<Group>(this.groupesUrl, groupes);
-  // }
-
-  // // Méthode pour récupérer les groupes
-  // getGroupes(): Observable<Group[]> {
-  //   return this.http.get<Group[]>(this.groupesUrl);
-  // }
 }

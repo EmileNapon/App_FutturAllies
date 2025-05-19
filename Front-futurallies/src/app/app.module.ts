@@ -27,6 +27,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormatDatePipe } from './module-formation-certification/a_pipes/datePipe';
 
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
+import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
 
 
 
@@ -34,7 +35,7 @@ import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosSe
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent
+    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,

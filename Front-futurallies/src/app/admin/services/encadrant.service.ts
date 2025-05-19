@@ -55,13 +55,4 @@ export class UtilisateurService {
     return this.http.delete<void>(url);
   }
 
-  // // Méthode pour sauvegarder les groupes
-  // saveGroupes(groupes: Group[]): Observable<Group> {
-  //   return this.http.post<Group>(this.groupesUrl, groupes);
-  // }
-
-  // // Méthode pour récupérer les groupes
-  // getGroupes(): Observable<Group[]> {
-  //   return this.http.get<Group[]>(this.groupesUrl);
-  // }
 }
