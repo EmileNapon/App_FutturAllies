@@ -17,7 +17,7 @@ import { HeaderGestionnaireComponent } from './header-footer/header-gestionnaire
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor'; // Chemin vers ton intercepteur
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DasbordEtudiantComponent } from './dasbord-etudiant/dasbord-etudiant.component';
 import { OfferModule } from './offer/offer.module';
@@ -28,6 +28,7 @@ import { FormatDatePipe } from './module-formation-certification/a_pipes/datePip
 
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
 import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
+import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
 
 
 
@@ -35,10 +36,10 @@ import { FormateurDashboardComponent } from './formateur-dashboard/formateur-das
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent
+    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent, FormateurFormationsComponent
   ],
   imports: [
-    BrowserModule,ReactiveFormsModule,
+    BrowserModule,ReactiveFormsModule,FormsModule,
     BrowserAnimationsModule,  MatSlideToggleModule,
     AppRoutingModule, RouterModule, GestionUtilisateursModule, OrientationsModule, ModuleFormationCertificationModule, OfferModule, MatDividerModule, MatIconModule
   ],

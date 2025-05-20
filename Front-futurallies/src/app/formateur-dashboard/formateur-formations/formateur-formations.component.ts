@@ -6,13 +6,14 @@ import { ModuleService } from '../services/module.service';
 import { ModuleFormationService } from '../services/moduleFormation.service';
 
 @Component({
-    selector: 'app-formation',
-    templateUrl: './formation.component.html',
-    styleUrls: ['./formation.component.css'],
-    standalone: false
+  selector: 'app-formateur-formations',
+  templateUrl: './formateur-formations.component.html',
+  styleUrl: './formateur-formations.component.css',
+  standalone:false
 })
-export class GestionnaireFormationComponent implements OnInit {
-  
+export class FormateurFormationsComponent implements OnInit {
+
+   
   formationsActifs:number=0
   formationsNotActifs:number=0
   formations: Formation[] = [];
@@ -32,7 +33,8 @@ export class GestionnaireFormationComponent implements OnInit {
 
   searchTerm: string = '';
   sortOrder: string = '';
-  
+   
+ VoirProgrammeTalentListVisible!:boolean
 
   constructor(
     private formationService: FormationService,
@@ -44,11 +46,19 @@ export class GestionnaireFormationComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.VoirProgrammeTalentListVisible=true
   //  this.formationId = this.route.snapshot.params['FormationId'];
     this.loadFormations1();
     this.loadModules()
     this.loadModulesFormations()
   }
+
+
+    ngVoirProgrammeTalentList():void{
+    this.VoirProgrammeTalentListVisible=true
+  }
+
 
   loadFormations(): void {
     this.formationService.getFormations().subscribe(
@@ -176,9 +186,5 @@ export class GestionnaireFormationComponent implements OnInit {
     this.changePageSize(newSize);
   }
 
-  }
 
-
-
-
-
+}

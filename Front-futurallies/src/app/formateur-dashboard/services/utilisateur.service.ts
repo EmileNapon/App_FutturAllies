@@ -47,6 +47,7 @@ export class UtilisateurService {
     return this.getUtilisateursByRole('formateur');
   }
 
+
   // Création d'un utilisateur (par exemple un formateur)
   createUser(newUser: any): Observable<any> {
     return this.http.post<CustomUser>(`${this.apiUrl}/register/`, newUser);

@@ -8,7 +8,8 @@ import { CustomUser, Formation, Module } from './models/tousModel';
 import { FormGroup } from '@angular/forms';
 import { SeanceService } from './services/seance.service';
 import { AnnonceService } from './services/annonce.service';
-import { UtilisateurService } from './services/encadrant.service';
+import { UtilisateurService } from './services/utilisateur.service';
+
 
 @Component({
   selector: 'app-formateur-dashboard',
@@ -30,9 +31,7 @@ formationWithModules: any[]=[]
 filtreEncadrants:any[]=[]
   
 filteredIncritsFormations:any[]=[]
-seancesAvecEncadrants:any[]=[]
-
-  
+seancesAvecEncadrants:any[]=[] 
 
 utilisateurs: CustomUser[] = [];
 etudiants: CustomUser[] = [];
@@ -56,12 +55,18 @@ filtereAnnonces:any[]=[]
 
 formationId_for_annonce!: number
 
-  searchTerm: string = '';
-  sortOrder: string = '';
+FiltreSeancesFormateur:any[]=[]
+seancesEncadrantsFilter:any[]=[]
+FiltreModuleFormateur:any[]=[]
+moduleFiltres:any[]=[]
+formationsFiltres:any[]=[]
+FiltreFormationFormateur:any[]=[]
 
  userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null, id: string | null, role: string | null, is_superuser:boolean | null  } | null = null;
 
-  constructor(
+
+
+ constructor(
     private formationService: FormationService,
     private router: Router,
     private moduleService : ModuleService,
@@ -74,20 +79,24 @@ formationId_for_annonce!: number
   ) {}
 
 
+
   ngOnInit(): void {
     this.userInfo = (this.serviceAuth.getUserInfo());
-    this.formationId = this.route.snapshot.params['FormationId'];
-    this.formationId_for_annonce = this.route.snapshot.params['dasbordId'];
+    
+
     this.loadFormations()
-    this.loadModulesFormations()
-    this.loadSeances()
+    this.loadFormateurs()
+
   }
+
+
+
 
   loadFormations(): void {
     this.formationService.getFormations().subscribe(
       (data) => {
         this.formations = data;
-        console.log('formations 111:', this.formations);
+        this.loadModules()
       },
       (error) => {
         console.error('Erreur lors du chargement des formations:', error);
@@ -95,10 +104,14 @@ formationId_for_annonce!: number
     );
   }
 
+  
+  FormationsFiltre:any[]=[]
+  modulesFiltrenoveau:any[]=[]
   loadModules(): void {
     this.moduleService.getModules().subscribe(data => {
-      this.module = data; 
-      console.log('modules 111uuu:', this.modules);
+      this.module = data;
+      this.loadSeances()
+      this.loadModulesFormations()
     });
   }
 
@@ -106,7 +119,10 @@ formationId_for_annonce!: number
     this.moduleFormationService.getModuleFormations().subscribe(
       (data) => {
         this.modulesFormations = data;  
-        console.log('modules 111:', this.modulesFormations);
+        this.modulesFiltrenoveau= this.modulesFormations.filter(mof=>this.module.some(m=>m.id==mof.module)) 
+        this.FormationsFiltre= this.formations.filter(form=>this.modulesFiltrenoveau.some(mf=>mf.formation==form.id)) 
+        console.log('modulesFiltrenoveau',this.modulesFiltrenoveau)
+        console.log('modulesFormationsFiltre',this.FormationsFiltre)
       },
       (error) => {
         console.error('Erreur lors du chargement des modules:', error);
@@ -114,7 +130,23 @@ formationId_for_annonce!: number
     );
   }
 
-  encadrantsFilter:any[]=[]
+
+
+
+  loadFormateurs(): void {
+    this.utilisateurService.getFormateurs().subscribe(
+      (data) => {
+        this.encadrants = data;
+      },
+      (error) => {
+        console.error('Erreur lors du chargement des formateurs:', error);
+      }
+    );
+  }
+  
+
+
+
   loadSeances(): void {
     this.seanceService.getSeances().subscribe(
       (data) => {
@@ -124,18 +156,11 @@ formationId_for_annonce!: number
           ...seance,
           encadrants: this.encadrants.filter(user => seance.user.includes(user.id))
         }));
-        const userId = Number(this.userInfo?.id);
-        this.encadrantsFilter = this.seancesAvecEncadrants.filter(seance =>
-          seance.user.includes(userId))
+        // const userId = Number(this.userInfo?.id);
+        // this.seancesEncadrantsFilter = this.seancesAvecEncadrants.filter(seance =>
+        //   seance.user.includes(18))
 
-
-        console.log('seances ', this.seances)
-        console.log('seances avec seancesAvecEncadrants', this.seancesAvecEncadrants)
-        console.log('seances avec encadrants', this.encadrants)
-        console.log('seances avec Number(this.userInfo?.id)', Number(this.userInfo?.id))
-        console.log('seances avec encadrantsFilter', this.encadrantsFilter)
-        
-           
+          this.moduleFiltres= this.module.filter(mod=>this.seancesAvecEncadrants.some(se=>se.module==mod.id))   
       },
       (error) => {
         console.error('Erreur lors du chargement des formations:', error);
@@ -146,9 +171,7 @@ formationId_for_annonce!: number
 loadAnnonces(): void {
     this.annonceService.getAnnonces().subscribe(data => {
     this.annonces = data;
-    console.log('seances avec anoonces 11', this.annonces)
     this.filtereAnnonces= this.annonces.filter(annon => annon.formation==this.formationId_for_annonce);
-    console.log('seances avec filtereAnnonces', this.filtereAnnonces)
   });
 }
 

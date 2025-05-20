@@ -66,7 +66,7 @@ const routes: Routes = [
       {path: 'entreprises/:detailEntreprise/detail', component: DetailEntrepriseComponent},
       {path: 'entreprises/:updateEntreprise/update', component: EditEntrepriseComponent},
       {path:'create-entreprise', component:CreateEntreprisetComponent},
-
+      
 
       { path: 'list/:resourceType', component: ResourceListComponent },
       { path: 'list/:resourceType/:resourceChild', component: ResourceListComponent },
@@ -79,8 +79,6 @@ const routes: Routes = [
       {path:':idcoursGestionnaireId/chapitre', component:GestionnaireChapitreComponent},
       {path: 'formation', component: GestionnaireFormationComponent},
       {path: ':dasbordId/programme-talent', component: GestionnaireDasbordProgTalentComponent},
-      {path: 'dasbord/:dasbordId/dasbord-prog-talent', component: GestionnaireDasbordProgTalentComponent},
-      {path: 'formation', component: GestionnaireFormationComponent},
       { path: 'ajouter-formation', component: AjoutFormationComponent },
       { path: 'update/:id/formation', component: ModificationFormationComponent },
       {path: 'create-seance/:id', component: AjoutSeanceComponent},

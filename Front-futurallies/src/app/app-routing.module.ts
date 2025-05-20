@@ -42,6 +42,7 @@ import { UserProfileTypeComponent } from './payment/components/user-profile-type
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
 import { FormateurEvaluationComponent } from './admin/components/gestionnaire/formateur/formateur-Evaluation/formateur-Evaluation';
 import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
+import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
 
 
 
@@ -50,7 +51,9 @@ const routes: Routes = [
 
   {path:'subscription', component:UserProfileTypeComponent}, 
 
-  {path: 'dashboard/formateur', component: FormateurDashboardComponent},
+  {path: 'dashboard/formateur', component: FormateurFormationsComponent},
+
+  {path: ':dasbordId/Formateurprogramme', component: FormateurDashboardComponent},
   
   { path: 'formateur/evaluation', component: FormateurEvaluationComponent},
   {path:'',component:AcceuilComponent},

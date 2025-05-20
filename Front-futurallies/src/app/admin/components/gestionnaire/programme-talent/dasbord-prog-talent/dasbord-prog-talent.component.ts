@@ -88,19 +88,13 @@ showAnnonce:boolean=false
     this.dasbordId = this.route.snapshot.paramMap.get('dasbordId');
     this.formationId_for_annonce = this.route.snapshot.params['dasbordId'];
     this.loadFormations()
-
-
-
-    console.log('gggggggggggggg')
    
     this.shutDetail = true;
     this.showDetail = false;
-
    
     this.loadModules()
     this.loadFormateurs()
     this.loadSeances()
-
 
     this.InitForm();
     this.annonceForm.patchValue({
@@ -235,13 +229,6 @@ showAnnonce:boolean=false
     this.showAjoutModule = false;
   }
   
-
-
-
-
-
-
-
   onShutDetail(){
     this.shutDetail = false;
     this.showDetail = true;
@@ -302,9 +289,9 @@ getGroupes() {
     this.formationService.getFormations().subscribe(
       (data) => {
         this.formations = data;
+        console.log('formations 111222333', this.formations)
         this.filterDataInscrit()
         this.loadAnnonces()
-
       },
       (error) => {
         console.error('Erreur lors du chargement des formations:', error);
@@ -315,10 +302,9 @@ getGroupes() {
   filteredIncritsFormations:any[]=[]
 
 
-  filterDataInscrit(): void {
-    
+  filterDataInscrit(): void {   
     this.filteredIncritsFormations= this.formations.filter(formation => formation.id==this.dasbordId);
-}
+  }
 
 
 
@@ -356,7 +342,8 @@ loadModulesFormations(): void {
       this.modulesFormations = data;
       this.FiltresmodulesFormations= this.modulesFormations.filter(moduleFormation=>moduleFormation.formation==this.dasbordId);
       this.FiltresModules= this.modules.filter(modul=>this.FiltresmodulesFormations.some(filModulFormation=>filModulFormation.module==modul.id));
-    this.loadSeances()
+      console.log('FiltresModules',this.FiltresModules)
+      this.loadSeances()
     },
     (error) => {
       console.error('Erreur lors du chargement des modules:', error);
@@ -418,7 +405,7 @@ loadSeances(): void {
         ...seance,
         encadrants: this.encadrants.filter(user => seance.user.includes(user.id))
       }));
-      console.log('@@@@@@@@@@@@@@', this.seancesAvecEncadrants)
+      console.log('@@@@@@@@@@@@@@ 33', this.seancesAvecEncadrants)
       
     },
     (error) => {
