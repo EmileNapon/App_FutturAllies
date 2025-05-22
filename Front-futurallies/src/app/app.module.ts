@@ -29,6 +29,8 @@ import { FormatDatePipe } from './module-formation-certification/a_pipes/datePip
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
 import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
 import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
+import { AnnoncesComponent } from './formateur-dashboard/annonces/annonces.component';
+import { FormateurEvaluationComponent } from './formateur-dashboard/formateur-Evaluation/formateur-Evaluation';
 
 
 
@@ -36,7 +38,7 @@ import { FormateurFormationsComponent } from './formateur-dashboard/formateur-fo
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent, FormateurFormationsComponent
+    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent, FormateurFormationsComponent,AnnoncesComponent, FormateurEvaluationComponent
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,FormsModule,

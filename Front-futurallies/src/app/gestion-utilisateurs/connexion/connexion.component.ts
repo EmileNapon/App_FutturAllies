@@ -53,7 +53,7 @@ console.log('hhhhhhhhhhh', this.loginForm.value)
           this.router.navigate(['/EmployeurPage']);
         }
         else if (response.role === 'formateur') {
-          this.router.navigate(['/gestionnaire/formateur-dashboard']);
+          this.router.navigate(['/dashboard/formateur']);
         }
         else if (response.role === 'admin' && Boolean(response.is_superuser) === true) {
           console.log('L\'utilisateur est un admin superutilisateur');

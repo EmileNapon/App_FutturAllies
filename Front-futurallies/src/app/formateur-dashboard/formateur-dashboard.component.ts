@@ -54,7 +54,7 @@ annonces: any[] = [];
 filtereAnnonces:any[]=[]
 
 formationId_for_annonce!: number
-
+encadrantDetail:any=null
 FiltreSeancesFormateur:any[]=[]
 seancesEncadrantsFilter:any[]=[]
 FiltreModuleFormateur:any[]=[]
@@ -64,8 +64,11 @@ FiltreFormationFormateur:any[]=[]
 
  userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null, id: string | null, role: string | null, is_superuser:boolean | null  } | null = null;
 
+ dasbordFormateurId!:number
+ isAfficheAnnonceVisible!:boolean
+ ngIsAfficheSeancesVisible!:boolean
 
-
+ ngIsAfficheTDVisible!: boolean
  constructor(
     private formationService: FormationService,
     private router: Router,
@@ -82,20 +85,46 @@ FiltreFormationFormateur:any[]=[]
 
   ngOnInit(): void {
     this.userInfo = (this.serviceAuth.getUserInfo());
-    
-
+    this.isAfficheAnnonceVisible=false
+    this.ngIsAfficheSeancesVisible=true
+    this.ngIsAfficheTDVisible=false
+    this.dasbordFormateurId = Number(this.route.snapshot.paramMap.get('dasbordFormateurId'));
     this.loadFormations()
+    this.LoadEncadrantDetail()
     this.loadFormateurs()
 
   }
 
 
+  ngIsAfficheSeances(){
+    this.isAfficheAnnonceVisible=false
+    this.ngIsAfficheSeancesVisible=true
+    this.ngIsAfficheTDVisible=false
+  }
+  ngIsAfficheTD():void{
+    this.isAfficheAnnonceVisible=false
+    this.ngIsAfficheSeancesVisible=false
+    this.ngIsAfficheTDVisible=true
+  }
+  ngIsAfficheAnnonce(){
+    this.isAfficheAnnonceVisible=true
+    this.ngIsAfficheSeancesVisible=false
+    this.ngIsAfficheTDVisible=false
+  }
 
+  LoadEncadrantDetail():void{
+    this.utilisateurService.getEncadrantByIds(Number(this.userInfo?.id)).subscribe((data) => {
+      this.encadrantDetail = data;
+    });
+  }
+
+
+  formations1:any
 
   loadFormations(): void {
-    this.formationService.getFormations().subscribe(
+    this.formationService.getFormationById(this.dasbordFormateurId).subscribe(
       (data) => {
-        this.formations = data;
+        this.formations1 = data;
         this.loadModules()
       },
       (error) => {
@@ -115,14 +144,19 @@ FiltreFormationFormateur:any[]=[]
     });
   }
 
+
+  modulesFormationsFiltresFormations:any[]=[]
+  modulesFormationsFiltresModules:any[]=[]
+  FiltresModulesFormations:any[]=[]
   loadModulesFormations(): void {
     this.moduleFormationService.getModuleFormations().subscribe(
       (data) => {
         this.modulesFormations = data;  
-        this.modulesFiltrenoveau= this.modulesFormations.filter(mof=>this.module.some(m=>m.id==mof.module)) 
-        this.FormationsFiltre= this.formations.filter(form=>this.modulesFiltrenoveau.some(mf=>mf.formation==form.id)) 
-        console.log('modulesFiltrenoveau',this.modulesFiltrenoveau)
-        console.log('modulesFormationsFiltre',this.FormationsFiltre)
+        this.modulesFormationsFiltresFormations= this.modulesFormations.filter(mof=>mof.formation==this.dasbordFormateurId)
+        this.modulesFormationsFiltresModules= this.modulesFormations.filter(mof=>this.module.some(m=>m.id==mof.module))
+        this.FiltresModulesFormations= this.module.filter(mof=>this.modulesFormationsFiltresModules.some(m=>m.module==mof.id))
+        // this.modulesFiltrenoveau= this.modulesFormations.filter(mof=>this.module.some(m=>m.id==mof.module)) 
+        // this.FormationsFiltre= this.formations.filter(form=>this.modulesFiltrenoveau.some(mf=>mf.formation==this.dasbordFormateurId)) 
       },
       (error) => {
         console.error('Erreur lors du chargement des modules:', error);
@@ -156,9 +190,6 @@ FiltreFormationFormateur:any[]=[]
           ...seance,
           encadrants: this.encadrants.filter(user => seance.user.includes(user.id))
         }));
-        // const userId = Number(this.userInfo?.id);
-        // this.seancesEncadrantsFilter = this.seancesAvecEncadrants.filter(seance =>
-        //   seance.user.includes(18))
 
           this.moduleFiltres= this.module.filter(mod=>this.seancesAvecEncadrants.some(se=>se.module==mod.id))   
       },

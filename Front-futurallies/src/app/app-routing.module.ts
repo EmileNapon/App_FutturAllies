@@ -43,17 +43,20 @@ import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosSe
 import { FormateurEvaluationComponent } from './admin/components/gestionnaire/formateur/formateur-Evaluation/formateur-Evaluation';
 import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
 import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
+import { AnnoncesComponent } from './formateur-dashboard/annonces/annonces.component';
 
 
 
 const routes: Routes = [
 
+  
+  {path:'annonces', component:AnnoncesComponent}, 
 
   {path:'subscription', component:UserProfileTypeComponent}, 
 
   {path: 'dashboard/formateur', component: FormateurFormationsComponent},
 
-  {path: ':dasbordId/Formateurprogramme', component: FormateurDashboardComponent},
+  {path: ':dasbordFormateurId/formateurprogramme', component: FormateurDashboardComponent},
   
   { path: 'formateur/evaluation', component: FormateurEvaluationComponent},
   {path:'',component:AcceuilComponent},

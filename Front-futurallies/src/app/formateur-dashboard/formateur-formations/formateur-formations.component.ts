@@ -4,6 +4,8 @@ import { FormationService } from '../services/formation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModuleService } from '../services/module.service';
 import { ModuleFormationService } from '../services/moduleFormation.service';
+import { UtilisateurService } from '../services/utilisateur.service';
+import { AuthService } from 'src/app/gestion-utilisateurs/connexion/service-connexion/service-connexion.service';
 
 @Component({
   selector: 'app-formateur-formations',
@@ -34,6 +36,11 @@ export class FormateurFormationsComponent implements OnInit {
   searchTerm: string = '';
   sortOrder: string = '';
    
+  encadrantDetail:any=null
+  encadrantId !:number
+  userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null, id: string | null, role: string | null, is_superuser:boolean | null  } | null = null;
+
+
  VoirProgrammeTalentListVisible!:boolean
 
   constructor(
@@ -42,16 +49,19 @@ export class FormateurFormationsComponent implements OnInit {
     private moduleService : ModuleService,
     private moduleFormationService  : ModuleFormationService,
     private route: ActivatedRoute, 
+    private utilisateurService: UtilisateurService,
+    private serviceAuth: AuthService,
   ) {}
 
 
   ngOnInit(): void {
-
+    this.userInfo = (this.serviceAuth.getUserInfo());
     this.VoirProgrammeTalentListVisible=true
   //  this.formationId = this.route.snapshot.params['FormationId'];
     this.loadFormations1();
     this.loadModules()
     this.loadModulesFormations()
+    this.LoadEncadrantDetail()
   }
 
 
@@ -72,7 +82,11 @@ export class FormateurFormationsComponent implements OnInit {
     );
   }
 
-
+  LoadEncadrantDetail():void{
+    this.utilisateurService.getEncadrantByIds(Number(this.userInfo?.id)).subscribe((data) => {
+      this.encadrantDetail = data;
+    });
+  }
 
 
   loadModules(): void {
@@ -118,7 +132,7 @@ export class FormateurFormationsComponent implements OnInit {
   }
 
   onSelectFormation(DasbordFormationId: number): void {
-    this.router.navigate([`/admin/${DasbordFormationId}/programme-talent`]); 
+    this.router.navigate([`${DasbordFormationId}/formateurprogramme`]); 
   }
     
 

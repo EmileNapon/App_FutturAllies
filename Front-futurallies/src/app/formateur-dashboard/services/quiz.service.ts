@@ -9,12 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class QuizService {
    private apiUrl = environment.apiUrl;
-  // private apiUrl = 'http://localhost:8000/fidalli/quizzes'; // Remplacez par l'URL de l'API
-  //private baseUrl = 'http://127.0.0.1:8000/fidalli/quiz/'; // URL de l'API Djangoquiz/create
- // private createUrl = 'http://127.0.0.1:8000/fidalli/quiz/create'; // URL de l'API Django
-  //private genereUrl = 'http://127.0.0.1:8000/fidalli/quiz/generate-quiz';
-  //private saveUrl = 'http://127.0.0.1:8000/fidalli/quiz/save-quiz';
-  //private submitRespUrl = 'http://127.0.0.1:8000/fidalli/quiz/submit';
+
 
  
 

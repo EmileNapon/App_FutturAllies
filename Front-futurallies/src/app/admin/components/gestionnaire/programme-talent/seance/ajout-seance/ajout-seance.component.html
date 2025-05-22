@@ -6,7 +6,7 @@
           <div class="table-title">
               <div class="row">
                   <div class="col-sm-6">
-                      <h2>Ajouter <b>d'une seance</b></h2>
+                      <h2>Ajouter <b>d'une seance nn</b></h2>
                   </div>
                   <div class="col-sm-6">
                       <a  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span></span></a>
@@ -71,7 +71,7 @@
     
     <button class="btn btn-danger" routerLink='/admin/formation' >annuler</button>
     <span style='padding-left:20px;'>
-    <button type="submit"  class="btn btn-primary" [disabled]="seanceForm.invalid">Ajouter la Séance</button>
+    <button type="submit"  class="btn btn-primary" [disabled]="seanceForm.invalid" routerLink='/admin/formation'>Ajouter la Séance</button>
     </span>
   </form>
 </div>

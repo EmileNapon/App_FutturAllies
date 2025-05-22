@@ -17,6 +17,10 @@ export class UtilisateurService {
   constructor(private http: HttpClient) { }
 
 
+  getEncadrantByIds(id: number): Observable<CustomUser> {
+    return this.http.get<CustomUser>(`${this.apiUrl}/encadrants/${id}/`);
+  }
+
   getEncadrants(): Observable<CustomUser[]> {
     return this.http.get<CustomUser[]>(`${this.apiUrl}/encadrants`);   
   }
@@ -53,10 +57,7 @@ export class UtilisateurService {
     return this.http.post<CustomUser>(`${this.apiUrl}/register/`, newUser);
   }
 
-  //   // Création d'un utilisateur (par exemple un formateur)
-  // createEncadrant(newEncadrant: any): Observable<any> {
-  //   return this.http.post<CustomUser>(this.addEncadrantUrl, newEncadrant);
-  // }
+
   // Modification d'un utilisateur
   updateEncadrant(id: number, updatedUser: any): Observable<any> {
     const url = `${this.apiUrl}/users/${id}/`;
@@ -69,13 +70,5 @@ export class UtilisateurService {
     return this.http.delete<void>(url);
   }
 
-  // // Méthode pour sauvegarder les groupes
-  // saveGroupes(groupes: Group[]): Observable<Group> {
-  //   return this.http.post<Group>(this.groupesUrl, groupes);
-  // }
 
-  // // Méthode pour récupérer les groupes
-  // getGroupes(): Observable<Group[]> {
-  //   return this.http.get<Group[]>(this.groupesUrl);
-  // }
 }

@@ -111,3 +111,47 @@ export interface Annonce {
     heure: string; // Heure de publication
     formation:number
 }
+
+
+
+export interface Quiz {
+    id: number; // Identifiant unique du quiz
+    besoin: string; // Description du quiz
+    title?: string; // Titre du quiz (optionnel)
+    date?: Date; // Date prévue du quiz (optionnel)
+    start_time?: string; // Heure de début (optionnel, format HH:mm:ss)
+    duration_minutes?: number; // Durée en minutes (optionnel)
+    module_id: number; // Référence à l'identifiant du module
+  }
+
+export interface Question {
+    id: number; // Identifiant unique de la question
+    question: string; // Texte de la question
+    correct_option: string; // Option correcte
+    explanation?: string; // Explication optionnelle
+    quiz_id: number; // Référence à l'identifiant du quiz
+}
+
+export interface Options {
+    id: number; // Identifiant unique de l'option
+    option_text: string; // Texte de l'option
+    question_id: number; // Référence à l'identifiant de la question
+}
+
+export interface Reponse{ 
+    id: number; // Identifiant unique de l'option
+    reponse: string; // Texte de l'option 
+    question_id: number; // Référence à l'identifiant de la question
+}
+
+
+// Définir une interface pour le type de données
+export interface QuizData {
+    description: string;
+    title: string;
+    date: string; // Vous pouvez utiliser Date si c'est un objet Date
+    start_time: string; // Vous pouvez aussi le typer comme Date si nécessaire
+    duration_minutes: number;
+    module_id: number;
+  }
+  

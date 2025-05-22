@@ -6,7 +6,7 @@
             <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
-                        <h4 class="text-white fw-bold">Dashboard Formateur</h4>
+                        <h4 class="text-white fw-bold">Dashboard Formateur </h4>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -37,134 +37,91 @@
             <!-- Main Content -->
             <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand topbar mb-4 static-top shadow">
-                    <div class="container-fluid">
-                        <button class="btn btn-link d-md-none rounded-circle me-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        
-                        <!-- Search Bar -->
-                        <form class="d-none d-sm-inline-block form-inline me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher..." aria-label="Search">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </form>
-                        
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ms-auto">
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge bg-danger badge-counter">3+</span>
-                                </a>
-                            </li>
-                            
-                            <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-bs-toggle="dropdown">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge bg-danger badge-counter">7</span>
-                                </a>
-                            </li>
-                            
-                            <div class="topbar-divider d-none d-sm-block"></div>
-                            
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                    <span class="me-2 d-none d-lg-inline text-gray-600 small">Formateur</span>
-                                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" width="32" height="32">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <!-- Content Row -->
-                <div class="row">
-                    <!-- Stats Cards -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card stat-card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col me-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Formations Actives</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                <div class="profile-header mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img *ngIf="encadrantDetail?.profile_pic; else defaultIcon"
+                            [src]="encadrantDetail.profile_pic" alt="Profile" class="profile-image img-fluid rounded-circle" style="width: 120px; height: 120px;">
+                            <ng-template #defaultIcon>
+                                <i class="bi bi-person-circle" style="font-size: 48px; color: gray;"></i>
+                              </ng-template>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{encadrantDetail?.nom}} {{encadrantDetail?.prenom}}</h4>
+                            <p class="text-muted mb-1">{{encadrantDetail?.specialite}}</p>
+                            <div class="d-flex">
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="info-card">
+                                        <p class="text-muted small mb-1">Date d'inscription</p>
+                                        <p class="fw-semibold mb-0"> {{ encadrantDetail?.date_inscription | date: 'MMMM d, y' }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card stat-card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col me-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Inscrits Totaux</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">124</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-users fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card stat-card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col me-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Séances à venir</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card stat-card border-left-danger shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col me-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                            Annonces</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-bullhorn fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-4 text-md-end">
+                            <button class="btn btn-outline-primary me-2">
+                                <i class="fas fa-envelope me-1"></i> Message
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-edit me-1"></i> Modifier
+                            </button>
                         </div>
                     </div>
                 </div>
+                <br/>
+                <div class="col-md-6">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="form-control" placeholder="Rechercher..."  >
+                    </div>
+                </div> 
+                <br/>
 
+                <!-- Tabs Navigation -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button  (click)='ngIsAfficheSeances()' class="nav-link active" id="sessions-tab" data-bs-toggle="tab" data-bs-target="#sessions" type="button" role="tab" aria-controls="sessions" aria-selected="true">
+                            <i class="fas fa-calendar-alt me-1"></i> Séances
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button (click)='ngIsAfficheTD()'  class="nav-link" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab" aria-controls="students" aria-selected="false">
+                            <i class="fas fa-calendar-alt me-1"></i> TD
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button (click)='ngIsAfficheAnnonce()' class="nav-link" id="announcements-tab" data-bs-toggle="tab" data-bs-target="#announcements" type="button" role="tab" aria-controls="announcements" aria-selected="false">
+                            <i class="fas fa-bullhorn me-1"></i> Annonces
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab" aria-controls="students" aria-selected="false">
+                            <i class="fas fa-users me-1"></i> Étudiants inscrits
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab" aria-controls="students" aria-selected="false">
+                            <i class="fas fa-users me-1"></i> Formateurs
+                        </button>
+                    </li>
 
+                </ul>
 
                 <div class="col-lg-12 mb-4">
                     <div class="card shadow">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Mes Formations en cours</h6>
+                        <div *ngIf='ngIsAfficheTDVisible'>
+                            <app-dasbord-formateur/>
                         </div>
+                        <div *ngIf='isAfficheAnnonceVisible'>
+                            <app-annonces/>
+                        </div>
+                        
+                    <div *ngIf='ngIsAfficheSeancesVisible'>
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h2 class="m-4 font-weight-bold ">Mes seances pour la formation <span class='text-primary' >{{formations1?.titre}} </span></h2>
+                        </div>
+
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -174,36 +131,33 @@
                                         <th>Début de séance</th>
                                         <th>Fin de séance</th>
                                         <th>Module</th>
-                                        <th>Programme</th>
                                         <th>Formateur</th>
                                         <th>Statut</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <ng-container *ngFor="let formation of FormationsFiltre">
-                                        <ng-container *ngFor="let modules of moduleFiltres">
+                                        <ng-container *ngFor="let modules of FiltresModulesFormations">
                                           <ng-container *ngFor="let seance of seancesAvecEncadrants">
-                                            <tr *ngIf="seance.module === modules.id && seance.formation === formation.id">
-                                              <td>{{ seance.date_formation }}</td>
-                                              <td>{{ seance.heure_debut }}</td>
-                                              <td>{{ seance.heure_fin }}</td>
-                                              <td>{{ modules.nom_module }}</td>
-                                              <td>{{ formation.titre }}</td>
+                                            <tr *ngIf="seance.module === modules.id && seance.formation== dasbordFormateurId ">
+                                              <td>{{ seance?.date_formation }}</td>
+                                              <td>{{ seance?.heure_debut }}</td>
+                                              <td>{{ seance?.heure_fin }}</td>
+                                              <td>{{ modules?.nom_module }}</td>
                                               <td>
                                                 <div *ngFor="let encadrant of seance.encadrants">
-                                                  <div>{{ encadrant.prenom }} {{ encadrant.nom }}</div>
+                                                  <div>{{ encadrant?.prenom }} {{ encadrant?.nom }}</div>
                                                 </div>
                                               </td>
-                                              <td><span>{{ seance.statut }}</span></td>
+                                              <td><span>{{ seance?.statut }}</span></td>
                                             </tr>
                                           </ng-container>
-                                        </ng-container>
+                                    
                                       </ng-container>
                                     </tbody>
-                                  </table>
-                                  
+                                  </table> 
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>       
             </main>

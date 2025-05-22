@@ -103,8 +103,6 @@ showAnnonce:boolean=false
 
     this.formationId = this.route.snapshot.params['id'];
     this.formationid=this.formationId
-
-    
     this.annonceForm.patchValue({
       date_publication: new Date(),
       heure: new Date().getTime,
@@ -370,7 +368,6 @@ deleteModule( id: number): void {
         }
       );
     });
-    console.log('[[[[]]]]=========================|||||||=====]', this.dasbordId)
     this.moduleFormationService.deleteModuleFormation(this.dasbordId,id).subscribe(() => {
       this.loadModules(); // Recharger la liste après la suppression
     });
@@ -513,14 +510,6 @@ isCreateFormulaireAnnonce():void{
     // Retourne les modules correspondants
     return this.modules.filter(module => moduleIds.includes(module.id));
   }
-
-
-
-
-
-
-
-
 
 
   nombreAffichage: number = 5; // Valeur par défaut

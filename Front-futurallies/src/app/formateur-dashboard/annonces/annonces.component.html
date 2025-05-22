@@ -1,0 +1,21 @@
+
+<div >
+    <div class="card mb-3" *ngFor="let annonce of  annoncesAffichees()">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-title mb-0">{{ annonce?.titre }} </h5>
+                <span class="badge bg-info text-dark">Nouveau </span>  
+            </div>
+            <p class="card-text text-muted small mb-2">Publié le  {{ annonce?.date_publication | date: 'dd/MM/yyyy' }} à {{ annonce?.heure }}</p>
+            <p class="card-text">{{ annonce?.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted small">Lieu: {{ annonce?.lieu}}</span>
+                <span class="text-muted small">Date: {{ annonce?.date_cours}}</span>
+               
+                <div>
+                    <button (click)="supprimerAnnonce(annonce.id)" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
