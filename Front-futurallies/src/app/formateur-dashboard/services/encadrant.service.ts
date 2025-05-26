@@ -17,7 +17,9 @@ export class UtilisateurService {
 
   constructor(private http: HttpClient) { }
 
-
+  getEncadrantByIds(id: number): Observable<CustomUser> {
+    return this.http.get<CustomUser>(`${this.apiUrl}/encadrants/${id}/`);
+  }
   // Méthode générique pour récupérer tous les utilisateurs
   getUtilisateurs(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/formation/list_users/`);

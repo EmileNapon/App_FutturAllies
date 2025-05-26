@@ -67,8 +67,9 @@ FiltreFormationFormateur:any[]=[]
  dasbordFormateurId!:number
  isAfficheAnnonceVisible!:boolean
  ngIsAfficheSeancesVisible!:boolean
-
  ngIsAfficheTDVisible!: boolean
+ selectedEncadrantId: number | null = null;
+ isVisibleDetail: boolean = false;
  constructor(
     private formationService: FormationService,
     private router: Router,
@@ -112,11 +113,28 @@ FiltreFormationFormateur:any[]=[]
     this.ngIsAfficheTDVisible=false
   }
 
+  afficherDetail(id: number): void {
+    this.selectedEncadrantId = id;
+    this.isVisibleDetail = true;
+    console.log('fffffffffffffffffffffff', this.selectedEncadrantId)
+  }
+
+  fermerDetail(): void {
+    this.isVisibleDetail = false;
+    this.selectedEncadrantId = null;
+  }
+
   LoadEncadrantDetail():void{
     this.utilisateurService.getEncadrantByIds(Number(this.userInfo?.id)).subscribe((data) => {
       this.encadrantDetail = data;
     });
   }
+
+  allerDetail(encadrantId:number):void{
+    this.router.navigate([`/formateurs/${encadrantId}/detail/`], { queryParams: { IisVisibleDetail: true } })
+  }
+
+
 
 
   formations1:any
@@ -132,6 +150,13 @@ FiltreFormationFormateur:any[]=[]
       }
     );
   }
+
+
+
+
+
+
+
 
   
   FormationsFiltre:any[]=[]

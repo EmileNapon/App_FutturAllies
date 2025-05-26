@@ -36,18 +36,6 @@ export class ListEncadrantComponent implements OnInit{
   
 
 
-  // loadEncadrants(): void {
-  //   this.loading = true;
-  //   this.listEncadrantService.getEncadrants().subscribe((data: any[]) => {
-  //     this.encadrants = data;
-  //     this.totalPages = Math.ceil(this.encadrants.length / this.size);
-  //     this.updatePaginatedEncadrant();
-  //     this.loading = false;
-  //   }, () => {
-  //     this.loading = false;
-  //   });
-  // }
-
   loadEncadrants(): void {
     this.loading = true;
     const filters: any = { role: 'formateur' };

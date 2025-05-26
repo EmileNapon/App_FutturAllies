@@ -39,9 +39,11 @@ export class FormateurFormationsComponent implements OnInit {
   encadrantDetail:any=null
   encadrantId !:number
   userInfo: { email: string | null, firstName: string | null, lastName: string | null, profilePic: string | null, id: string | null, role: string | null, is_superuser:boolean | null  } | null = null;
-
+  dasbordFormateurId!: number
 
  VoirProgrammeTalentListVisible!:boolean
+ IisVisibleDetail!: boolean
+
 
   constructor(
     private formationService: FormationService,
@@ -54,9 +56,14 @@ export class FormateurFormationsComponent implements OnInit {
   ) {}
 
 
+
+
+
   ngOnInit(): void {
     this.userInfo = (this.serviceAuth.getUserInfo());
+    this.dasbordFormateurId = Number(this.route.snapshot.paramMap.get('dasbordFormateurId'));
     this.VoirProgrammeTalentListVisible=true
+    this.IisVisibleDetail=false
   //  this.formationId = this.route.snapshot.params['FormationId'];
     this.loadFormations1();
     this.loadModules()
@@ -110,7 +117,9 @@ export class FormateurFormationsComponent implements OnInit {
     );
   }
 
-
+  allerDetail(encadrantId:number):void{
+    this.router.navigate([`/formateurs/${encadrantId}/detail/`])
+  }
 
   filterModulesForFormation(formationId: number): any[] {
     // Filtre les relations ModuleFormation par formationId

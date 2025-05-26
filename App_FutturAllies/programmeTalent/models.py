@@ -78,7 +78,6 @@ class AffectationStage(models.Model):
     date_affectation = models.DateField(default=date.today)
     group=models.ForeignKey(Group,on_delete=models.CASCADE, null=True)
 
-########################################################################################
 
 
 

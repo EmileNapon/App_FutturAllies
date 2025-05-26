@@ -44,6 +44,7 @@ import { FormateurEvaluationComponent } from './admin/components/gestionnaire/fo
 import { FormateurDashboardComponent } from './formateur-dashboard/formateur-dashboard.component';
 import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
 import { AnnoncesComponent } from './formateur-dashboard/annonces/annonces.component';
+import { DetailEncadrantComponent } from './formateur-dashboard/detail-encadrant/detail-encadrant.component';
 
 
 
@@ -52,12 +53,10 @@ const routes: Routes = [
   
   {path:'annonces', component:AnnoncesComponent}, 
 
+  {path: 'formateurs/:detailFormateur/detail', component: DetailEncadrantComponent},
   {path:'subscription', component:UserProfileTypeComponent}, 
-
   {path: 'dashboard/formateur', component: FormateurFormationsComponent},
-
   {path: ':dasbordFormateurId/formateurprogramme', component: FormateurDashboardComponent},
-  
   { path: 'formateur/evaluation', component: FormateurEvaluationComponent},
   {path:'',component:AcceuilComponent},
   {path:'dasbord',component : DasbordEtudiantComponent},

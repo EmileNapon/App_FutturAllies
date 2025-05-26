@@ -31,14 +31,13 @@ import { FormateurDashboardComponent } from './formateur-dashboard/formateur-das
 import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
 import { AnnoncesComponent } from './formateur-dashboard/annonces/annonces.component';
 import { FormateurEvaluationComponent } from './formateur-dashboard/formateur-Evaluation/formateur-Evaluation';
-
-
+import { DetailEncadrantComponent } from './formateur-dashboard/detail-encadrant/detail-encadrant.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent, FormateurFormationsComponent,AnnoncesComponent, FormateurEvaluationComponent
+    AcceuilComponent,PremiumEtudiantComponent, HeaderPrincipaleComponent, HeaderGestionnaireComponent, DasbordEtudiantComponent, FooterComponent,AcceuilNosServicesComponent, FormateurDashboardComponent, FormateurFormationsComponent,AnnoncesComponent, FormateurEvaluationComponent, DetailEncadrantComponent
   ],
   imports: [
     BrowserModule,ReactiveFormsModule,FormsModule,
