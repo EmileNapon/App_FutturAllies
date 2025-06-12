@@ -12,7 +12,7 @@
 
   <!-- Contenu du formulaire -->
   <div class="application-card" [ngClass]="{ 'blurred': isSubmitting }">
-    <h1 *ngIf="offer">Candidature à l'offre : {{ offer.title }}</h1>
+    <h1 *ngIf="offer">Candidature à l'offre : {{ offer.topic }}</h1>
     <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
       
       <!-- Message de motivation -->

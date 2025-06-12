@@ -1,11 +1,12 @@
 // offer.model.ts
 
 export class Offer {
-    id: string;
-    title: string;
-    enterprise: string;
-    enterpriseLocation: string;
-    enterWebsite?: string;
+    _id: string;
+    profil: string;
+    topic: string;
+    company: string;
+    companyLocation: string;
+    companyWebsite?: string;
     description: string;
     domain: string;
     location: string;
@@ -20,24 +21,31 @@ export class Offer {
     benefits?: string;
     contactEmail: string;
     status: 'Open' | 'Closed' | 'Pending';
-    isRemote: boolean;
+    isRemoteWorking: boolean;
     applicationMode: 'Online' | 'Physical' | 'Both';
-    onlineSubmission: boolean;
-    isRequiredCvDoc: boolean;
-    isRequiredMlDoc: boolean;
-    canAddOthersDoc: boolean;
+    isCvDocRequired: boolean;
+    isMlDocRequired: boolean;
+    canAddAdditionalDocs: boolean;
     applicationLink?: string;
     additionalInfo?: string;
     createdBy: string;
     postedDate: Date;
     updatedDate?: Date;
     expirationDate?: Date;
+    hasPreselection?: boolean;
+    preselectionType?: 'OnApplicationFile' | 'OnQuiz';
+    preselectionQuizMode?: 'Online' | 'Physical';
+    hasEvaluation?: boolean;
+    evaluationMode?: 'Online' | 'Physical';
+    hasInterview?: boolean;
+    interviewMode?: 'ByPhone' | 'InVisio' | 'Physical';
 
     constructor(
-        id: string,
-        title: string,
-        enterprise: string,
-        enterpriseLocation: string,
+        _id: string,
+        profil: string,
+        topic: string,
+        company: string,
+        companyLocation: string,
         description: string,
         domain: string,
         location: string,
@@ -46,16 +54,15 @@ export class Offer {
         contactEmail: string,
         postedDate: Date,
         status: 'Open' | 'Closed' | 'Pending',
-        isRemote: boolean,
+        isRemoteWorking: boolean,
         applicationMode: 'Online' | 'Physical' | 'Both',
-        onlineSubmission: boolean,
-        isRequiredCvDoc: boolean,
-        isRequiredMlDoc: boolean,
-        canAddOthersDoc: boolean,
+        isCvDocRequired: boolean,
+        isMlDocRequired: boolean,
+        canAddAdditionalDocs: boolean,
         createdBy: string,
         salary?: number,
         duration?: number,
-        enterWebsite?: string,
+        companyWebsite?: string,
         requirements?: string,
         responsibilities?: string,
         educationLevel?: string,
@@ -65,11 +72,19 @@ export class Offer {
         applicationLink?: string,
         additionalInfo?: string,
         updatedDate?: Date,
+        hasPreselection?: boolean,
+        preselectionType?: 'OnApplicationFile' | 'OnQuiz',
+        preselectionQuizMode?: 'Online' | 'Physical',
+        hasEvaluation?: boolean,
+        evaluationMode?: 'Online' | 'Physical',
+        hasInterview?: boolean,
+        interviewMode?: 'ByPhone' | 'InVisio' | 'Physical',
     ) {
-        this.id = id;
-        this.title = title;
-        this.enterprise = enterprise;
-        this.enterpriseLocation = enterpriseLocation;
+        this._id = _id;
+        this.profil = profil;
+        this.topic = topic;
+        this.company = company;
+        this.companyLocation = companyLocation;
         this.description = description;
         this.domain = domain;
         this.location = location;
@@ -78,15 +93,14 @@ export class Offer {
         this.contactEmail = contactEmail;
         this.postedDate = postedDate;
         this.status = status;
-        this.isRemote = isRemote;
+        this.isRemoteWorking = isRemoteWorking;
         this.applicationMode = applicationMode;
-        this.onlineSubmission = onlineSubmission;
-        this.isRequiredCvDoc = isRequiredCvDoc;
-        this.isRequiredMlDoc = isRequiredMlDoc;
-        this.canAddOthersDoc = canAddOthersDoc;
+        this.isCvDocRequired = isCvDocRequired;
+        this.isMlDocRequired = isMlDocRequired;
+        this.canAddAdditionalDocs = canAddAdditionalDocs;
         this.salary = salary;
         this.duration = duration;
-        this.enterWebsite = enterWebsite;
+        this.companyWebsite = companyWebsite;
         this.requirements = requirements;
         this.responsibilities = responsibilities;
         this.educationLevel = educationLevel;
@@ -97,15 +111,22 @@ export class Offer {
         this.additionalInfo = additionalInfo;
         this.updatedDate = updatedDate;
         this.createdBy = createdBy;
+        this.hasPreselection = hasPreselection;
+        this.preselectionType = preselectionType;
+        this.preselectionQuizMode = preselectionQuizMode;
+        this.hasEvaluation = hasEvaluation;
+        this.evaluationMode = evaluationMode;
+        this.hasInterview = hasInterview;
+        this.interviewMode = interviewMode;
     }
 }
 
 // offer-application.model.ts
 
 export class OfferApplication {
-    id: string;
-    offer: string;
-    candidat: string;
+    _id: string;
+    offerId: string;
+    candidatId: string;
     status: 'Pending' | 'Accepted' | 'Rejected' | 'In Review';
     message: string;
     submittedDocumentsIds: string[];
@@ -113,8 +134,8 @@ export class OfferApplication {
     lastUpdated: Date;
 
     constructor(
-        id: string,
-        offer: string,
+        _id: string,
+        offerId: string,
         candidatId: string,
         status: 'Pending' | 'Accepted' | 'Rejected' | 'In Review',
         message: string,
@@ -122,9 +143,9 @@ export class OfferApplication {
         applicationDate: Date,
         lastUpdated: Date
     ) {
-        this.id = id;
-        this.offer = offer;
-        this.candidat = candidatId;
+        this._id = _id;
+        this.offerId = offerId;
+        this.candidatId = candidatId;
         this.status = status;
         this.message = message;
         this.submittedDocumentsIds = submittedDocumentsIds;
@@ -132,7 +153,6 @@ export class OfferApplication {
         this.lastUpdated = lastUpdated;
     }
 }
-
 
 // offer-stats.model.ts
 
@@ -147,4 +167,3 @@ export class OfferStats {
         this.stat = stat;
     }
 }
-

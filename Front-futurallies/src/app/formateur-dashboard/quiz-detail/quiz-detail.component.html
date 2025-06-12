@@ -1,0 +1,22 @@
+<div *ngIf="quiz">
+    <h2>{{ quiz.title }}</h2>
+    <form (ngSubmit)="submit()">
+      <div *ngFor="let q of quiz.questions">
+        <h4>{{ q.question }}</h4>
+        <div *ngFor="let opt of q.options">
+          <label>
+            <input
+              type="checkbox"
+              (change)="toggleAnswer(q.id, opt.option_id)"
+            />
+            {{ opt.option_id }} {{ opt.option_text }}
+          </label>
+        </div>
+      </div>
+      <button type="submit">Soumettre</button>
+    </form>
+    <div *ngIf="score !== null">
+      <h3>Résultat : {{ score }} / {{ total }}</h3>
+    </div>
+</div>
+  

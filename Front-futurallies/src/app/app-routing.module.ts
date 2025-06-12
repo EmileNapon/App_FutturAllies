@@ -36,7 +36,7 @@ import { DasbordEtudiantComponent } from './dasbord-etudiant/dasbord-etudiant.co
 import { DasbordEtudiantTalentComponent } from './module-formation-certification/etudiant/dasbord-etudiant-talent/dasbord-etudiant-talent.component';
 
 import { LoginComponent } from './admin/components/login/login.component';
-import { DashboardComponent } from './offer/components/dashboard/dashboard/dashboard.component';
+
 
 import { UserProfileTypeComponent } from './payment/components/user-profile-type/user-profile-type.component';
 import { AcceuilNosServicesComponent } from './acceuil-NosServices/acceuil-NosServices';
@@ -45,6 +45,9 @@ import { FormateurDashboardComponent } from './formateur-dashboard/formateur-das
 import { FormateurFormationsComponent } from './formateur-dashboard/formateur-formations/formateur-formations.component';
 import { AnnoncesComponent } from './formateur-dashboard/annonces/annonces.component';
 import { DetailEncadrantComponent } from './formateur-dashboard/detail-encadrant/detail-encadrant.component';
+import { QuizComponent } from './formateur-dashboard/quiz/quiz.component';
+import { QuizDetailComponent } from './formateur-dashboard/quiz-detail/quiz-detail.component';
+
 
 
 
@@ -52,7 +55,8 @@ const routes: Routes = [
 
   
   {path:'annonces', component:AnnoncesComponent}, 
-
+  {path:'quiz', component:QuizComponent}, 
+  { path: 'quiz/:idQuiz', component: QuizDetailComponent },
   {path: 'formateurs/:detailFormateur/detail', component: DetailEncadrantComponent},
   {path:'subscription', component:UserProfileTypeComponent}, 
   {path: 'dashboard/formateur', component: FormateurFormationsComponent},
@@ -65,7 +69,7 @@ const routes: Routes = [
   {path:'premiumEmployeur', component:PremiumEmployeurComponent},
   {path:'premiumEtudiant', component:PremiumEtudiantComponent},
   {path:'acceuil', component:AcceuilComponent},
-  {path:'dashboard',component:DashboardComponent},
+  // {path:'dashboard',component:DashboardComponent},
 
   {
     path: 'admin',

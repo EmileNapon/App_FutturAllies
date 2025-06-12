@@ -18,6 +18,31 @@
     text-align: center;
 }
 
+.offer-status {
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.status-open {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-closed {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.status-pending {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
 /* Styles pour la section d'information */
 .info-section {
     display: flex;
@@ -70,7 +95,7 @@ h3 {
     gap: 20px;
 }
 
-.description-card, .skills-card, .responsibilities-card {
+.description-card, .skills-card, .responsibilities-card, .benefits-card, .additional-info-card, .documents-card {
     background-color: #ffffff;
     border-radius: 15px;
     border-top: 8px solid #6229cc;
@@ -79,7 +104,7 @@ h3 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.description-card:hover, .skills-card:hover, .responsibilities-card:hover {
+.description-card:hover, .skills-card:hover, .responsibilities-card:hover, .benefits-card:hover, .additional-info-card:hover, .documents-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -99,6 +124,15 @@ ul {
 li {
     margin-bottom: 10px;
     color: #555;
+}
+
+/* Section Documents Requis */
+.documents-card {
+    margin-top: 20px;
+}
+
+.documents-card h4 {
+    color: #6229cc;
 }
 
 /* Bouton de candidature */
@@ -147,5 +181,33 @@ li {
     }
     50% {
         opacity: 0.5;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .info-section {
+        flex-direction: column;
+    }
+
+    .summary-card, .company-card {
+        width: 100%;
+    }
+
+    .offer-header h1 {
+        font-size: 2em;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    h4 {
+        font-size: 1.1em;
+    }
+
+    .apply-button {
+        width: 100%;
+        text-align: center;
     }
 }

@@ -16,7 +16,30 @@
     </div>
 
     <!-- Liste des offres filtrées -->
-    <div *ngIf="!loading" class="offer-list-container">
-        <app-offer *ngFor="let offer of filteredOffers" [offer]="offer"></app-offer>
+    <div *ngIf="!loading && filteredOffers.length > 0" class="offer-list-container">
+        <div *ngFor="let offer of filteredOffers" class="offer-card">
+            <h2>{{ offer.topic }}</h2>
+            <p class="company-name">{{ offer.company }} | <span class="location">{{ offer.location }}</span></p>
+            <p class="description">{{ offer.description | slice:0:150 }}...</p>
+            
+            <!-- Affichage des informations supplémentaires -->
+            <div class="offer-details">
+                <p><strong>Type :</strong> {{ offer.type }}</p>
+                <p><strong>Contrat :</strong> {{ offer.contractType }}</p>
+                <p><strong>Poste :</strong> {{ offer.type }}</p>
+                <p *ngIf="offer.salary"><strong>Salaire :</strong> {{ offer.salary | currency }}</p>
+                <p *ngIf="offer.expirationDate"><strong>Date d'expiration :</strong> {{ offer.expirationDate | date }}</p>
+                <p *ngIf="offer.hasPreselection"><strong>Pré-sélection :</strong> {{ offer.preselectionType || 'Aucune' }}</p>
+                <p *ngIf="offer.hasEvaluation"><strong>Évaluation en ligne :</strong> {{ offer.evaluationMode }}</p>
+            </div>
+
+            <button *ngIf="offer.applicationLink" class="apply-button">
+                <a [href]="offer.applicationLink" target="_blank">Postuler</a>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="!loading && filteredOffers.length === 0" class="no-offers">
+        <p>Aucune offre ne correspond à votre recherche.</p>
     </div>
 </div>

@@ -1,8 +1,8 @@
 <div class="offer-card">
     <div class="offer-card">  
         <div class="offer-header">  
-            <h2>{{ offer.title }}</h2>  
-            <p class="company-name">{{ offer.enterprise || 'Entreprise inconnue' }}</p> <!-- Affichage du nom de l'entreprise -->  
+            <h2>{{ offer.topic }}</h2>  
+            <p class="company-name">{{ offer.company || 'Entreprise inconnue' }}</p> <!-- Affichage du nom de l'entreprise -->  
         </div>  
         <!-- (Reste du code HTML...) -->  
     </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="info-item">
                 <i class="icon">🏠</i>
-                <p><strong>Télétravail :</strong> {{ offer.isRemote ? 'Oui' : 'Non' }}</p>
+                <p><strong>Télétravail :</strong> {{ offer.isRemoteWorking ? 'Oui' : 'Non' }}</p>
             </div>
             <div class="info-item">
                 <i class="icon">📅</i>
@@ -51,12 +51,12 @@
             </div>
             <div class="info-item">
                 <i class="icon">🏢</i>
-                <p><strong>Entreprise :</strong> {{offer.enterprise }}</p>
+                <p><strong>Entreprise :</strong> {{offer.company }}</p>
             </div>
         </div>
     </div>
 
     <div class="details-container">
-        <a [routerLink]="['/offers/details', offer.id]" class="details-link">Voir Détails</a>
+        <a [routerLink]="['/offers/details', offer._id]" class="details-link">Voir Détails</a>
     </div>
 </div>

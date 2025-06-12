@@ -1,0 +1,9 @@
+<div class="container">
+    <h2>Liste des Quiz</h2>
+    <ul>
+      <li *ngFor="let quiz of quizzes">
+        <a [routerLink]="['/quiz', quiz.id]">{{ quiz.title }}</a>
+      </li>
+    </ul>
+  </div>
+  

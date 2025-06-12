@@ -1,13 +1,12 @@
-import { Component, OnInit, Inject} from '@angular/core';  
+import { Component, OnInit, Inject } from '@angular/core';
 import { Offer } from '../../models/offer.models';
 import { OfferService } from '../../services/offer.service';
 
-
 @Component({
-    selector: 'app-offer-list',
-    templateUrl: './offer-list.component.html',
-    styleUrls: ['./offer-list.component.css'],
-    standalone: false
+  selector: 'app-offer-list',
+  templateUrl: './offer-list.component.html',
+  styleUrls: ['./offer-list.component.css'],
+  standalone:false
 })
 export class OfferListComponent implements OnInit {
   offers: Offer[] = [];
@@ -53,5 +52,3 @@ export class OfferListComponent implements OnInit {
     }
   }
 }
-
-

@@ -3,7 +3,6 @@ from datetime import date
 
 from users.models import CustomUser
 
-########################################################################################
 
 class Enterprise(models.Model):
     name = models.CharField(max_length=255)
@@ -95,7 +94,7 @@ class Offer(models.Model):
     postedDate = models.DateTimeField(auto_now_add=True, verbose_name="Date de publication", null=True)
     updatedAt = models.DateTimeField(auto_now=True, verbose_name="Dernière mise à jour", null=True)
     expirationDate = models.DateTimeField(blank=True, null=True, verbose_name="Date d'expiration")
-
+    enterWebsite = models.URLField(blank=True, null=True, verbose_name="Site web de l'entreprise")
     def __str__(self):
         return self.title
 

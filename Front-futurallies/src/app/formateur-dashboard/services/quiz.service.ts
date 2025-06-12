@@ -17,7 +17,7 @@ export class QuizService {
 
   // Récupérer tous les quizzes
   getQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(`${this.apiUrl}/quizzes`);
+    return this.http.get<Quiz[]>(`${this.apiUrl}/quiz/`);
   }
 
   // Récupérer un quiz par ID
@@ -54,12 +54,15 @@ export class QuizService {
     return this.http.get(`${this.apiUrl}/quiz/`);
   }
 
-  /**
-   * Récupérer un quiz spécifique par son ID.
-   * @param id ID du quiz.
-   * @returns Un observable contenant les détails du quiz.
-   */
+
   getQuizDetailById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/quiz/${id}/`);
+  }
+
+  submitQuiz(id: number, answers: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/quiz/${id}/`, { answers });
+  }
+  getQuizDetails(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/quiz/${id}/`);
   }
 }

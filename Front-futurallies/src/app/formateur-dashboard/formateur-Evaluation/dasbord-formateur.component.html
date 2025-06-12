@@ -33,7 +33,7 @@
       <div class="row bg-light m-3 p-3 border-bottom"  *ngIf="showlist">
         <div class="col-md-6">
           <h1 class="text-left">Liste des examens</h1>
-           <p>  <a class="btn btn-link"> <h2>{{ quiz.title }}</h2>  </a> <span style="color: red;"> de {{ quiz.duration }} le {{ quiz.date }} à {{quiz.start_time}}  </span></p>
+           <p>  <a class="btn btn-link"> <h2>{{ quiz?.title }}</h2>  </a> <span style="color: red;"> de {{ quiz?.duration }} le {{ quiz?.date }} à {{quiz?.start_time}}  </span></p>
         </div>
         <div class="col-md-6">
           <h1 class="text-left">Liste des exercices</h1>

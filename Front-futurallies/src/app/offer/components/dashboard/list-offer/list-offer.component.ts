@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
     standalone: false
 })
 export class ListOfferComponent implements OnInit, OnDestroy {
-  offers: Offer[] = []; // Liste complète des offres
+  offers: any[] = []; // Liste complète des offres
   filteredOffers: Offer[] = []; // Offres filtrées selon le statut et les filtres
   loading: boolean = true; // Indicateur de chargement
   status: string | null = null; // Statut récupéré depuis l'URL

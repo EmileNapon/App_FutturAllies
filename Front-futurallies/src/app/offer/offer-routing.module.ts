@@ -46,11 +46,6 @@ const routes: Routes = [
         component: CandidatListComponent,
       },
 
-      // Exemples de routes supplémentaires (commentées)
-      // { path: 'company-profile', component: CompanyProfileComponent },
-      // { path: 'notification-settings', component: NotificationSettingsComponent },
-      // { path: 'user-management', component: UserManagementComponent },
-      // { path: 'security-settings', component: SecuritySettingsComponent },
     ],
   },
 
@@ -60,8 +55,6 @@ const routes: Routes = [
   // Route pour postuler à une offre (hors tableau de bord)
   { path: 'application/:id', component: OfferApplicationComponent },
 
-  // Redirection pour les routes inconnues (404)
-  // { path: '**', redirectTo: 'dashboard' },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

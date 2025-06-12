@@ -2,6 +2,9 @@ from rest_framework import serializers
 from .models import Quiz, Question, Options, Reponse
 
 
+from rest_framework import serializers
+from .models import Quiz, Question, Options, Reponse
+
 
 class OptionsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,8 +19,8 @@ class ReponseSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    options = OptionsSerializer(many=True, read_only=True)
-    reponses = ReponseSerializer(many=True, read_only=True)
+    options = OptionsSerializer(source='options_set', many=True, read_only=True)
+    reponses = ReponseSerializer(source='reponse_set', many=True, read_only=True)
 
     class Meta:
         model = Question
@@ -25,11 +28,16 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class QuizSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True, read_only=True)
+    questions = QuestionSerializer(source='question_set', many=True, read_only=True)
 
     class Meta:
         model = Quiz
         fields = "__all__"
+
+
+
+
+
 
 # class OptionsSerializer(serializers.ModelSerializer):
 #     class Meta:
